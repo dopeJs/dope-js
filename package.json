@@ -1,7 +1,7 @@
 {
   "name": "@melon-design/react",
   "version": "1.0.0",
-  "description": "Simple react components",
+  "description": "A simple design system and UI library.",
   "repository": {
     "type": "git",
     "url": "https://github.com/melonote-app/melon-design"

@@ -1,14 +1,22 @@
-# Melon Design
+<div align="center">
+<article style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+    <h1 style="width: 100%; text-align: center;">Melon-Design</h1>
+    <p>
+        A simple design system and UI library.
+    </p>
+</article>
 
-Simple react components
+<div align="center">
 
-[![NPM][npm-badge]][npm-url] [![FIGMA][figma-badge]][figma-url] [![LICENSE][license-badge]][license-url]
-[![BUILD-JS][build-js-badge]][build-js-url] [![BUILD-CSS][build-css-badge]][build-css-url] [![CODECOV][codecov-badge]][codecov-url] [![Chromatic][chromatic-badge]][chromatic-url] [![Cypress][cypress-badge]][cypress-url]
+[![NPM][npm-badge]][npm-url] [![LICENSE][license-badge]][license-url]
 
 [npm-badge]: https://img.shields.io/npm/v/@melon-design/react.svg
 [npm-url]: https://www.npmjs.com/package/@melon-design/react
 [license-badge]: https://img.shields.io/npm/l/@melon-design/react
 [license-url]: https://github.com/melonote-app/melon-design/blob/main/LICENSE
+
+</div>
+</div>
 
 # 🎉 Features
 
