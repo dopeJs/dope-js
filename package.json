@@ -14,11 +14,22 @@
     "yarn": "please-use-pnpm"
   },
   "scripts": {
+    "commit": "git-cz",
     "typecheck": "tsc",
     "lint": "eslint ."
   },
   "author": "",
   "license": "MIT",
+  "commitlint": {
+    "extends": [
+      "./scripts/commit-lint-config"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./scripts/cz-prompt"
+    }
+  },
   "dependencies": {
     "@floating-ui/react-dom": "^1.0.0",
     "@floating-ui/react-dom-interactions": "^0.9.3",
@@ -37,6 +48,7 @@
     "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@typescript-eslint/parser": "^5.37.0",
+    "commitizen": "^4.2.5",
     "eslint": "^8.23.1",
     "eslint-config-prettier": "^8.5.0",
     "eslint-import-resolver-typescript": "^3.5.1",
