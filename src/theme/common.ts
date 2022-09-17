@@ -10,4 +10,6 @@ export const commonTheme: Omit<
   normal: 400,
   semiBold: 500,
   bold: 600,
+  fontFamilyBase: `'Nunito', sans-serif`,
+  fontFamilyMonospace: `'Source Code Pro', monospace`,
 }

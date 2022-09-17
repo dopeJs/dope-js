@@ -15,6 +15,8 @@ declare module 'styled-components' {
     normal: number
     bold: number
     semiBold: number
+    fontFamilyBase: string
+    fontFamilyMonospace: string
     primary: ColorFn
     danger: ColorFn
     warn: ColorFn
