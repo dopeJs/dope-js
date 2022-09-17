@@ -1,4 +1,17 @@
+import { ErrorInfo, ReactNode } from 'react'
 import { DefaultTheme } from 'styled-components'
+
+export interface IErrorBoundaryProps {
+  /**
+   * The method will be triggered when an error is about to be occurred.
+   */
+  onError?: (error: Error, info: ErrorInfo) => void
+  /**
+   * The replacement element when an error is about to be occurred.
+   */
+  fallback?: ReactNode
+  children?: ReactNode
+}
 
 export type ColorType =
   | 'blue'

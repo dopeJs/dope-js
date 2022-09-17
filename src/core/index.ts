@@ -1,1 +1,2 @@
-export * from './MelonProvider'
+export * from './App'
+export * from './ErrorBoundary'

@@ -13,7 +13,7 @@ export interface Options {
   keyframes?: Keyframe[] | PropertyIndexedKeyframes
   timing?: number | EffectTiming | keyof typeof SpeedMaps
   onReady?: (playState: AnimationPlayState) => void
-  onFinish?: (event: AnimationPlaybackEvent) => any
+  onFinish?: (event: AnimationPlaybackEvent) => unknown
 }
 
 export const useAnimation = <T extends HTMLElement>({

@@ -1,27 +1,36 @@
 import { commonTheme, darkColors, lightColors } from '@/theme'
-import { ColorFn, ColorType, IProviderConfig, IThemeContext } from '@/types'
+import {
+  ColorFn,
+  ColorType,
+  IErrorBoundaryProps,
+  IProviderConfig,
+  IThemeContext,
+} from '@/types'
 import {
   createContext,
   FC,
-  ReactNode,
   useCallback,
   useEffect,
   useMemo,
   useState,
 } from 'react'
 import { DefaultTheme, ThemeProvider } from 'styled-components'
+import { ErrorBoundary } from './ErrorBoundary'
 import { GlobalStyle } from './GlobalStyle'
 
 export const ThemeContext = createContext<IThemeContext | null>(null)
 
-interface IMelonProviderProps {
+export interface IAppProps extends IErrorBoundaryProps {
   options: IProviderConfig
-  children: ReactNode
+  rootId?: string
 }
 
-export const MelonProvider: FC<IMelonProviderProps> = ({
+export const App: FC<IAppProps> = ({
   children,
   options: { primary, danger, success, warn },
+  fallback,
+  onError,
+  rootId = 'root',
 }) => {
   const [dark, setDark] = useState(false)
 
@@ -96,21 +105,23 @@ export const MelonProvider: FC<IMelonProviderProps> = ({
   }, [dark])
 
   return (
-    <ThemeContext.Provider
-      value={{
-        dark,
-        setDark,
-        setPrimary,
-        setDanger,
-        setWarn,
-        setSuccess,
-        theme,
-      }}
-    >
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        {children}
-      </ThemeProvider>
-    </ThemeContext.Provider>
+    <ErrorBoundary fallback={fallback} onError={onError}>
+      <ThemeContext.Provider
+        value={{
+          dark,
+          setDark,
+          setPrimary,
+          setDanger,
+          setWarn,
+          setSuccess,
+          theme,
+        }}
+      >
+        <ThemeProvider theme={theme}>
+          <GlobalStyle reset rootId={rootId} />
+          {children}
+        </ThemeProvider>
+      </ThemeContext.Provider>
+    </ErrorBoundary>
   )
 }
