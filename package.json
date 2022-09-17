@@ -20,6 +20,10 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@floating-ui/react-dom": "^1.0.0",
+    "@floating-ui/react-dom-interactions": "^0.9.3",
+    "rc-dialog": "^8.9.0",
+    "rc-tree": "^5.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-is": "^18.2.0",
