@@ -61,4 +61,5 @@ jobs:
           echo "New version: $RELEASE_VERSION"
 
           pnpm version $RELEASE_VERSION
-          # pnpm build -r --tag $DIST_TAG --no-git-checks
+          # pnpm publish -r --tag $DIST_TAG --no-git-checks
+          git push -o ci.skip --follow-tags --no-verify --atomic
