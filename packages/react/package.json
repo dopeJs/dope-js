@@ -40,24 +40,13 @@
   "scripts": {
     "start": "rollup -cw",
     "build": "rm -rf lib && rollup -c",
-    "commit": "git-cz",
     "lint": "eslint .",
     "prepublishOnly": "rm -rf ./temp-package-dir && clean-publish --access public",
     "postpublish": "rm -rf ./temp-package-dir",
-    "version": "pnpm version --allow-same-version"
+    "vers": "npm version --allow-same-version"
   },
   "author": "",
   "license": "MIT",
-  "commitlint": {
-    "extends": [
-      "./scripts/commit-lint-config"
-    ]
-  },
-  "config": {
-    "commitizen": {
-      "path": "./scripts/cz-prompt"
-    }
-  },
   "dependencies": {
     "@floating-ui/react-dom": "^1.0.0",
     "@floating-ui/react-dom-interactions": "^0.9.3",

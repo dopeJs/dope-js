@@ -1,3 +1,4 @@
 packages:
   - 'packages/**'
   - 'homepage'
+  - '!packages/**/temp-package-dir'

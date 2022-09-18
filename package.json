@@ -18,11 +18,12 @@
     "yarn": "please-use-pnpm"
   },
   "scripts": {
-    "start": "lerna exec --scope @melon-design/react pnpm start",
+    "start:react": "lerna exec --scope @melon-design/react pnpm start",
     "build:react": "lerna exec --scope @melon-design/react pnpm build",
-    "lint": "eslint .",
-    "vers:react": "lerna exec --scope @melon-design/react pnpm version",
-    "publish:react": "cd packages/react && pnpm publish"
+    "version:react": "pnpm version -w @melon-design/react --allow-same-version",
+    "publish:react": "lerna exec --scope @melon-design/react pnpm publish",
+    "start:homepage": "echo 'homepage'",
+    "lint": "eslint ."
   },
   "author": "",
   "license": "MIT",
