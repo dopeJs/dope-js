@@ -37,6 +37,8 @@ jobs:
           RELEASE_TYPE: ${{ github.event.inputs.release_type }}
       - name: Change version
         run: |
+          cd packages/react
+
           if [[ -z $RELEASE_VERSION ]]; then
             echo "new version is empty"
             exit 1
