@@ -20,29 +20,17 @@
   "scripts": {
     "start": "lerna exec --scope @melon-design/react pnpm start",
     "build:react": "lerna exec --scope @melon-design/react pnpm build",
-    "commit": "git-cz",
     "lint": "eslint .",
     "version": "lerna exec --scope @melon-design/react pnpm version",
     "publish:react": "cd packages/react && pnpm publish"
   },
   "author": "",
   "license": "MIT",
-  "commitlint": {
-    "extends": [
-      "./scripts/commit-lint-config"
-    ]
-  },
-  "config": {
-    "commitizen": {
-      "path": "./scripts/cz-prompt"
-    }
-  },
   "dependencies": {},
   "devDependencies": {
     "@types/node": "^18.7.18",
     "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@typescript-eslint/parser": "^5.37.0",
-    "commitizen": "^4.2.5",
     "eslint": "^8.23.1",
     "eslint-config-prettier": "^8.5.0",
     "eslint-import-resolver-typescript": "^3.5.1",
