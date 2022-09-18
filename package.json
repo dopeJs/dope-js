@@ -43,7 +43,7 @@
     "lint": "eslint .",
     "prepublishOnly": "rm -rf ./temp-package-dir && clean-publish",
     "postpublish": "rm -rf ./temp-package-dir",
-    "publish": "clean-publish"
+    "publish": "clean-publish --access public"
   },
   "author": "",
   "license": "MIT",
