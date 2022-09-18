@@ -23,6 +23,7 @@ yarn-error.log*
 
 lib
 dist
+temp-package-dir
 
 # local env files
 .env*.local
