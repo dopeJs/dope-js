@@ -21,7 +21,7 @@
     "start": "lerna exec --scope @melon-design/react pnpm start",
     "build:react": "lerna exec --scope @melon-design/react pnpm build",
     "lint": "eslint .",
-    "version": "lerna exec --scope @melon-design/react pnpm version",
+    "vers:react": "lerna exec --scope @melon-design/react pnpm version",
     "publish:react": "cd packages/react && pnpm publish"
   },
   "author": "",

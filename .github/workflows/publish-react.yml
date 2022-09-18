@@ -46,7 +46,7 @@ jobs:
           git config --global user.email 'iamjz210@gmail.com'
 
           echo "New version: $RELEASE_VERSION"
-          pnpm version $RELEASE_VERSION --allow-same-version
+          pnpm vers:react $RELEASE_VERSION --allow-same-version
       - name: Publish
         run: |
           npm config set registry=https://registry.npmjs.org/
