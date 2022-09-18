@@ -8,7 +8,7 @@
   },
   "packageManager": "pnpm@7.11.0",
   "engines": {
-    "nxxode": ">=16.15.0",
+    "node": ">=16.15.0",
     "pnpm": ">=7.4.0",
     "npm": "please-use-pnpm",
     "yarn": "please-use-pnpm"
@@ -33,6 +33,7 @@
   },
   "publishConfig": {
     "types": "lib/index.d.ts",
+    "access": "public",
     "directory": "temp-package-dir",
     "registry": "https://registry.npmjs.org/"
   },
@@ -41,9 +42,7 @@
     "build": "rm -rf lib && rollup -c",
     "commit": "git-cz",
     "lint": "eslint .",
-    "prepublishOnly": "rm -rf ./temp-package-dir && clean-publish",
-    "postpublish": "rm -rf ./temp-package-dir",
-    "publish": "clean-publish --access public"
+    "prepublishOnly": "rm -rf ./temp-package-dir && clean-publish --access public"
   },
   "author": "",
   "license": "MIT",

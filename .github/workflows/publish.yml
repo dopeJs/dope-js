@@ -1,0 +1,17 @@
+name: 'publish'
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_type:
+        description: 'release type: release | beta | next'
+        required: true
+
+jobs:
+  publish-new-version:
+    name: 'publish a new version'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.PAT }}
