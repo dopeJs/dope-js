@@ -1,0 +1,50 @@
+{
+  "name": "@melon-js/router",
+  "version": "0.0.1",
+  "description": "Router for melon-js.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/melonote-app/melon-design"
+  },
+  "packageManager": "pnpm@7.11.0",
+  "engines": {
+    "node": ">=16.15.0",
+    "pnpm": ">=7.4.0",
+    "npm": "please-use-pnpm",
+    "yarn": "please-use-pnpm"
+  },
+  "main": "lib/mdr.cjs.js",
+  "module": "lib/mdr.es.js",
+  "browser": "lib/mdr.umd.js",
+  "types": "src/index.ts",
+  "files": [
+    "theme.d.ts",
+    "lib"
+  ],
+  "exports": {
+    ".": {
+      "import": "./lib/mdr.es.js",
+      "require": "./lib/mdr.cjs.js",
+      "default": "./lib/mdr.umd.js"
+    },
+    "./lib/*": "./lib/*",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "types": "lib/index.d.ts",
+    "access": "public",
+    "directory": "temp-package-dir",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "start": "rollup -cw",
+    "build": "rimraf lib && rollup -c",
+    "prepublishOnly": "rimraf ./temp-package-dir && clean-publish --access public",
+    "postpublish": "rimraf ./temp-package-dir"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "rollup": "^2.79.0"
+  }
+}

@@ -1,12 +1,14 @@
 {
   "name": "melon-design",
-  "version": "0.0.3",
+  "version": "0.0.1",
   "description": "A simple design system and UI library.",
   "repository": {
     "type": "git",
     "url": "https://github.com/melonote-app/melon-design"
   },
   "workspaces": [
+    "packages/core",
+    "packages/router",
     "packages/react",
     "homepage"
   ],
@@ -18,10 +20,9 @@
     "yarn": "please-use-pnpm"
   },
   "scripts": {
-    "start:react": "lerna exec --scope @melon-design/react pnpm start",
-    "build:react": "lerna exec --scope @melon-design/react pnpm build",
-    "version:react": "pnpm version -w @melon-design/react --allow-same-version --no-commit-hooks",
-    "publish:react": "lerna exec --scope @melon-design/react pnpm publish",
+    "start:react": "lerna exec --scope @melon-js/design pnpm start",
+    "build:react": "lerna exec --scope @melon-js/design pnpm build",
+    "publish:react": "lerna exec --scope @melon-js/design pnpm publish",
     "start:homepage": "echo 'homepage'",
     "lint": "eslint ."
   },
@@ -39,6 +40,7 @@
     "eslint-plugin-react": "^7.31.8",
     "lerna": "^5.5.1",
     "prettier": "^2.7.1",
+    "rimraf": "^3.0.2",
     "semver": "^7.3.7",
     "shelljs": "^0.8.5",
     "typescript": "^4.8.3"

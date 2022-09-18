@@ -1,9 +1,16 @@
 {
-  "name": "@melon-design/homepage",
-  "version": "0.0.3",
+  "name": "@melon-js/homepage",
+  "version": "0.0.1",
   "description": "A simple design system and UI library.",
   "repository": {
     "type": "git",
     "url": "https://github.com/melonote-app/melon-design"
+  },
+  "dependencies": {
+    "@melon-js/design": "workspace:",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@melon-js/core": "workspace:"
   }
 }

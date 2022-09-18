@@ -1,0 +1,42 @@
+{
+  "name": "@melon-js/core",
+  "version": "0.0.1",
+  "description": "React router like nextjs.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/melonote-app/melon-js"
+  },
+  "packageManager": "pnpm@7.11.0",
+  "engines": {
+    "node": ">=16.15.0",
+    "pnpm": ">=7.4.0",
+    "npm": "please-use-pnpm",
+    "yarn": "please-use-pnpm"
+  },
+  "bin": {
+    "melon": "./bin/melon.js"
+  },
+  "publishConfig": {
+    "types": "lib/index.d.ts",
+    "access": "public",
+    "directory": "temp-package-dir",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "start": "tsc -w & tsc-alias -w",
+    "build": "rimraf lib && tsc && tsc-alias",
+    "prepublishOnly": "rimraf ./temp-package-dir && clean-publish --access public",
+    "postpublish": "rimraf ./temp-package-dir"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "time-require": "^0.1.2",
+    "tsc-alias": "^1.7.0"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "commander": "^9.4.0",
+    "debug": "^4.3.4"
+  }
+}

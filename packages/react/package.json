@@ -1,6 +1,6 @@
 {
-  "name": "@melon-design/react",
-  "version": "0.0.3",
+  "name": "@melon-js/design",
+  "version": "0.0.1",
   "description": "A simple design system and UI library.",
   "repository": {
     "type": "git",
@@ -28,7 +28,6 @@
       "default": "./lib/md.umd.js"
     },
     "./lib/*": "./lib/*",
-    "./jsx-runtime": "./jsx-runtime.d.ts",
     "./package.json": "./package.json"
   },
   "publishConfig": {
@@ -39,9 +38,9 @@
   },
   "scripts": {
     "start": "rollup -cw",
-    "build": "rm -rf lib && rollup -c",
-    "prepublishOnly": "rm -rf ./temp-package-dir && clean-publish --access public",
-    "postpublish": "rm -rf ./temp-package-dir"
+    "build": "rimraf lib && rollup -c",
+    "prepublishOnly": "rimraf ./temp-package-dir && clean-publish --access public",
+    "postpublish": "rimraf ./temp-package-dir"
   },
   "author": "",
   "license": "MIT",

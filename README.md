@@ -10,10 +10,10 @@
 
 [![NPM][npm-badge]][npm-url] [![LICENSE][license-badge]][license-url]
 
-[npm-badge]: https://img.shields.io/npm/v/@melon-design/react.svg
-[npm-url]: https://www.npmjs.com/package/@melon-design/react
-[license-badge]: https://img.shields.io/npm/l/@melon-design/react
-[license-url]: https://github.com/melonote-app/melon-design/blob/main/LICENSE
+[npm-badge]: https://img.shields.io/npm/v/@melon-js/design.svg
+[npm-url]: https://www.npmjs.com/package/@melon-js/design
+[license-badge]: https://img.shields.io/npm/l/@melon-js/design
+[license-url]: https://github.com/melonote-app/melon-js/blob/main/LICENSE
 
 </div>
 </div>
@@ -24,10 +24,10 @@
 
 ```sh
 # with npm
-npm install @melon-design/react
+npm install @melon-js/design
 
 # with yarn
-yarn add @melon-design/react
+yarn add @melon-js/design
 ```
 
 # 👍 Usage
@@ -37,7 +37,7 @@ Here is a quick example to get you started, it's all you need:
 ```jsx
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { App, Button, Switch } from '@melon-design/react'
+import { App, Button, Switch } from '@melon-js/design'
 const Entry = () => (
   <App>
     <Button type="primary">primary button</Button>

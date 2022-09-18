@@ -3,3 +3,4 @@ lib
 dist
 temp-package-dir
 scripts/*.js
+packages/**/*.js
