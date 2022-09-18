@@ -33,7 +33,6 @@ importers:
       semver: 7.3.7
       shelljs: 0.8.5
       typescript: 4.8.3
-    publishDirectory: temp-package-dir
 
   homepage:
     specifiers: {}
