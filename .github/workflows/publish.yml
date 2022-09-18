@@ -10,9 +10,9 @@ on:
         type: choice
         description: 'version type'
         options:
-          - Major
-          - Minor
           - Patch
+          - Minor
+          - Major
 
 jobs:
   publish-new-version:
