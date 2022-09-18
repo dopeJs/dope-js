@@ -1,2 +1,4 @@
 rollup.config.js
+lib
+dist
 scripts/*.js

@@ -1,24 +1,27 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "module": "esnext",
     "lib": ["dom", "dom.iterable", "esnext"],
+    "jsx": "preserve",
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
     "esModuleInterop": true,
-    "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
+    "sourceMap": true,
     "incremental": true,
+    "allowSyntheticDefaultImports": true,
+    "rootDir": "src",
+    "outDir": "lib",
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
     }
   },
-  "exclude": ["node_modules", ".storybook"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "theme.d.ts"],
+  "exclude": ["lib", "node_modules"]
 }

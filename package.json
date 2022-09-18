@@ -1,22 +1,49 @@
 {
   "name": "@melon-design/react",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A simple design system and UI library.",
   "repository": {
     "type": "git",
     "url": "https://github.com/melonote-app/melon-design"
   },
-  "packageManager": "pnpm@7.9.0",
+  "packageManager": "pnpm@7.11.0",
   "engines": {
     "nxxode": ">=16.15.0",
     "pnpm": ">=7.4.0",
     "npm": "please-use-pnpm",
     "yarn": "please-use-pnpm"
   },
+  "main": "lib/md.cjs.js",
+  "module": "lib/md.es.js",
+  "browser": "lib/md.umd.js",
+  "types": "src/index.ts",
+  "files": [
+    "theme.d.ts",
+    "lib"
+  ],
+  "exports": {
+    ".": {
+      "import": "./lib/md.es.js",
+      "require": "./lib/md.cjs.js",
+      "default": "./lib/md.umd.js"
+    },
+    "./lib/*": "./lib/*",
+    "./jsx-runtime": "./jsx-runtime.d.ts",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "types": "lib/index.d.ts",
+    "directory": "temp-package-dir",
+    "registry": "https://www.npmjs.com/"
+  },
   "scripts": {
+    "start": "rollup -cw",
+    "build": "rm -rf lib && rollup -c",
     "commit": "git-cz",
-    "typecheck": "tsc",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "prepublishOnly": "rm -rf ./temp-package-dir && clean-publish",
+    "postpublish": "rm -rf ./temp-package-dir",
+    "publish": "clean-publish"
   },
   "author": "",
   "license": "MIT",
@@ -42,12 +69,16 @@
     "styled-components": "^5.3.5"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^22.0.2",
+    "@rollup/plugin-node-resolve": "^14.1.0",
+    "@rollup/plugin-typescript": "^8.5.0",
     "@types/node": "^18.7.18",
     "@types/react": "^18.0.20",
     "@types/react-dom": "^18.0.6",
     "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^5.37.0",
     "@typescript-eslint/parser": "^5.37.0",
+    "clean-publish": "^4.0.1",
     "commitizen": "^4.2.5",
     "eslint": "^8.23.1",
     "eslint-config-prettier": "^8.5.0",
@@ -55,6 +86,8 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.31.8",
-    "lerna": "^5.5.1"
+    "lerna": "^5.5.1",
+    "rollup": "^2.79.0",
+    "tslib": "^2.4.0"
   }
 }
