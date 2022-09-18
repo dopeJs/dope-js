@@ -3,26 +3,22 @@ name: 'publish'
 on:
   workflow_dispatch:
     inputs:
-      dist_tag:
-        description: 'dist-tag: Default to latest'
-        default: latest
-      version:
+      release_type:
         type: choice
-        description: 'version type'
+        description: 'Release type'
         options:
-          - Patch
-          - Minor
-          - Major
+          - patch
+          - minor
+          - major
+          - beta
+          - alpha
+          - next
 
 jobs:
   publish-new-version:
     name: 'publish a new version'
     runs-on: ubuntu-latest
     steps:
-      - name: Check inputs
-        run: |
-          echo ${{ github.event.inputs.dist_tag }}
-          echo ${{ github.event.inputs.version }}
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v3
         with:
@@ -35,24 +31,34 @@ jobs:
         run: pnpm install
       - name: Build
         run: pnpm build
-      - name: Get version list
+      - name: Get new version
+        run: echo "RELEASE_VERSION="$(node scripts/new-version.js)"" >> $GITHUB_ENV
+        env:
+          RELEASE_TYPE: ${{ github.event.inputs.release_type }}
+      - name: publish
         run: |
-          PKG_NAME=@melon-design/react
-          echo "VERSION_LIST="$(npm view $PKG_NAME versions --json)"" >> $GITHUB_ENV
-      # - name: Get new version
-      #   run: echo "RELEASE_VERSION="$(node scripts/version.js)"" >> $GITHUB_ENV
-      #   env:
-      #     DIST_TAG: ${{ github.event.inputs.dist_tag }}
-      #     VERSION_TYPE: ${{ github.event.inputs.version }}
-      # - name: publish
-      #   run: |
-      #     git config --global user.name 'John Zhang'
-      #     git config --global user.email 'iamjz210@gmail.com'
-      #     npm config set registry=https://registry.npmjs.org/
-      #     npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
-      #     npm whoami
-      #     DIST_TAG=${{ github.event.inputs.release_type }}
-      #     echo "$RELEASE_VERSION"
-      #     echo "$DIST_TAG"
-      #     pnpm version $RELEASE_VERSION
-      #     pnpm build -r --tag $DIST_TAG --no-git-checks
+          if [[ -z $RELEASE_VERSION ]]; then
+            echo "new version is empty"
+            exit 1
+          fi
+
+          git config --global user.name 'John Zhang'
+          git config --global user.email 'iamjz210@gmail.com'
+          npm config set registry=https://registry.npmjs.org/
+          npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
+          npm whoami
+
+          DIST_TAG=latest
+          if [[ ${{ github.event.inputs.release_type }} == 'beta' ]]; then
+            DIST_TAG=beta
+          elif [[ ${{ github.event.inputs.release_type }} == 'alpha' ]]; then
+            DIST_TAG=alpha
+          elif [[ ${{ github.event.inputs.release_type }} == 'next' ]]; then
+            DIST_TAG=next
+          fi
+
+          echo "Dist tag: $DIST_TAG"
+          echo "New version: $RELEASE_VERSION"
+
+          pnpm version $RELEASE_VERSION
+          # pnpm build -r --tag $DIST_TAG --no-git-checks
