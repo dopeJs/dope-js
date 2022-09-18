@@ -17,37 +17,13 @@
     "npm": "please-use-pnpm",
     "yarn": "please-use-pnpm"
   },
-  "main": "lib/md.cjs.js",
-  "module": "lib/md.es.js",
-  "browser": "lib/md.umd.js",
-  "types": "src/index.ts",
-  "files": [
-    "theme.d.ts",
-    "lib"
-  ],
-  "exports": {
-    ".": {
-      "import": "./lib/md.es.js",
-      "require": "./lib/md.cjs.js",
-      "default": "./lib/md.umd.js"
-    },
-    "./lib/*": "./lib/*",
-    "./jsx-runtime": "./jsx-runtime.d.ts",
-    "./package.json": "./package.json"
-  },
-  "publishConfig": {
-    "types": "lib/index.d.ts",
-    "access": "public",
-    "directory": "temp-package-dir",
-    "registry": "https://registry.npmjs.org/"
-  },
   "scripts": {
     "start": "lerna exec --scope @melon-design/react pnpm start",
     "build": "lerna exec --scope @melon-design/react pnpm build",
     "commit": "git-cz",
     "lint": "eslint .",
     "version": "lerna exec --scope @melon-design/react pnpm version",
-    "publish": "lerna exec --scope @melon-design/react pnpm publish"
+    "publish:react": "cd packages/react && pnpm publish"
   },
   "author": "",
   "license": "MIT",

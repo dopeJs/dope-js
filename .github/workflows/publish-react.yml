@@ -1,4 +1,4 @@
-name: 'publish'
+name: 'Publish @melon-design/react'
 
 on:
   workflow_dispatch:
@@ -16,7 +16,7 @@ on:
 
 jobs:
   publish-new-version:
-    name: 'publish a new version'
+    name: 'Publish a new version'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -64,7 +64,7 @@ jobs:
 
           echo "Dist tag: $DIST_TAG"
 
-          pnpm publish -r --tag $DIST_TAG --no-git-checks
+          pnpm publish:react -r --tag $DIST_TAG --no-git-checks
       - name: Git push
         run: |
           git push -o ci.skip --follow-tags --no-verify --atomic

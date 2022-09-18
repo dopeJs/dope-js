@@ -1,11 +1,15 @@
+import alias from '@rollup/plugin-alias'
 import commonjs from '@rollup/plugin-commonjs'
 import resolve from '@rollup/plugin-node-resolve'
 import typescript from '@rollup/plugin-typescript'
+import * as path from 'path'
 import { defineConfig } from 'rollup'
 
 const globals = { react: 'React' }
 
 const formats = ['cjs', 'es', 'umd']
+
+const projectRootDir = path.resolve(__dirname)
 
 const rollupConfig = defineConfig({
   input: 'src/index.ts',
@@ -18,6 +22,11 @@ const rollupConfig = defineConfig({
   })),
   external: globals,
   plugins: [
+    alias({
+      entries: [
+        { find: '@', replacement: path.resolve(projectRootDir, 'src') },
+      ],
+    }),
     commonjs(),
     resolve(),
     typescript({

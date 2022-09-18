@@ -42,6 +42,7 @@ importers:
     specifiers:
       '@floating-ui/react-dom': ^1.0.0
       '@floating-ui/react-dom-interactions': ^0.9.3
+      '@rollup/plugin-alias': ^3.1.9
       '@rollup/plugin-commonjs': ^22.0.2
       '@rollup/plugin-node-resolve': ^14.1.0
       '@rollup/plugin-typescript': ^8.5.0
@@ -70,6 +71,7 @@ importers:
       react-model: 4.2.1_bb2lpehc4sm6fnn2zwweqmbmoy
       styled-components: 5.3.5_7i5myeigehqah43i5u7wbekgba
     devDependencies:
+      '@rollup/plugin-alias': 3.1.9_rollup@2.79.0
       '@rollup/plugin-commonjs': 22.0.2_rollup@2.79.0
       '@rollup/plugin-node-resolve': 14.1.0_rollup@2.79.0
       '@rollup/plugin-typescript': 8.5.0_tznp6w7csbjledp5nresoxoky4
@@ -1458,6 +1460,16 @@ packages:
       picocolors: 1.0.0
       tiny-glob: 0.2.9
       tslib: 2.4.0
+    dev: true
+
+  /@rollup/plugin-alias/3.1.9_rollup@2.79.0:
+    resolution: {integrity: sha512-QI5fsEvm9bDzt32k39wpOwZhVzRcL5ydcffUHMyLVaVaLeC70I8TJZ17F1z1eMoLu4E/UOcH9BWVkKpIKdrfiw==}
+    engines: {node: '>=8.0.0'}
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0
+    dependencies:
+      rollup: 2.79.0
+      slash: 3.0.0
     dev: true
 
   /@rollup/plugin-commonjs/22.0.2_rollup@2.79.0:
