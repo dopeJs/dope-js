@@ -64,7 +64,7 @@ jobs:
 
           echo "Dist tag: $DIST_TAG"
 
-          pnpm publish:react -r --tag $DIST_TAG --no-git-checks
+          pnpm publish:react -- -r --tag $DIST_TAG --no-git-checks
       - name: Git push
         run: |
           git push -o ci.skip --follow-tags --no-verify --atomic
