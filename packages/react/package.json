@@ -40,10 +40,8 @@
   "scripts": {
     "start": "rollup -cw",
     "build": "rm -rf lib && rollup -c",
-    "lint": "eslint .",
     "prepublishOnly": "rm -rf ./temp-package-dir && clean-publish --access public",
-    "postpublish": "rm -rf ./temp-package-dir",
-    "vers": "npm version --allow-same-version"
+    "postpublish": "rm -rf ./temp-package-dir"
   },
   "author": "",
   "license": "MIT",

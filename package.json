@@ -20,7 +20,7 @@
   "scripts": {
     "start:react": "lerna exec --scope @melon-design/react pnpm start",
     "build:react": "lerna exec --scope @melon-design/react pnpm build",
-    "version:react": "pnpm version -w @melon-design/react --allow-same-version",
+    "version:react": "pnpm version -w @melon-design/react --allow-same-version --no-commit-hooks",
     "publish:react": "lerna exec --scope @melon-design/react pnpm publish",
     "start:homepage": "echo 'homepage'",
     "lint": "eslint ."
