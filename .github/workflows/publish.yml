@@ -35,7 +35,7 @@ jobs:
         run: echo "RELEASE_VERSION="$(node scripts/new-version.js)"" >> $GITHUB_ENV
         env:
           RELEASE_TYPE: ${{ github.event.inputs.release_type }}
-      - name: publish
+      - name: Change version
         run: |
           if [[ -z $RELEASE_VERSION ]]; then
             echo "new version is empty"
@@ -44,6 +44,11 @@ jobs:
 
           git config --global user.name 'John Zhang'
           git config --global user.email 'iamjz210@gmail.com'
+
+          echo "New version: $RELEASE_VERSION"
+          pnpm version $RELEASE_VERSION --allow-same-version
+      - name: Publish
+        run: |
           npm config set registry=https://registry.npmjs.org/
           npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
           npm whoami
@@ -58,8 +63,8 @@ jobs:
           fi
 
           echo "Dist tag: $DIST_TAG"
-          echo "New version: $RELEASE_VERSION"
 
-          pnpm version $RELEASE_VERSION --allow-same-version
           # pnpm publish -r --tag $DIST_TAG --no-git-checks
+      - name: Git push
+        run: |
           git push -o ci.skip --follow-tags --no-verify --atomic
