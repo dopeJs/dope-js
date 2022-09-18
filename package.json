@@ -34,7 +34,7 @@
   "publishConfig": {
     "types": "lib/index.d.ts",
     "directory": "temp-package-dir",
-    "registry": "https://www.npmjs.com/"
+    "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
     "start": "rollup -cw",
