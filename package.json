@@ -47,7 +47,7 @@
     "commit": "git-cz",
     "lint": "eslint .",
     "version": "lerna exec --scope @melon-design/react pnpm version",
-    "publish": "lerna exec --scope @melon-design/react pnpm public"
+    "publish": "lerna exec --scope @melon-design/react pnpm publish"
   },
   "author": "",
   "license": "MIT",
