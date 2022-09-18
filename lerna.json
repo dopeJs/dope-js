@@ -1,0 +1,15 @@
+{
+  "packages": ["packages/*", "homepage"],
+  "version": "2.0.0",
+  "npmClient": "pnpm",
+  "useWorkspaces": true,
+  "npmClientArgs": ["--ignore-engines"],
+  "command": {
+    "publish": {
+      "ignoreChanges": ["homepage/**/*"]
+    },
+    "bootstrap": {
+      "npmClientArgs": ["--no-package-lock"]
+    }
+  }
+}

@@ -14,14 +14,7 @@
     "isolatedModules": true,
     "sourceMap": true,
     "incremental": true,
-    "allowSyntheticDefaultImports": true,
-    "rootDir": "src",
-    "outDir": "lib",
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"]
-    }
+    "allowSyntheticDefaultImports": true
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "theme.d.ts"],
   "exclude": ["lib", "node_modules"]
 }

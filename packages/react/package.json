@@ -1,15 +1,11 @@
 {
-  "name": "melon-design",
+  "name": "@melon-design/react",
   "version": "0.0.3",
   "description": "A simple design system and UI library.",
   "repository": {
     "type": "git",
     "url": "https://github.com/melonote-app/melon-design"
   },
-  "workspaces": [
-    "packages/*",
-    "homepage"
-  ],
   "packageManager": "pnpm@7.11.0",
   "engines": {
     "node": ">=16.15.0",
@@ -42,12 +38,13 @@
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
-    "start": "lerna exec --scope @melon-design/react pnpm start",
-    "build": "lerna exec --scope @melon-design/react pnpm build",
+    "start": "rollup -cw",
+    "build": "rm -rf lib && rollup -c",
     "commit": "git-cz",
     "lint": "eslint .",
-    "version": "lerna exec --scope @melon-design/react pnpm version",
-    "publish": "lerna exec --scope @melon-design/react pnpm public"
+    "prepublishOnly": "rm -rf ./temp-package-dir && clean-publish --access public",
+    "postpublish": "rm -rf ./temp-package-dir",
+    "version": "pnpm version"
   },
   "author": "",
   "license": "MIT",
@@ -61,21 +58,27 @@
       "path": "./scripts/cz-prompt"
     }
   },
-  "dependencies": {},
+  "dependencies": {
+    "@floating-ui/react-dom": "^1.0.0",
+    "@floating-ui/react-dom-interactions": "^0.9.3",
+    "rc-dialog": "^8.9.0",
+    "rc-tree": "^5.7.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-is": "^18.2.0",
+    "react-model": "^4.2.1",
+    "styled-components": "^5.3.5"
+  },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^22.0.2",
+    "@rollup/plugin-node-resolve": "^14.1.0",
+    "@rollup/plugin-typescript": "^8.5.0",
     "@types/node": "^18.7.18",
-    "@typescript-eslint/eslint-plugin": "^5.37.0",
-    "@typescript-eslint/parser": "^5.37.0",
-    "commitizen": "^4.2.5",
-    "eslint": "^8.23.1",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-import-resolver-typescript": "^3.5.1",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-react": "^7.31.8",
-    "lerna": "^5.5.1",
-    "semver": "^7.3.7",
-    "shelljs": "^0.8.5",
-    "typescript": "^4.8.3"
+    "@types/react": "^18.0.20",
+    "@types/react-dom": "^18.0.6",
+    "@types/styled-components": "^5.1.26",
+    "clean-publish": "^4.0.1",
+    "rollup": "^2.79.0",
+    "tslib": "^2.4.0"
   }
 }
