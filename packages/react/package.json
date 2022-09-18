@@ -44,7 +44,7 @@
     "lint": "eslint .",
     "prepublishOnly": "rm -rf ./temp-package-dir && clean-publish --access public",
     "postpublish": "rm -rf ./temp-package-dir",
-    "version": "pnpm version"
+    "version": "pnpm version --allow-same-version"
   },
   "author": "",
   "license": "MIT",
