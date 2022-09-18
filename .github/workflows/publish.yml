@@ -3,17 +3,35 @@ name: 'publish'
 on:
   workflow_dispatch:
     inputs:
-      release_type:
-        description: 'release type: release | beta | next'
-        required: true
+      dist_tag:
+        description: 'dist-tag: Default to latest'
+        default: latest
+      version:
+        type: choice
+        description: 'version type'
+        options:
+          - Major
+          - Minor
+          - Patch
 
 jobs:
   publish-new-version:
     name: 'publish a new version'
     runs-on: ubuntu-latest
     steps:
+      - name: Check inputs
+        run: |
+          echo ${{ github.event.inputs.dist_tag }}
+          echo ${{ github.event.inputs.version }}
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v3
         with:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
+      - uses: pnpm/action-setup@v2.2.2
+        with:
+          version: 7.11.0
+      - name: Install dependencies
+        run: pnpm install
+      - name: Build
+        run: pnpm build
