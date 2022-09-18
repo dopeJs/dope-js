@@ -19,7 +19,7 @@
   },
   "scripts": {
     "start": "lerna exec --scope @melon-design/react pnpm start",
-    "build": "lerna exec --scope @melon-design/react pnpm build",
+    "build:react": "lerna exec --scope @melon-design/react pnpm build",
     "commit": "git-cz",
     "lint": "eslint .",
     "version": "lerna exec --scope @melon-design/react pnpm version",

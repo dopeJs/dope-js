@@ -30,7 +30,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Build
-        run: pnpm build
+        run: pnpm build:react
       - name: Get new version
         run: echo "RELEASE_VERSION="$(node scripts/new-version.js)"" >> $GITHUB_ENV
         env:
