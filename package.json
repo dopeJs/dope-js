@@ -1,6 +1,6 @@
 {
   "name": "@melon-design/react",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A simple design system and UI library.",
   "repository": {
     "type": "git",
@@ -87,6 +87,7 @@
     "eslint-plugin-react": "^7.31.8",
     "lerna": "^5.5.1",
     "rollup": "^2.79.0",
+    "semver": "^7.3.7",
     "tslib": "^2.4.0"
   }
 }
