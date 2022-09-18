@@ -7,7 +7,7 @@
     "url": "https://github.com/melonote-app/melon-design"
   },
   "workspaces": [
-    "packages/*",
+    "packages/react",
     "homepage"
   ],
   "packageManager": "pnpm@7.11.0",
