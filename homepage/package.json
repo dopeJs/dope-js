@@ -6,8 +6,10 @@
     "type": "git",
     "url": "https://github.com/melonote-app/melon-design"
   },
+  "type": "module",
   "scripts": {
-    "start": "melon start"
+    "start": "melon start",
+    "build": "melon build"
   },
   "dependencies": {
     "@melon-js/design": "workspace:*",

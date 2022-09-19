@@ -8,9 +8,6 @@ node_modules
 # testing
 /coverage
 
-# production
-/build
-
 # misc
 .DS_Store
 *.pem
@@ -26,6 +23,7 @@ yarn-error.log*
 lib
 dist
 temp-package-dir
+*.cjs
 
 # local env files
 .env*.local

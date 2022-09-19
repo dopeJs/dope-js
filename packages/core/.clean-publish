@@ -1,0 +1,7 @@
+{
+  "fields": [
+    "independent"
+  ],
+  "withoutPublish": true,
+  "tempDir": "temp-package-dir"
+}

@@ -21,11 +21,12 @@
   },
   "scripts": {
     "melon": "./packages/core/bin/melon",
-    "start": "lerna run --scope @melon-js/* start",
-    "build": "lerna run --scope @melon-js/* build",
+    "start": "lerna run --scope @melon-js/* --parallel --stream start",
+    "build": "lerna run --scope @melon-js/* --parallel --stream build",
     "build:design": "lerna exec --scope @melon-js/design pnpm build",
     "publish:design": "lerna exec --scope @melon-js/design pnpm publish",
     "start:home": "cd homepage && pnpm start",
+    "build:home": "cd homepage && pnpm build",
     "lint": "eslint ."
   },
   "author": "",
@@ -41,10 +42,12 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.31.8",
     "lerna": "^5.5.1",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.7.1",
     "rimraf": "^3.0.2",
     "semver": "^7.3.7",
     "shelljs": "^0.8.5",
+    "tsx": "^3.9.0",
     "typescript": "^4.8.3"
   }
 }

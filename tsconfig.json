@@ -12,7 +12,6 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "sourceMap": true,
-    "incremental": true,
     "allowSyntheticDefaultImports": true
   },
   "exclude": ["**/*.js", "node_modules"]

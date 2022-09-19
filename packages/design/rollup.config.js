@@ -14,9 +14,9 @@ const projectRootDir = path.resolve(__dirname)
 const rollupConfig = defineConfig({
   input: 'src/index.ts',
   output: formats.map((item) => ({
-    file: `lib/md.${item}.js`,
+    file: `lib/design.${item}.js`,
     format: item,
-    name: 'Melon-design',
+    name: 'MelonJS-design',
     globals,
     sourcemap: true,
   })),

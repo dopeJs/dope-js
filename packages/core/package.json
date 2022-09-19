@@ -16,6 +16,21 @@
   "bin": {
     "melon": "./bin/melon.js"
   },
+  "main": "./lib/index.js",
+  "types": "src/index.ts",
+  "files": [
+    "bin",
+    "lib"
+  ],
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.js",
+      "require": "./lib/index.js"
+    },
+    "./lib/*": "./lib/*",
+    "./package.json": "./package.json"
+  },
   "publishConfig": {
     "types": "lib/index.d.ts",
     "access": "public",
@@ -23,21 +38,50 @@
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
-    "start": "tsc -w & tsc-alias -w",
-    "build": "rimraf lib && tsc && tsc-alias",
-    "prepublishOnly": "rimraf ./temp-package-dir && clean-publish --access public",
-    "postpublish": "rimraf ./temp-package-dir"
+    "start": "rimraf lib && pnpm run build-bundle -w",
+    "build": "rimraf lib && run-s build-bundle build-types",
+    "build-bundle": "rollup -c",
+    "build-types": "run-s build-temp-types roll-types",
+    "build-temp-types": "rimraf temp && tsc --emitDeclarationOnly --outDir temp -p src",
+    "roll-types": "api-extractor run && rimraf temp",
+    "clean-publish": "clean-publish --access public",
+    "prepublishOnly": "rimraf ./temp-package-dir && run-s build clean-publish",
+    "postpublish": "rimraf ./temp-package-dir",
+    "lint": "eslint --cache --ext .ts src/**"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@babel/types": "^7.19.0",
+    "@microsoft/api-extractor": "^7.31.1",
+    "@rollup/plugin-alias": "^3.1.9",
+    "@rollup/plugin-commonjs": "^22.0.2",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^14.1.0",
+    "@rollup/plugin-typescript": "^8.5.0",
+    "@types/compressible": "^2.0.0",
+    "@types/etag": "^1.8.1",
+    "@types/hjson": "^2.4.3",
+    "@types/mime-types": "^2.1.1",
+    "clean-publish": "^4.0.1",
+    "rollup": "^2.79.0",
     "time-require": "^0.1.2",
-    "tsc-alias": "^1.7.0"
+    "tsc-alias": "^1.7.0",
+    "tslib": "^2.4.0"
   },
   "dependencies": {
     "chalk": "^4.1.2",
+    "chokidar": "^3.5.3",
     "commander": "^9.4.0",
+    "compressible": "^2.0.18",
     "debug": "^4.3.4",
-    "find-up": "^5.0.0"
+    "esbuild": "^0.15.8",
+    "etag": "^1.8.1",
+    "find-up": "^5.0.0",
+    "hjson": "^3.2.2",
+    "merge": "^2.1.1",
+    "mime-types": "^2.1.35",
+    "vite": "^3.1.2",
+    "winston": "^3.8.2"
   }
 }

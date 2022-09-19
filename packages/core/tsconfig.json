@@ -1,16 +1,8 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "module": "commonjs",
-    "moduleResolution": "Node",
-    "noEmit": false,
-    "rootDir": "src",
-    "outDir": "lib",
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"]
-    }
-  },
-  "include": ["src/**/*.ts"],
-  "exclude": ["lib", "node_modules", "bin"]
+    "strict": false,
+    "declaration": false,
+    "resolveJsonModule": true
+  }
 }
