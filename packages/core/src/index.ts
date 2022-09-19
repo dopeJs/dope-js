@@ -1,6 +1,7 @@
 import chalk from 'chalk'
 import { Command } from 'commander'
 import { resolve } from 'path'
+import { IDevOptions } from './types'
 import { getLogo } from './utils'
 
 async function main() {
@@ -20,9 +21,18 @@ async function main() {
 
   program
     .command('start')
+    .alias('s')
+    .option('-p --port <port>', 'assign dev port')
+    .option('-c --config <configPath>', 'assign a melon.config file')
+    .option('--cwd <cwd>', 'assign workspace root')
     .description('start a unbundle esm development server powered by vite.')
-    .action(() => {
-      console.log('start')
+    .action(async ({ port, config }: IDevOptions) => {
+      const { startDevServer } = await import('./commands/dev')
+
+      startDevServer({
+        port,
+        config,
+      })
     })
 
   program

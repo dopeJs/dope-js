@@ -6,7 +6,7 @@
     "type": "git",
     "url": "https://github.com/melonote-app/melon-design"
   },
-  "packageManager": "pnpm@7.11.0",
+  "packageManager": "pnpm@7.12.0",
   "engines": {
     "node": ">=16.15.0",
     "pnpm": ">=7.4.0",

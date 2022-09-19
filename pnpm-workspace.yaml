@@ -1,5 +1,4 @@
 packages:
-  - 'packages/core'
-  - 'packages/react'
-  - 'packages/router'
+  - 'packages/*'
   - 'homepage'
+  - '!**/temp-package-dir'

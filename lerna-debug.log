@@ -1,0 +1,23 @@
+0 silly argv {
+0 silly argv   _: [ 'exec' ],
+0 silly argv   scope: '@melon-js/home',
+0 silly argv   args: [ 'start' ],
+0 silly argv   lernaVersion: '5.5.1',
+0 silly argv   '$0': 'node_modules/lerna/cli.js',
+0 silly argv   cmd: 'pnpm'
+0 silly argv }
+1 notice cli v5.5.1
+2 verbose rootPath /Users/John/Code/personal/melon-js
+3 verbose packageConfigs Package manager 'pnpm' detected. Resolving packages using 'pnpm-workspace.yaml'.
+4 notice filter including "@melon-js/home"
+5 info filter [ '@melon-js/home' ]
+6 info Executing command in 1 package: "pnpm start"
+7 error TypeError: Cannot read properties of undefined (reading 'version')
+7 error     at /Users/John/Code/personal/melon-js/node_modules/.pnpm/@lerna+package-graph@5.5.1/node_modules/@lerna/package-graph/index.js:80:37
+7 error     at Array.forEach (<anonymous>)
+7 error     at /Users/John/Code/personal/melon-js/node_modules/.pnpm/@lerna+package-graph@5.5.1/node_modules/@lerna/package-graph/index.js:60:38
+7 error     at PackageGraph.forEach (<anonymous>)
+7 error     at new PackageGraph (/Users/John/Code/personal/melon-js/node_modules/.pnpm/@lerna+package-graph@5.5.1/node_modules/@lerna/package-graph/index.js:49:10)
+7 error     at new QueryGraph (/Users/John/Code/personal/melon-js/node_modules/.pnpm/@lerna+query-graph@5.5.1/node_modules/@lerna/query-graph/query-graph.js:48:18)
+7 error     at runTopologically (/Users/John/Code/personal/melon-js/node_modules/.pnpm/@lerna+run-topologically@5.5.1/node_modules/@lerna/run-topologically/run-topologically.js:23:17)
+7 error     at ExecCommand.runCommandInPackagesTopological (/Users/John/Code/personal/melon-js/node_modules/.pnpm/@lerna+exec@5.5.1/node_modules/@lerna/exec/index.js:146:17)

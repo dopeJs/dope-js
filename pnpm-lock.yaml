@@ -38,11 +38,11 @@ importers:
 
   homepage:
     specifiers:
-      '@melon-js/core': 'workspace:'
-      '@melon-js/design': 'workspace:'
+      '@melon-js/core': workspace:*
+      '@melon-js/design': workspace:*
       react: ^18.2.0
     dependencies:
-      '@melon-js/design': link:../packages/react
+      '@melon-js/design': link:../packages/design
       react: 18.2.0
     devDependencies:
       '@melon-js/core': link:../packages/core
@@ -52,18 +52,20 @@ importers:
       chalk: ^4.1.2
       commander: ^9.4.0
       debug: ^4.3.4
+      find-up: ^5.0.0
       time-require: ^0.1.2
       tsc-alias: ^1.7.0
     dependencies:
       chalk: 4.1.2
       commander: 9.4.0
       debug: 4.3.4
+      find-up: 5.0.0
     devDependencies:
       time-require: 0.1.2
       tsc-alias: 1.7.0
     publishDirectory: temp-package-dir
 
-  packages/react:
+  packages/design:
     specifiers:
       '@floating-ui/react-dom': ^1.0.0
       '@floating-ui/react-dom-interactions': ^0.9.3
@@ -3069,7 +3071,6 @@ packages:
     dependencies:
       locate-path: 6.0.0
       path-exists: 4.0.0
-    dev: true
 
   /flat-cache/3.0.4:
     resolution: {integrity: sha512-dm9s5Pw7Jc0GvMYbshN6zchCA9RgQlzzEZX3vylR9IqFfS8XciblUXOKfW6SiuJ0e13eDYZoZV5wdrev7P3Nwg==}
@@ -4051,7 +4052,6 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       p-locate: 5.0.0
-    dev: true
 
   /lodash.ismatch/4.4.0:
     resolution: {integrity: sha512-fPMfXjGQEV9Xsq/8MTSgUf255gawYRbjwMyDbcvDhXgV7enSZA0hynz6vMPnpAb5iONEzBHBPsT+0zes5Z301g==}
@@ -4718,7 +4718,6 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       yocto-queue: 0.1.0
-    dev: true
 
   /p-locate/2.0.0:
     resolution: {integrity: sha512-nQja7m7gSKuewoVRen45CtVfODR3crN3goVQ0DDZ9N3yHxgpkuBhZqsaiotSQRrADUrne346peY7kT3TSACykg==}
@@ -4739,7 +4738,6 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       p-limit: 3.1.0
-    dev: true
 
   /p-map-series/2.1.0:
     resolution: {integrity: sha512-RpYIIK1zXSNEOdwxcfe7FdvGcs7+y5n8rifMhMNWvaxRNMPINJHF5GDeuVxWqnfrcHPSCnp7Oo5yNXHId9Av2Q==}
@@ -4888,7 +4886,6 @@ packages:
   /path-exists/4.0.0:
     resolution: {integrity: sha512-ak9Qy5Q7jYb2Wwcey5Fpvg2KoAc/ZIhLSLOSBmRmygPsGwkVVt0fZa0qrtMz+m6tJTAHfZQ8FnmB4MG4LWy7/w==}
     engines: {node: '>=8'}
-    dev: true
 
   /path-is-absolute/1.0.1:
     resolution: {integrity: sha512-AVbw3UJ2e9bq64vSaS9Am0fje1Pa8pbGqTTsmXfaIiMpnr5DlDhfJOuLj9Sf95ZPVDAUerDfEk88MPmPe7UCQg==}
@@ -6235,4 +6232,3 @@ packages:
   /yocto-queue/0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
-    dev: true

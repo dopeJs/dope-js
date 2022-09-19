@@ -2,21 +2,17 @@
 const debug = require('debug')
 const { existsSync } = require('fs')
 const { resolve } = require('path')
+const { performance } = require('perf_hooks')
 debug('time-require').enabled && require('time-require')
-const { clearConsole, normolizeNodePath } = require('../lib/utils')
+const { clearConsole } = require('../lib/utils')
 
 async function melon() {
   const entry = resolve(__dirname, '..', 'lib', 'index.js')
 
   const isEntryExist = existsSync(entry)
 
-  // generate node path in case of npm not working instantly
-  normolizeNodePath()
-
-  // clear terminal view
-  clearConsole()
-
   if (isEntryExist) {
+    global.__melon_start_time__ = performance.now()
     require(entry)
   } else {
     console.warn(

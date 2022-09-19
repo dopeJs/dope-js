@@ -12,7 +12,7 @@
     "packages/react",
     "homepage"
   ],
-  "packageManager": "pnpm@7.11.0",
+  "packageManager": "pnpm@7.12.0",
   "engines": {
     "node": ">=16.15.0",
     "pnpm": ">=7.4.0",
@@ -20,10 +20,12 @@
     "yarn": "please-use-pnpm"
   },
   "scripts": {
-    "start:react": "lerna exec --scope @melon-js/design pnpm start",
-    "build:react": "lerna exec --scope @melon-js/design pnpm build",
-    "publish:react": "lerna exec --scope @melon-js/design pnpm publish",
-    "start:homepage": "echo 'homepage'",
+    "melon": "./packages/core/bin/melon",
+    "start": "lerna run --scope @melon-js/* start",
+    "build": "lerna run --scope @melon-js/* build",
+    "build:design": "lerna exec --scope @melon-js/design pnpm build",
+    "publish:design": "lerna exec --scope @melon-js/design pnpm publish",
+    "start:home": "cd homepage && pnpm start",
     "lint": "eslint ."
   },
   "author": "",
