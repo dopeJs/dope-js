@@ -9,10 +9,12 @@
   "type": "module",
   "scripts": {
     "start": "melon start",
-    "build": "melon build"
+    "build": "melon build",
+    "preview": "melon preview"
   },
   "dependencies": {
     "@melon-js/design": "workspace:*",
+    "@types/react": "^18.0.20",
     "react": "^18.2.0"
   },
   "devDependencies": {

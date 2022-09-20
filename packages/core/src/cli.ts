@@ -1,4 +1,4 @@
-import { IDevOptions } from '@/types'
+import { IBuildOptions, IDevOptions } from '@/types'
 import { getLogo } from '@/utils'
 import chalk from 'chalk'
 import { Command } from 'commander'
@@ -22,14 +22,16 @@ export async function main() {
   program
     .command('start')
     .alias('s')
+    .option('-h --host <port>', 'assign dev host')
     .option('-p --port <port>', 'assign dev port')
     .option('-c --config <configPath>', 'assign a melon.config file')
     .option('--cwd <cwd>', 'assign workspace root')
     .description('start a unbundle esm development server powered by vite.')
-    .action(async ({ port, config, cwd }: IDevOptions) => {
+    .action(async ({ host, port, config, cwd }: IDevOptions) => {
       const { startDevServer } = await import('./commands/start')
 
       startDevServer({
+        host,
         port,
         config,
         cwd,
@@ -38,11 +40,27 @@ export async function main() {
 
   program
     .command('build')
+    .alias('b')
     .description('build esm output.')
-    .action(async () => {
+    .option('-c --config <configPath>', 'assign a melon.config file')
+    .option('--cwd <cwd>', 'assign workspace root')
+    .action(async ({ config, cwd }: IBuildOptions) => {
       const { build } = await import('./commands/build')
 
-      build()
+      build({ config, cwd })
+    })
+
+  program
+    .command('preview')
+    .description('build esm output.')
+    .option('-h --host <port>', 'assign dev host')
+    .option('-p --port <port>', 'assign dev port')
+    .option('-c --config <configPath>', 'assign a melon.config file')
+    .option('--cwd <cwd>', 'assign workspace root')
+    .action(async ({ host, port, config, cwd }: IDevOptions) => {
+      const { preview } = await import('./commands/preview')
+
+      preview({ host, port, config, cwd })
     })
 
   const args = process.argv

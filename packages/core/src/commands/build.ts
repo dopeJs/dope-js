@@ -1,9 +1,22 @@
-import { logger } from '@/utils'
-import { build as viteBuild } from 'vite'
+import { IBuildOptions } from '@/types'
+import { findConfigFile, getDefaultConfig, logger } from '@/utils'
+import { cwd as getCwd } from 'process'
+import { build as viteBuild, loadConfigFromFile, mergeConfig } from 'vite'
 
-export const build = async () => {
+export const build = async (options: IBuildOptions = {}) => {
   try {
-    await viteBuild({})
+    const { cwd: _cwd, config: _config } = options
+    const cwd = _cwd || getCwd()
+    const configFile = _config || (await findConfigFile(cwd))
+
+    const userConfig = await loadConfigFromFile(
+      { command: 'build', mode: 'production' },
+      configFile
+    )
+    const defaultConfig = await getDefaultConfig(cwd, true)
+    const mergedConfig = mergeConfig(defaultConfig, userConfig?.config || {})
+
+    await viteBuild(mergedConfig)
   } catch (e) {
     if (e instanceof Error) {
       logger.error(e.message)

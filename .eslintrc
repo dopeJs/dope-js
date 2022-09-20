@@ -59,7 +59,7 @@
     "import/no-unresolved": [
       "error",
       {
-        "ignore": ["@/.*", "@melon-js/.*"]
+        "ignore": ["@/.*", "@melon-js/.*", "~pages"]
       }
     ],
     "@typescript-eslint/no-empty-interface": "off",

@@ -19,11 +19,11 @@ yarn-error.log*
 .pnpm-debug.log*
 
 .rollup.cache
+.melon.cache
 
 lib
 dist
 temp-package-dir
-*.cjs
 
 # local env files
 .env*.local

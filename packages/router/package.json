@@ -13,9 +13,9 @@
     "npm": "please-use-pnpm",
     "yarn": "please-use-pnpm"
   },
-  "main": "lib/mdr.cjs.js",
-  "module": "lib/mdr.es.js",
-  "browser": "lib/mdr.umd.js",
+  "main": "lib/router.cjs.js",
+  "module": "lib/router.es.js",
+  "browser": "lib/router.umd.js",
   "types": "src/index.ts",
   "files": [
     "theme.d.ts",
@@ -23,9 +23,9 @@
   ],
   "exports": {
     ".": {
-      "import": "./lib/mdr.es.js",
-      "require": "./lib/mdr.cjs.js",
-      "default": "./lib/mdr.umd.js"
+      "import": "./lib/router.es.js",
+      "require": "./lib/router.cjs.js",
+      "default": "./lib/router.umd.js"
     },
     "./lib/*": "./lib/*",
     "./package.json": "./package.json"
@@ -36,10 +36,19 @@
     "directory": "temp-package-dir",
     "registry": "https://registry.npmjs.org/"
   },
-  "scripts": {},
+  "scripts": {
+    "build": "rimraf lib && rollup -c"
+  },
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@melon-js/core": "workspace:*",
+    "@types/react": "^18.0.20",
     "rollup": "^2.79.0"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-router": "^6.4.0",
+    "react-router-dom": "^6.4.0"
   }
 }

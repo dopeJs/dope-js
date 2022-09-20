@@ -20,7 +20,8 @@
   "types": "src/index.ts",
   "files": [
     "bin",
-    "lib"
+    "lib",
+    "files"
   ],
   "exports": {
     ".": {
@@ -52,36 +53,29 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@babel/types": "^7.19.0",
     "@microsoft/api-extractor": "^7.31.1",
     "@rollup/plugin-alias": "^3.1.9",
     "@rollup/plugin-commonjs": "^22.0.2",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^14.1.0",
     "@rollup/plugin-typescript": "^8.5.0",
-    "@types/compressible": "^2.0.0",
-    "@types/etag": "^1.8.1",
-    "@types/hjson": "^2.4.3",
-    "@types/mime-types": "^2.1.1",
+    "@types/debug": "^4.1.7",
     "clean-publish": "^4.0.1",
     "rollup": "^2.79.0",
-    "time-require": "^0.1.2",
-    "tsc-alias": "^1.7.0",
     "tslib": "^2.4.0"
   },
   "dependencies": {
+    "@vitejs/plugin-react": "^2.1.0",
     "chalk": "^4.1.2",
-    "chokidar": "^3.5.3",
     "commander": "^9.4.0",
-    "compressible": "^2.0.18",
     "debug": "^4.3.4",
-    "esbuild": "^0.15.8",
-    "etag": "^1.8.1",
+    "fast-glob": "^3.2.12",
     "find-up": "^5.0.0",
-    "hjson": "^3.2.2",
-    "merge": "^2.1.1",
-    "mime-types": "^2.1.35",
     "vite": "^3.1.2",
+    "vite-plugin-eslint": "^1.8.1",
+    "vite-plugin-html": "^3.2.0",
+    "vite-plugin-index-html": "^2.0.2",
+    "vite-plugin-virtual-html": "^0.2.11",
     "winston": "^3.8.2"
   }
 }

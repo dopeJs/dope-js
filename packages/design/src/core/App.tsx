@@ -21,23 +21,27 @@ import { GlobalStyle } from './GlobalStyle'
 export const ThemeContext = createContext<IThemeContext | null>(null)
 
 export interface IAppProps extends IErrorBoundaryProps {
-  options: IProviderConfig
+  options?: IProviderConfig
   rootId?: string
 }
 
 export const App: FC<IAppProps> = ({
   children,
-  options: { primary, danger, success, warn },
+  options,
   fallback,
   onError,
   rootId = 'root',
 }) => {
   const [dark, setDark] = useState(false)
 
-  const [primaryColor, setPrimary] = useState<ColorType>(primary || 'blue')
-  const [dangerColor, setDanger] = useState<ColorType>(danger || 'red')
-  const [warnColor, setWarn] = useState<ColorType>(warn || 'yellow')
-  const [successColor, setSuccess] = useState<ColorType>(success || 'green')
+  const [primaryColor, setPrimary] = useState<ColorType>(
+    options?.primary || 'blue'
+  )
+  const [dangerColor, setDanger] = useState<ColorType>(options?.danger || 'red')
+  const [warnColor, setWarn] = useState<ColorType>(options?.warn || 'yellow')
+  const [successColor, setSuccess] = useState<ColorType>(
+    options?.success || 'green'
+  )
 
   const color = useCallback(
     (stage: number, type: ColorType, alpha = 1) => {
