@@ -23,9 +23,7 @@ const rollupConfig = defineConfig({
   external: globals,
   plugins: [
     alias({
-      entries: [
-        { find: '@', replacement: path.resolve(projectRootDir, 'src') },
-      ],
+      entries: [{ find: '@', replacement: path.resolve(projectRootDir, 'src') }],
     }),
     commonjs(),
     resolve(),

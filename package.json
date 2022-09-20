@@ -12,14 +12,12 @@
     "packages/react",
     "homepage"
   ],
-  "packageManager": "pnpm@7.12.0",
   "engines": {
-    "node": ">=16.15.0",
-    "pnpm": ">=7.4.0",
-    "npm": "please-use-pnpm",
-    "yarn": "please-use-pnpm"
+    "node": "^14.18.0 || >=16.0.0"
   },
+  "packageManager": "pnpm@7.12.0",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "melon": "./packages/core/bin/melon",
     "start": "lerna run --scope @melon-js/* --parallel --stream start",
     "build": "lerna run --scope @melon-js/* --parallel --stream build",

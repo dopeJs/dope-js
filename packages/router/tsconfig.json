@@ -2,6 +2,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "jsx": "preserve",
+    "downlevelIteration": true,
     "rootDir": "src",
     "outDir": "lib",
     "baseUrl": ".",
@@ -9,6 +10,6 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["src/**/*.tsx", "router.d.ts"],
+  "include": ["src/**/*.tsx", "router.d.ts", "src/index.ts"],
   "exclude": ["lib", "node_modules"]
 }

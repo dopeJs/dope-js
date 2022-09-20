@@ -8,6 +8,7 @@ export const startDevServer = async (options: IDevOptions = {}) => {
     const { host, port, config: _config, cwd: _cwd } = options
 
     const cwd = _cwd || getCwd()
+
     const configFile = _config || (await findConfigFile(cwd))
 
     const userConfig = await loadConfigFromFile(

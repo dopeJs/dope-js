@@ -27,6 +27,7 @@ function createNodePlugins(isProduction, declarationDir) {
     }),
     commonjs({
       extensions: ['.js'],
+      ignoreDynamicRequires: true,
     }),
     json(),
   ]

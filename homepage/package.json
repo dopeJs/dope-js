@@ -7,17 +7,22 @@
     "url": "https://github.com/melonote-app/melon-design"
   },
   "type": "module",
+  "engines": {
+    "node": "^14.18.0 || >=16.0.0"
+  },
+  "packageManager": "pnpm@7.12.0",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "start": "melon start",
     "build": "melon build",
     "preview": "melon preview"
   },
   "dependencies": {
     "@melon-js/design": "workspace:*",
-    "@types/react": "^18.0.20",
     "react": "^18.2.0"
   },
   "devDependencies": {
+    "@types/react": "^18.0.20",
     "@melon-js/core": "workspace:*"
   }
 }

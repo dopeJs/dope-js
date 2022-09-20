@@ -6,13 +6,10 @@
     "type": "git",
     "url": "https://github.com/melonote-app/melon-design"
   },
-  "packageManager": "pnpm@7.12.0",
   "engines": {
-    "node": ">=16.15.0",
-    "pnpm": ">=7.4.0",
-    "npm": "please-use-pnpm",
-    "yarn": "please-use-pnpm"
+    "node": "^14.18.0 || >=16.0.0"
   },
+  "packageManager": "pnpm@7.12.0",
   "main": "lib/router.cjs.js",
   "module": "lib/router.es.js",
   "browser": "lib/router.umd.js",
@@ -37,18 +34,23 @@
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "start": "rimraf lib && rollup -cw",
     "build": "rimraf lib && rollup -c"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@melon-js/core": "workspace:*",
     "@types/react": "^18.0.20",
-    "rollup": "^2.79.0"
+    "rollup": "^2.79.0",
+    "tslib": "^2.4.0"
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-router": "^6.4.0",
-    "react-router-dom": "^6.4.0"
+    "history": "^5.3.0",
+    "path-to-regexp": "^6.2.1",
+    "url-toolkit": "^2.2.5"
+  },
+  "peerDependencies": {
+    "react": ">=17.0.2"
   }
 }
