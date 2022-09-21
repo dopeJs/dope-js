@@ -48,7 +48,6 @@ importers:
       '@melon-js/router': workspace:*
       '@types/react': ^18.0.20
       '@types/react-dom': ^18.0.6
-      '@types/styled-components': ^5.1.26
       eslint: ^8.23.1
       react: ^18.2.0
       react-dom: ^18.2.0
@@ -56,7 +55,6 @@ importers:
     dependencies:
       '@melon-js/design': link:../packages/design
       '@melon-js/router': link:../packages/router
-      '@types/styled-components': 5.1.26
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-is: 18.2.0
@@ -1983,6 +1981,7 @@ packages:
     dependencies:
       '@types/react': 18.0.20
       hoist-non-react-statics: 3.3.2
+    dev: true
 
   /@types/json-schema/7.0.11:
     resolution: {integrity: sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==}
@@ -2068,6 +2067,7 @@ packages:
       '@types/hoist-non-react-statics': 3.3.1
       '@types/react': 18.0.20
       csstype: 3.1.1
+    dev: true
 
   /@types/tmp/0.0.33:
     resolution: {integrity: sha512-gVC1InwyVrO326wbBZw+AO3u2vRXz/iRWq9jYhpG4W8LXyIgDv3ZmcLQ5Q4Gs+gFMyqx+viFoFT+l3p61QFCmQ==}

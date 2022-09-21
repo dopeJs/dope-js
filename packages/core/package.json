@@ -1,6 +1,6 @@
 {
   "name": "@melon-js/core",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "React router like nextjs.",
   "repository": {
     "type": "git",
