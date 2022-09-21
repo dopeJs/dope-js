@@ -1,14 +1,22 @@
 {
-  "extends": "../tsconfig.json",
   "compilerOptions": {
+    "module": "esnext",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
     "jsx": "react-jsx",
-    "rootDir": "src",
-    "outDir": "lib",
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "theme.d.ts"],
-  "exclude": ["lib", "node_modules"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "melon.config.ts"],
+  "exclude": ["dist", "node_modules"]
 }

@@ -21,10 +21,9 @@
     "melon": "./packages/core/bin/melon",
     "start": "lerna run --scope @melon-js/* --parallel --stream start",
     "build": "lerna run --scope @melon-js/* --parallel --stream build",
-    "build:design": "lerna exec --scope @melon-js/design pnpm build",
-    "publish:design": "lerna exec --scope @melon-js/design pnpm publish",
     "start:home": "cd homepage && pnpm start",
     "build:home": "cd homepage && pnpm build",
+    "version": "lerna version --scope @melon-js/* --allow-same-version",
     "lint": "eslint ."
   },
   "author": "",
