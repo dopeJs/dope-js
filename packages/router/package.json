@@ -1,6 +1,6 @@
 {
   "name": "@melon-js/router",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Router for melon-js.",
   "repository": {
     "type": "git",
