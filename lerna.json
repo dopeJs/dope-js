@@ -1,13 +1,34 @@
 {
-  "packages": ["packages/*", "homepage"],
-  "version": "2.0.0",
+  "packages": [
+    "packages/*",
+    "homepage"
+  ],
+  "version": "0.0.2",
   "npmClient": "pnpm",
   "useWorkspaces": true,
-  "npmClientArgs": ["--ignore-engines"],
+  "npmClientArgs": [
+    "--ignore-engines"
+  ],
   "command": {
-    "run": { "ignoreChanges": ["melon-js-homepage"] },
-    "version": { "ignoreChanges": ["melon-js-homepage"] },
-    "publish": { "ignoreChanges": ["melon-js-homepage"] },
-    "bootstrap": { "npmClientArgs": ["--no-package-lock"] }
+    "run": {
+      "ignoreChanges": [
+        "melon-js-homepage"
+      ]
+    },
+    "version": {
+      "ignoreChanges": [
+        "melon-js-homepage"
+      ]
+    },
+    "publish": {
+      "ignoreChanges": [
+        "melon-js-homepage"
+      ]
+    },
+    "bootstrap": {
+      "npmClientArgs": [
+        "--no-package-lock"
+      ]
+    }
   }
 }

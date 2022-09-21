@@ -1,6 +1,6 @@
 {
   "name": "@melon-js/eslint-plugin",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "MelonJS plugin for eslint",
   "repository": {
     "type": "git",
