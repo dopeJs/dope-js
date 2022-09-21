@@ -1,4 +1,4 @@
-name: 'Publish @melon-design/react'
+name: 'Publish Packages'
 
 on:
   workflow_dispatch:
@@ -29,8 +29,6 @@ jobs:
           version: 7.12.0
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
-      - name: Build
-        run: pnpm build:design
       - name: Get new version
         run: echo "RELEASE_VERSION="$(node scripts/new-version.js)"" >> $GITHUB_ENV
         env:
