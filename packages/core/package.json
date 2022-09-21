@@ -18,7 +18,8 @@
   "files": [
     "bin",
     "lib",
-    "files"
+    "files",
+    "routes.d.ts"
   ],
   "exports": {
     ".": {
@@ -27,7 +28,10 @@
       "require": "./lib/index.js"
     },
     "./lib/*": "./lib/*",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./routes": {
+      "types": "./routes.d.ts"
+    }
   },
   "publishConfig": {
     "types": "lib/index.d.ts",

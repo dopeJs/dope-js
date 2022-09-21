@@ -1,15 +1,14 @@
 import { extname, join, resolve } from 'path'
-import type { Logger, ViteDevServer } from 'vite'
+import type { FSWatcher, Logger, ModuleNode, ViteDevServer } from 'vite'
 import { getPageFiles } from './files'
 import { resolveOptions } from './options'
 import { PageOptions, ResolvedOptions, RouterOptions } from './types'
-import { debug, slash, toArray } from './utils'
+import { debug, isTarget, slash, toArray } from './utils'
 // import type { FSWatcher } from 'fs'
 // import { extname, join, resolve } from 'path'
 // import { MelonRouterOptions } from '.'
 // import { getPageFiles } from './files'
 // import { resolveOptions } from './options'
-// // import { debug, invalidatePagesModule, isTarget } from './utils'
 
 export interface PageRoute {
   path: string
@@ -30,7 +29,7 @@ export class RouterContext {
     this.root = slash(viteRoot)
     debug.env('root', this.root)
     this.options = resolveOptions(options, this.root)
-    // debug.options(this.options)
+    debug.options(this.options)
   }
 
   setLogger(logger: Logger) {
@@ -41,79 +40,93 @@ export class RouterContext {
     if (this._server === server) return
 
     this._server = server
-    // this.setupWatcher(server.watcher)
+    this.setupWatcher(server.watcher)
   }
 
-  // setupWatcher(watcher: FSWatcher) {
-  //   watcher.on('unlink', async (path) => {
-  //     path = slash(path)
-  //     if (!isTarget(path, this.options)) return
-  //     await this.removePage(path)
-  //     this.onUpdate()
-  //   })
-  //   watcher.on('add', async (path) => {
-  //     path = slash(path)
-  //     if (!isTarget(path, this.options)) return
-  //     const page = this.options.dirs.find((i) =>
-  //       path.startsWith(slash(resolve(this.root, i.dir)))
-  //     )!
-  //     await this.addPage(path, page)
-  //     this.onUpdate()
-  //   })
+  setupWatcher(watcher: FSWatcher) {
+    watcher.on('unlink', (path) => {
+      path = slash(path)
+      if (!isTarget(path, this.options)) return
+      this.removePage(path)
+      this.onUpdate()
+    })
 
-  //   watcher.on('change', async (path) => {
-  //     path = slash(path)
-  //     if (!isTarget(path, this.options)) return
-  //     const page = this._pageRouteMap.get(path)
-  //     if (page) await this.options.resolver.hmr?.changed?.(this, path)
-  //   })
-  // }
+    watcher.on('add', (path) => {
+      path = slash(path)
+      if (!isTarget(path, this.options)) return
+      const page = this.options.dirs.find((i) => path.startsWith(slash(resolve(this.root, i.dir))))!
+      this.addPage(path, page)
+      this.onUpdate()
+    })
+  }
 
-  async addPage(path: string | string[], pageDir: PageOptions) {
+  getRoute(path: string, pageDir: PageOptions) {
+    const pageDirPath = slash(resolve(this.root, pageDir.dir))
+    let route = '/' + slash(join(pageDir.baseRoute, path.replace(`${pageDirPath}/`, '').replace(extname(path), '')))
+    if (route.endsWith('/index')) route = route.slice(0, -6)
+    route = route.trim()
+    if (route.length === 0) route = '/'
+
+    const regex = /\[([A-Za-z0-9]+)\]/g
+    if (regex.test(route)) {
+      route = route.replace(regex, ':$1')
+    }
+
+    return route
+  }
+
+  addPage(path: string | string[], pageDir: PageOptions) {
     debug.pages('add', path)
     for (const p of toArray(path)) {
-      const pageDirPath = slash(resolve(this.root, pageDir.dir))
-      const route = slash(join(pageDir.baseRoute, p.replace(`${pageDirPath}/`, '').replace(extname(p), '')))
+      const route = this.getRoute(p, pageDir)
+
       this._pageRouteMap.set(p, {
         path: p,
         route,
       })
-      await this.options.resolver.hmr?.added?.(this, p)
     }
   }
 
-  // async removePage(path: string) {
-  //   debug.pages('remove', path)
-  //   this._pageRouteMap.delete(path)
-  //   await this.options.resolver.hmr?.removed?.(this, path)
-  // }
+  removePage(path: string) {
+    debug.pages('remove', path)
+    this._pageRouteMap.delete(path)
+  }
 
-  // onUpdate() {
-  //   if (!this._server) return
+  onUpdate() {
+    if (!this._server) return
 
-  //   invalidatePagesModule(this._server)
-  //   debug.hmr('Reload generated pages.')
-  //   this._server.ws.send({
-  //     type: 'full-reload',
-  //   })
-  // }
+    const { moduleGraph } = this._server
+    const mods = moduleGraph.getModulesByFile('/@vite-plugin-pages/generated-pages')
+    if (mods) {
+      const seen = new Set<ModuleNode>()
+      mods.forEach((mod) => {
+        moduleGraph.invalidateModule(mod, seen)
+      })
+    }
 
-  // async resolveRoutes() {
-  //   return this.options.resolver.resolveRoutes(this)
-  // }
+    debug.hmr('Reload generated pages.')
+    this._server.ws.send({
+      type: 'full-reload',
+    })
+  }
 
-  async searchGlob() {
+  resolveRoutes() {
+    const routes = Array.from(this._pageRouteMap.values())
+    return routes || []
+  }
+
+  searchGlob() {
     const pageDirFiles = this.options.dirs.map((page) => {
       const pagesDirPath = slash(resolve(this.options.root, page.dir))
       const files = getPageFiles(pagesDirPath, this.options)
+
       debug.search(page.dir, files)
       return {
         ...page,
         files: files.map((file) => slash(file)),
       }
     })
-    console.log(pageDirFiles)
-    for (const page of pageDirFiles) await this.addPage(page.files, page)
+    for (const page of pageDirFiles) this.addPage(page.files, page)
     debug.cache(this.pageRouteMap)
   }
 

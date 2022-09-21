@@ -1,6 +1,5 @@
 import { resolve } from 'path'
 import { getPageDirs } from './files'
-import { resolver } from './resolver'
 import { PageOptions, ResolvedOptions, RouterOptions } from './types'
 import { slash, toArray } from './utils'
 
@@ -25,12 +24,14 @@ export function resolveOptions(options: RouterOptions, root: string): ResolvedOp
   const pagesDir = options.pagesDir || ['src/pages']
   const dirs = resolvePageDirs(pagesDir, root, exclude)
 
+  const extensionsRE = new RegExp(`\\.(${extensions.join('|')})$`)
+
   return {
     root,
     extensions,
     exclude,
     dirs,
     caseSensitive,
-    resolver: resolver(),
+    extensionsRE,
   }
 }

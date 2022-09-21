@@ -1,4 +1,6 @@
 import Debug from 'debug'
+import { resolve } from 'path'
+import { ResolvedOptions } from './types'
 
 export const dynamicRouteRE = /^\[(.+)\]$/
 export const cacheAllRouteRE = /^\[\.{3}(.*)\]$/
@@ -68,4 +70,16 @@ export function buildRoutePath(node: string): string | undefined {
   }
 
   return `${normalizedName}`
+}
+
+function isPagesDir(path: string, options: ResolvedOptions) {
+  for (const page of options.dirs) {
+    const dirPath = slash(resolve(options.root, page.dir))
+    if (path.startsWith(dirPath)) return true
+  }
+  return false
+}
+
+export function isTarget(path: string, options: ResolvedOptions) {
+  return isPagesDir(path, options) && options.extensionsRE.test(path)
 }

@@ -15,7 +15,8 @@
   "browser": "lib/design.umd.js",
   "types": "src/index.ts",
   "files": [
-    "lib"
+    "lib",
+    "theme.d.ts"
   ],
   "exports": {
     ".": {
@@ -24,8 +25,10 @@
       "default": "./lib/design.umd.js"
     },
     "./lib/*": "./lib/*",
-    "./src/*": "./src/*",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./theme": {
+      "types": "./theme.d.ts"
+    }
   },
   "publishConfig": {
     "types": "lib/index.d.ts",

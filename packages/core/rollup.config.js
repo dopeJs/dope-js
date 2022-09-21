@@ -57,7 +57,7 @@ function createConfig(isProduction) {
       }
       warn(warning)
     },
-    external: ['fsevents', ...(isProduction ? [] : Object.keys(pkg.devDependencies))],
+    external: ['fsevents', ...Object.keys(pkg.dependencies), ...(isProduction ? [] : Object.keys(pkg.devDependencies))],
     plugins: createPlugins(isProduction),
   })
 }

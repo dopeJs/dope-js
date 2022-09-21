@@ -12,6 +12,7 @@ export type UserConfig = Omit<ViteUserConfig, 'root' | 'mode' | 'cacheDir'> & {
 export function defineConfig(config?: UserConfig) {
   const router = config?.router
   const title = config?.title || 'MelonJS'
+
   const defaultConfig: UserConfig = {
     plugins: [
       melonRouter({ ...router }),

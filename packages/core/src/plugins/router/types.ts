@@ -32,7 +32,6 @@ export type RouterOptions = Partial<Options>
 export type Awaitable<T> = T | PromiseLike<T>
 
 export interface PageResolver {
-  resolveModuleIds: () => string[]
   resolveExtensions: () => string[]
   resolveRoutes: (ctx: RouterContext) => Awaitable<string>
   getComputedRoutes: (ctx: RouterContext) => Awaitable<PageRoute[]>
@@ -51,5 +50,5 @@ export interface PageResolver {
 export interface ResolvedOptions extends Omit<Options, 'pagesDir'> {
   root: string
   dirs: Array<PageOptions>
-  resolver: PageResolver
+  extensionsRE: RegExp
 }
