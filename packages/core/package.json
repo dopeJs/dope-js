@@ -37,7 +37,7 @@
   },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "start": "rimraf lib && pnpm run build-bundle -w",
+    "start": "rimraf lib && rollup -cw",
     "build": "rimraf lib && rollup -c && tsc-alias",
     "clean-publish": "clean-publish --access public",
     "prepublishOnly": "rimraf ./temp-package-dir && run-s build clean-publish",
