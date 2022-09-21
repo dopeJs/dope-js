@@ -28,7 +28,7 @@ jobs:
         with:
           version: 7.12.0
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --no-lockfile
       - name: Get new version
         run: echo "RELEASE_VERSION="$(node scripts/new-version.js)"" >> $GITHUB_ENV
         env:
