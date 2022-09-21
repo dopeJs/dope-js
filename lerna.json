@@ -5,9 +5,9 @@
   "useWorkspaces": true,
   "npmClientArgs": ["--ignore-engines"],
   "command": {
-    "run": { "ignore": ["melon-js-homepage"], "ignoreChanges": ["homepage/**/*"] },
+    "run": { "ignoreChanges": ["melon-js-homepage"] },
     "version": { "ignoreChanges": ["melon-js-homepage"] },
-    "publish": { "ignore": ["melon-js-homepage"], "ignoreChanges": ["homepage/**/*"] },
+    "publish": { "ignoreChanges": ["melon-js-homepage"] },
     "bootstrap": { "npmClientArgs": ["--no-package-lock"] }
   }
 }

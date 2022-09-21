@@ -21,7 +21,7 @@
     "preinstall": "npx only-allow pnpm",
     "melon": "./packages/core/bin/melon",
     "start": "lerna run --scope @melon-js/* --parallel --stream start",
-    "build": "lerna run --parallel --stream build",
+    "build": "lerna run --scope @melon-js/* --parallel --stream build",
     "start:home": "cd homepage && pnpm start",
     "build:home": "cd homepage && pnpm build",
     "version": "lerna version --scope @melon-js/*",
