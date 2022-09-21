@@ -1,7 +1,7 @@
 const semver = require('semver')
 const shell = require('shelljs')
 
-const package = '@melon-design/react'
+const package = '@melon-js/core'
 
 const getVersions = () => {
   const str = shell
@@ -95,9 +95,7 @@ const generateVersions = (versionSet, versType) => {
 function main() {
   try {
     const versions = getVersions()
-    const releaseType = process.env.RELEASE_TYPE
-      ? process.env.RELEASE_TYPE.toLowerCase()
-      : 'patch'
+    const releaseType = process.env.RELEASE_TYPE ? process.env.RELEASE_TYPE.toLowerCase() : 'patch'
 
     return generateVersions(versions, releaseType)
   } catch (err) {

@@ -24,7 +24,8 @@
     "build": "lerna run --scope @melon-js/* --parallel --stream build",
     "start:home": "cd homepage && pnpm start",
     "build:home": "cd homepage && pnpm build",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "publish": "lerna run --scope @melon-js/* --stream publish"
   },
   "author": "",
   "license": "MIT",
