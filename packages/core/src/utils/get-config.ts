@@ -1,10 +1,10 @@
+import { melonRouter } from '@/plugins'
+import { IServerOption } from '@/types'
 import react from '@vitejs/plugin-react'
 import findUp from 'find-up'
 import { join } from 'path'
 import { PluginOption, UserConfig } from 'vite'
 import eslint from 'vite-plugin-eslint'
-import { melonRouter } from '../plugins'
-import { IServerOption } from '../types'
 
 const findFileCache: Record<string, string> = {}
 const getFindFileCacheKey = (cwd: string, files: string | string[]) => {

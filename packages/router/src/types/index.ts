@@ -1,6 +1,6 @@
+import type { IRouterCache } from '@/cache'
 import type { BrowserHistory, Location, Path, To } from 'history'
 import type { MutableRefObject, ReactElement } from 'react'
-import type { IRouterCache } from '../cache'
 
 export type RedirectResult = void | undefined | To
 

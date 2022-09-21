@@ -1,8 +1,15 @@
 {
-  "extends": "./tsconfig.base.json",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "strict": false,
-    "declaration": false,
-    "resolveJsonModule": true
-  }
+    "jsx": "react-jsx",
+    "downlevelIteration": true,
+    "rootDir": "src",
+    "outDir": "lib",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": ["src/**/*.tsx", "router.d.ts", "src/index.ts"],
+  "exclude": ["lib", "node_modules"]
 }

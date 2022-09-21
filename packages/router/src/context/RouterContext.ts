@@ -1,7 +1,7 @@
+import { RouterCache } from '@/cache'
+import type { IRouterContext } from '@/types'
 import { createBrowserHistory } from 'history'
 import { createContext } from 'react'
-import { RouterCache } from '../cache'
-import type { IRouterContext } from '../types'
 
 export const browserHistory = createBrowserHistory()
 

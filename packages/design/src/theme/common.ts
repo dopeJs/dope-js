@@ -1,5 +1,5 @@
+import { ColorType } from '@/types'
 import { DefaultTheme } from 'styled-components'
-import { ColorType } from '../types'
 
 type Colors = 'primary' | 'danger' | 'warn' | 'success' | ColorType
 

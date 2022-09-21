@@ -1,5 +1,5 @@
+import { LayoutFunc } from '@/types'
 import { Component, MutableRefObject, PropsWithChildren, ReactElement, ReactNode } from 'react'
-import { LayoutFunc } from '../types'
 
 export interface ErrorBoundaryProps extends PropsWithChildren {
   fallback?: ReactNode

@@ -35,11 +35,7 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "start": "rimraf lib && rollup -cw",
-    "build": "rimraf lib && run-s build-bundle build-types",
-    "build-bundle": "rollup -c",
-    "build-types": "run-s build-temp-types roll-types",
-    "build-temp-types": "rimraf temp && tsc --emitDeclarationOnly --outDir temp -p src",
-    "roll-types": "api-extractor run && rimraf temp",
+    "build": "rimraf lib && rollup -c && tsc-alias",
     "clean-publish": "clean-publish --access public",
     "prepublishOnly": "rimraf ./temp-package-dir && run-s build clean-publish",
     "postpublish": "rimraf ./temp-package-dir",
@@ -49,7 +45,6 @@
   "license": "MIT",
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.19.1",
-    "@microsoft/api-extractor": "^7.31.1",
     "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-commonjs": "^22.0.2",
     "@rollup/plugin-json": "^4.1.0",
@@ -57,6 +52,7 @@
     "@rollup/plugin-typescript": "^8.5.0",
     "@types/react": "^18.0.20",
     "rollup": "^2.79.0",
+    "tsc-alias": "^1.7.0",
     "tslib": "^2.4.0"
   },
   "dependencies": {

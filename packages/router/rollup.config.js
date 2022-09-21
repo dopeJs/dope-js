@@ -7,16 +7,15 @@ import { resolve } from 'path'
 import { defineConfig } from 'rollup'
 import pkg from './package.json'
 
-function createPlugins(isProduction, declarationDir) {
-  const sourceMap = !isProduction
-
+function createPlugins(isProduction) {
   return [
     nodeResolve({ preferBuiltins: true }),
     typescript({
-      tsconfig: resolve(__dirname, 'src', 'tsconfig.json'),
-      sourceMap,
-      declaration: declarationDir !== false,
-      declarationDir: declarationDir !== false ? declarationDir : undefined,
+      sourceMap: !isProduction,
+      declaration: true,
+      declarationDir: resolve(__dirname, 'lib'),
+      lib: ['ESNext', 'DOM'],
+      jsx: 'react-jsx',
     }),
     babel({
       babelHelpers: 'runtime',
@@ -34,13 +33,7 @@ const globals = { react: 'React' }
 const formats = ['cjs', 'es', 'umd']
 
 function getExternals(isProduction) {
-  const set = new Set([
-    ...Object.keys(globals),
-    'fsevents',
-    // ...Object.keys(pkg.dependencies),
-    ...(isProduction ? [] : Object.keys(pkg.devDependencies)),
-  ])
-
+  const set = new Set([...Object.keys(globals), 'fsevents', ...(isProduction ? [] : Object.keys(pkg.devDependencies))])
   return Array.from(set)
 }
 
@@ -57,6 +50,7 @@ function createConfig(isProduction) {
       format: item,
       name: 'MelonJS-router',
       globals,
+      sourcemap: !isProduction,
     })),
     onwarn(warning, warn) {
       // node-resolve complains a lot about this but seems to still work?
@@ -73,7 +67,7 @@ function createConfig(isProduction) {
       warn(warning)
     },
     external: getExternals(isProduction),
-    plugins: createPlugins(isProduction, isProduction ? false : resolve(__dirname, 'lib')),
+    plugins: createPlugins(isProduction),
   })
 }
 

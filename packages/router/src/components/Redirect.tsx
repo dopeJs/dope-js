@@ -1,6 +1,6 @@
+import { useRouter } from '@/hooks'
+import { computeMatch } from '@/utils'
 import { FC, useEffect, useMemo } from 'react'
-import { useRouter } from '../hooks'
-import { computeMatch } from '../utils'
 
 export interface RedirectProps {
   /**

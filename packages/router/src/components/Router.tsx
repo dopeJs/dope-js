@@ -1,9 +1,9 @@
+import { useRouterCache } from '@/cache'
+import { browserHistory, RouterContext } from '@/context'
+import { RedirectFunc } from '@/types'
+import { formatRawLocation, setBase, useInitialRedirect } from '@/utils'
 import { BrowserHistory, Update as HistoryUpdate, Location } from 'history'
 import { FC, PropsWithChildren, ReactElement, useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { useRouterCache } from '../cache'
-import { browserHistory, RouterContext } from '../context'
-import { RedirectFunc } from '../types'
-import { formatRawLocation, setBase, useInitialRedirect } from '../utils'
 import { Route, RouteProps } from './Route'
 import { Switch } from './Switch'
 

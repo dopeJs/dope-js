@@ -1,7 +1,7 @@
+import { IBuildOptions } from '@/types'
+import { findConfigFile, getDefaultConfig, logger } from '@/utils'
 import { cwd as getCwd } from 'process'
 import { build as viteBuild, loadConfigFromFile, mergeConfig } from 'vite'
-import { IBuildOptions } from '../types'
-import { findConfigFile, getDefaultConfig, logger } from '../utils'
 
 export const build = async (options: IBuildOptions = {}) => {
   try {

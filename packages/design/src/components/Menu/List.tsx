@@ -1,5 +1,5 @@
+import { styled } from '@/styled'
 import { FC, useMemo } from 'react'
-import { styled } from '../../styled'
 import { Item } from './Item'
 import { IMenuListProps } from './types'
 

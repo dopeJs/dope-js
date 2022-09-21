@@ -15,8 +15,7 @@
   "browser": "lib/design.umd.js",
   "types": "src/index.ts",
   "files": [
-    "lib",
-    "theme.d.ts"
+    "lib"
   ],
   "exports": {
     ".": {
@@ -37,12 +36,7 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "start": "rimraf lib && rollup -cw",
-    "build": "rimraf lib && run-s build-bundle build-types",
-    "build-bundle": "rollup -c",
-    "build-types": "run-s clear-temp-types build-temp-types roll-types clear-temp-types",
-    "build-temp-types": "tsc --emitDeclarationOnly --outDir node_modules/.melon.types -p src",
-    "roll-types": "api-extractor run",
-    "clear-temp-types": "rimraf node_modules/.melon.types",
+    "build": "rimraf lib && rollup -c && tsc-alias",
     "clean-publish": "clean-publish --access public",
     "prepublishOnly": "rimraf ./temp-package-dir && run-s build clean-publish",
     "postpublish": "rimraf ./temp-package-dir",
@@ -61,7 +55,6 @@
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.19.1",
-    "@microsoft/api-extractor": "^7.31.1",
     "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-commonjs": "^22.0.2",
     "@rollup/plugin-json": "^4.1.0",
@@ -72,6 +65,7 @@
     "@types/styled-components": "^5.1.26",
     "clean-publish": "^4.0.1",
     "rollup": "^2.79.0",
+    "tsc-alias": "^1.7.0",
     "tslib": "^2.4.0"
   },
   "peerDependencies": {

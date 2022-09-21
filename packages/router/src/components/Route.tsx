@@ -1,3 +1,7 @@
+import { RouterContext } from '@/context'
+import { useRouter } from '@/hooks'
+import { LayoutFunc } from '@/types'
+import { computeMatch, CustomMatch, defaultMatchOptions, genId, isPromise } from '@/utils'
 import {
   cloneElement,
   ComponentType,
@@ -13,10 +17,6 @@ import {
   useRef,
   useState,
 } from 'react'
-import { RouterContext } from '../context'
-import { useRouter } from '../hooks'
-import { LayoutFunc } from '../types'
-import { computeMatch, CustomMatch, defaultMatchOptions, genId, isPromise } from '../utils'
 import { ErrorBoundary } from './Error'
 
 export interface RouteProps extends PropsWithChildren {

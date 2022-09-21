@@ -1,7 +1,7 @@
+import { IDevOptions } from '@/types'
+import { findConfigFile, getDefaultConfig, logger } from '@/utils'
 import { cwd as getCwd } from 'process'
 import { loadConfigFromFile, mergeConfig, preview as vitePreview, UserConfig } from 'vite'
-import { IDevOptions } from '../types'
-import { findConfigFile, getDefaultConfig, logger } from '../utils'
 
 export const preview = async (options: IDevOptions = {}) => {
   try {

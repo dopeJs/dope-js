@@ -1,7 +1,7 @@
+import { RouterContext } from '@/context'
+import { handleRoute, parseSearchParams, removePrefix } from '@/utils'
 import type { BrowserHistory, Location, To } from 'history'
 import { useCallback, useContext, useMemo } from 'react'
-import { RouterContext } from '../context'
-import { handleRoute, parseSearchParams, removePrefix } from '../utils'
 
 export type UseRouterReturn = {
   push: BrowserHistory['push']

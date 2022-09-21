@@ -1,7 +1,7 @@
+import { IDevOptions } from '@/types'
+import { findConfigFile, getDefaultConfig, logger } from '@/utils'
 import { cwd as getCwd } from 'process'
 import { createServer, loadConfigFromFile, mergeConfig, UserConfig } from 'vite'
-import { IDevOptions } from '../types'
-import { findConfigFile, getDefaultConfig, logger } from '../utils'
 
 export const startDevServer = async (options: IDevOptions = {}) => {
   try {

@@ -1,9 +1,0 @@
-{
-  "extends": "../tsconfig.base.json",
-  "include": ["./", "../theme.d.ts"],
-  "compilerOptions": {
-    "lib": ["ESNext", "DOM"],
-    "jsx": "react-jsx",
-    "declaration": true
-  }
-}

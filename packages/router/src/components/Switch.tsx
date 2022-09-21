@@ -1,6 +1,6 @@
+import { useRouter } from '@/hooks'
+import { computeMatch, defaultMatchOptions } from '@/utils'
 import { Children, cloneElement, FC, isValidElement, PropsWithChildren, ReactElement, ReactPortal } from 'react'
-import { useRouter } from '../hooks'
-import { computeMatch, defaultMatchOptions } from '../utils'
 
 export const Switch: FC<PropsWithChildren> = ({ children }) => {
   const { pathname } = useRouter()
