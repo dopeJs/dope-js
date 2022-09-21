@@ -1,39 +1,83 @@
-import alias from '@rollup/plugin-alias'
+import { babel } from '@rollup/plugin-babel'
 import commonjs from '@rollup/plugin-commonjs'
-import resolve from '@rollup/plugin-node-resolve'
+import json from '@rollup/plugin-json'
+import nodeResolve from '@rollup/plugin-node-resolve'
 import typescript from '@rollup/plugin-typescript'
-import * as path from 'path'
+import { resolve } from 'path'
 import { defineConfig } from 'rollup'
+import pkg from './package.json'
+
+function createPlugins(isProduction, declarationDir) {
+  const sourceMap = !isProduction
+
+  return [
+    nodeResolve({ preferBuiltins: true }),
+    typescript({
+      tsconfig: resolve(__dirname, 'src', 'tsconfig.json'),
+      sourceMap,
+      declaration: declarationDir !== false,
+      declarationDir: declarationDir !== false ? declarationDir : undefined,
+    }),
+    babel({
+      babelHelpers: 'runtime',
+      plugins: ['@babel/plugin-transform-runtime'],
+    }),
+    commonjs({
+      extensions: ['.js'],
+      ignoreDynamicRequires: true,
+    }),
+    json(),
+  ]
+}
 
 const globals = { react: 'React' }
-
 const formats = ['cjs', 'es', 'umd']
 
-const projectRootDir = path.resolve(__dirname)
+function getExternals(isProduction) {
+  const set = new Set([
+    ...Object.keys(globals),
+    'fsevents',
+    // ...Object.keys(pkg.dependencies),
+    ...(isProduction ? [] : Object.keys(pkg.devDependencies)),
+  ])
 
-const rollupConfig = defineConfig({
-  input: 'src/index.ts',
-  output: formats.map((item) => ({
-    file: `lib/design.${item}.js`,
-    format: item,
-    name: 'MelonJS-design',
-    globals,
-    sourcemap: true,
-  })),
-  external: globals,
-  plugins: [
-    alias({
-      entries: [{ find: '@', replacement: path.resolve(projectRootDir, 'src') }],
-    }),
-    commonjs(),
-    resolve(),
-    typescript({
-      compilerOptions: {
-        declaration: true,
-        jsx: 'react-jsx',
-      },
-    }),
-  ],
-})
+  return Array.from(set)
+}
 
-export default rollupConfig
+function createConfig(isProduction) {
+  return defineConfig({
+    treeshake: {
+      moduleSideEffects: 'no-external',
+      propertyReadSideEffects: false,
+      tryCatchDeoptimization: false,
+    },
+    input: 'src/index.ts',
+    output: formats.map((item) => ({
+      file: `lib/router.${item}.js`,
+      format: item,
+      name: 'MelonJS-router',
+      globals,
+    })),
+    onwarn(warning, warn) {
+      // node-resolve complains a lot about this but seems to still work?
+      if (warning.message.includes('Package subpath')) {
+        return
+      }
+      // we use the eval('require') trick to deal with optional deps
+      if (warning.message.includes('Use of eval')) {
+        return
+      }
+      if (warning.message.includes('Circular dependency')) {
+        return
+      }
+      warn(warning)
+    },
+    external: getExternals(isProduction),
+    plugins: createPlugins(isProduction, isProduction ? false : resolve(__dirname, 'lib')),
+  })
+}
+
+export default (commandLineArgs) => {
+  const isProduction = !commandLineArgs.watch
+  return defineConfig(createConfig(isProduction))
+}

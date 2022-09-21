@@ -15,14 +15,20 @@
     "preinstall": "npx only-allow pnpm",
     "start": "melon start",
     "build": "melon build",
-    "preview": "melon preview"
+    "preview": "melon preview",
+    "lint": "eslint --cache --ext .ts,.tsx src/**"
   },
   "dependencies": {
     "@melon-js/design": "workspace:*",
-    "react": "^18.2.0"
+    "@melon-js/router": "workspace:*",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@melon-js/core": "workspace:*",
+    "@melon-js/eslint-plugin": "workspace:*",
     "@types/react": "^18.0.20",
-    "@melon-js/core": "workspace:*"
+    "@types/react-dom": "^18.0.6",
+    "eslint": "^8.23.1"
   }
 }

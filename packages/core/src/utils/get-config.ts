@@ -1,20 +1,14 @@
-import { melonRouter } from '@/plugins'
-import { IServerOption } from '@/types'
 import react from '@vitejs/plugin-react'
 import findUp from 'find-up'
-import { existsSync, statSync } from 'fs'
-import { join, resolve } from 'path'
+import { join } from 'path'
 import { PluginOption, UserConfig } from 'vite'
 import eslint from 'vite-plugin-eslint'
-import { createHtmlPlugin } from 'vite-plugin-html'
+import { melonRouter } from '../plugins'
+import { IServerOption } from '../types'
 
 const findFileCache: Record<string, string> = {}
 const getFindFileCacheKey = (cwd: string, files: string | string[]) => {
-  const afterKey = Array.isArray(files)
-    ? files.join('&')
-    : typeof files === 'string'
-    ? files
-    : ''
+  const afterKey = Array.isArray(files) ? files.join('&') : typeof files === 'string' ? files : ''
   return `${cwd}?${afterKey}`
 }
 
@@ -55,12 +49,24 @@ export async function findConfigFile(cwd: string) {
   return result || ''
 }
 
-export async function getDefaultConfig(
-  cwd: string,
-  isProduction: boolean,
-  server?: IServerOption
-) {
-  const plugins: Array<PluginOption> = [react(), eslint(), melonRouter()]
+export async function getDefaultConfig(cwd: string, isProduction: boolean, server?: IServerOption) {
+  const plugins: Array<PluginOption> = [
+    react({
+      babel: {
+        plugins: ['@babel/plugin-transform-runtime'],
+        presets: [
+          [
+            '@babel/preset-react',
+            {
+              runtime: 'automatic',
+            },
+          ],
+        ],
+      },
+    }),
+    eslint(),
+    melonRouter(),
+  ]
 
   const config: UserConfig = {
     root: cwd,
@@ -68,16 +74,7 @@ export async function getDefaultConfig(
     cacheDir: 'node_modules/.melon.cache',
     resolve: {
       alias: { '@': join(cwd, 'src') },
-      extensions: [
-        '.mjs',
-        '.js',
-        '.ts',
-        '.jsx',
-        '.tsx',
-        '.json',
-        '.mdx',
-        '.md',
-      ],
+      extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.mdx', '.md'],
     },
     plugins,
     build: {

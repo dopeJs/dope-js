@@ -8,7 +8,7 @@ export const defaultMatchOptions: MatchOptions = {
 
 export type CustomMatch = (path: string, pathname: string) => MatchReturn | boolean
 
-export type MatchReturn = [boolean, Record<string, string> | null]
+export type MatchReturn = [boolean, Record<string, string>]
 
 export interface MatchOptions {
   strict: boolean
@@ -22,12 +22,12 @@ export const computeMatch = (pathname: string, path: string, options: MatchOptio
 
   if (typeof customMatch === 'function') {
     const customResult = customMatch(path, pathname)
-    if (typeof customResult === 'boolean') return [customResult, null]
+    if (typeof customResult === 'boolean') return [customResult, {}]
     return customResult
   }
 
   if (path === '*') {
-    return [true, null]
+    return [true, {}]
   }
 
   const keys: Key[] = []
@@ -43,7 +43,7 @@ export const computeMatch = (pathname: string, path: string, options: MatchOptio
   const matchResult = matchReg.exec(pathname)
 
   if (matchResult === null) {
-    return [false, null]
+    return [false, {}]
   }
 
   const params: Record<string, string> = {}
@@ -54,6 +54,6 @@ export const computeMatch = (pathname: string, path: string, options: MatchOptio
     })
     return [true, params]
   } else {
-    return [true, null]
+    return [true, {}]
   }
 }

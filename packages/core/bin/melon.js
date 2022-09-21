@@ -10,9 +10,7 @@ async function melon() {
   if (isEntryExist) {
     require(entry)
   } else {
-    console.warn(
-      'Melon JS core file missing, please reinstall @melon-js/core globally'
-    )
+    console.warn('Melon JS core file missing, please reinstall @melon-js/core globally')
   }
 }
 

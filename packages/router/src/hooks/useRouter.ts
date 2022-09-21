@@ -1,7 +1,7 @@
-import { RouterContext } from '@/context'
-import { handleRoute, parseSearchParams, removePrefix } from '@/utils'
 import type { BrowserHistory, Location, To } from 'history'
 import { useCallback, useContext, useMemo } from 'react'
+import { RouterContext } from '../context'
+import { handleRoute, parseSearchParams, removePrefix } from '../utils'
 
 export type UseRouterReturn = {
   push: BrowserHistory['push']
@@ -23,7 +23,7 @@ export type UseRouterReturn = {
 export const useRouter = (): UseRouterReturn => {
   // history contains a location too
   // both location works
-  const { history, location, prevLocation, cache, redirect } = useContext(RouterContext)
+  const { history, location, prevLocation, cache, redirect } = useContext(RouterContext)!
 
   const { hash, search } = location
 

@@ -1,4 +1,4 @@
-import { createGlobalStyle, css } from '@/styled'
+import { createGlobalStyle, css } from '../../styled'
 
 export interface IGlobalStyleProps {
   /**

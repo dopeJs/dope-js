@@ -1,23 +1,23 @@
-import { ErrorBoundary } from '@/components'
-import { RouteContext, RouterContext } from '@/context'
-import { useRouter, useProps } from '@/hooks'
-import { computeMatch, CustomMatch, defaultMatchOptions, genId, isPromise } from '@/utils'
-import type { FC, PropsWithChildren } from 'react'
-import React, {
-  useMemo,
-  ComponentType,
-  isValidElement,
-  useRef,
+import {
   cloneElement,
+  ComponentType,
+  createElement,
+  FC,
+  isValidElement,
+  PropsWithChildren,
   ReactElement,
-  useState,
-  useEffect,
-  useContext,
   ReactNode,
-  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
 } from 'react'
-
-export type LayoutFunc = (page: ReactElement) => ReactElement
+import { RouterContext } from '../context'
+import { useRouter } from '../hooks'
+import { LayoutFunc } from '../types'
+import { computeMatch, CustomMatch, defaultMatchOptions, genId, isPromise } from '../utils'
+import { ErrorBoundary } from './Error'
 
 export interface RouteProps extends PropsWithChildren {
   /**
@@ -50,20 +50,19 @@ export interface RouteProps extends PropsWithChildren {
    * and now it's already matched
    */
   switched?: boolean
-  switchedParams?: object
+  switchedParams?: Record<string, string>
 
   /**
    * components to render
    * if component is a Promise, react.lazyComponent will be rendered
    */
-  // component?: React.Component<{ params?: object | null }> | ReactNode | LazyFunc
   dynamic?: LazyFunc
 
   /**
    * component's priority is lower than dynamic
    * render no-dynamic react components
    */
-  component?: ComponentType<{ params: object | null }> | ReactElement
+  component?: ComponentType<{ params: Record<string, string> }> | ReactElement
 
   /**
    * user can decide whether a path matches
@@ -101,29 +100,22 @@ export interface RouteProps extends PropsWithChildren {
    * layout for nextMode
    */
   layout?: LayoutFunc
-
-  /**
-   * @props
-   * injected props from parent components
-   */
-  routeProps?: { pathQuery?: Record<string, string> }
 }
 
-type LazyFunc = () => Promise<{
+export type LazyFunc = () => Promise<{
   default: ComponentType<DynamicParams>
   layout?: (page: ReactElement) => ReactElement
   failed?: boolean
 }>
 
-enum DynamicStatus {
+export enum DynamicStatus {
   none = 'none',
   pending = 'pending',
   loaded = 'loaded',
 }
 
 export interface DynamicParams {
-  params: object | null
-  pathQuery?: Record<string, string>
+  params: Record<string, string>
 }
 
 export const Route: FC<RouteProps> = ({
@@ -141,7 +133,6 @@ export const Route: FC<RouteProps> = ({
   customMatch,
   pathQuery,
   children,
-  routeProps,
 }) => {
   // route id
   const routeId = useRef<{ value: number | null }>({ value: null })
@@ -156,13 +147,12 @@ export const Route: FC<RouteProps> = ({
   // get error & notFound ui fallback
   const { error: routerError, notFound: routerNotFound, redirectRef } = useContext(RouterContext)
 
-  const parentRouteProps = useProps()
-
   const isDynamic = typeof dynamic === 'function'
-  const [matched, pathParams] = useMemo<[boolean, object | null]>(() => {
+  const [matched, pathParams] = useMemo<[boolean, Record<string, string>]>(() => {
     if (switched) {
       return [switched, switchedParams || {}]
     }
+
     const [matched, params] = computeMatch(pathname, path, {
       strict,
       sensitive,
@@ -173,7 +163,8 @@ export const Route: FC<RouteProps> = ({
     if (matched) {
       return [matched, params]
     }
-    return [false, null]
+
+    return [false, {}]
   }, [pathname, path, strict, sensitive, exact, customMatch, switched, switchedParams])
 
   const [fail, setFail] = useState(false)
@@ -251,9 +242,8 @@ export const Route: FC<RouteProps> = ({
               }
             } else {
               const { default: renderFunction, layout } = module
-              const renderElement = React.createElement<DynamicParams>(renderFunction, {
+              const renderElement = createElement<DynamicParams>(renderFunction, {
                 params: pathParams || {},
-                pathQuery: routeProps?.['pathQuery'] || {},
               })
               // preserve last rendered component's layout
               if (typeof layout === 'function') {
@@ -292,7 +282,7 @@ export const Route: FC<RouteProps> = ({
       if (Reflect.has(path2staticRef.current, path)) {
         return path2staticRef.current[path] || null
       } else {
-        const ele = React.createElement<{ params: object | null }>(component, {
+        const ele = createElement<{ params: Record<string, string> }>(component, {
           params: pathParams || {},
         })
         path2staticRef.current[path] = ele
@@ -307,25 +297,6 @@ export const Route: FC<RouteProps> = ({
       return <>{children}</>
     }
   }, [component, children, pathParams, path])
-
-  const routeContextValue = useMemo(() => {
-    return Object.assign({}, parentRouteProps, routeProps)
-  }, [parentRouteProps, routeProps])
-
-  const createRouteContextValue = useCallback(
-    (children: JSX.Element | null) => {
-      return (
-        <RouteContext.Provider
-          value={{
-            props: routeContextValue,
-          }}
-        >
-          {children}
-        </RouteContext.Provider>
-      )
-    },
-    [routeContextValue]
-  )
 
   if (!matched) return null
 
@@ -362,5 +333,5 @@ export const Route: FC<RouteProps> = ({
     finalRenderResult = staticRender
   }
 
-  return createRouteContextValue(finalRenderResult)
+  return finalRenderResult
 }

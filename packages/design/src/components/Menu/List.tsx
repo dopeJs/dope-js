@@ -1,5 +1,5 @@
-import { styled } from '@/styled'
 import { FC, useMemo } from 'react'
+import { styled } from '../../styled'
 import { Item } from './Item'
 import { IMenuListProps } from './types'
 
@@ -8,13 +8,7 @@ const StyledList = styled.div`
   flex-direction: column;
 `
 
-export const List: FC<IMenuListProps> = ({
-  data,
-  activeKey,
-  onItemClick,
-  showIcon,
-  depth = 1,
-}) => {
+export const List: FC<IMenuListProps> = ({ data, activeKey, onItemClick, showIcon, depth = 1 }) => {
   const displayList = useMemo(() => {
     if (!Array.isArray(data) || data.length === 0) return []
     return data.sort((a, b) => {

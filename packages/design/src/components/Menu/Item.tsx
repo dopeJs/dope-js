@@ -1,5 +1,5 @@
-import { styled, css } from '@/styled'
 import { FC, useCallback, useEffect, useMemo, useState } from 'react'
+import { styled, css } from '../../styled'
 import { List } from './List'
 import { IMenuItemProps } from './types'
 
@@ -57,13 +57,7 @@ export const Item: FC<IMenuItemProps> = ({
         {title}
       </StyledItem>
       {!fold && Array.isArray(children) && children.length > 0 && (
-        <List
-          data={children}
-          activeKey={activeKey}
-          onItemClick={onItemClick}
-          depth={depth + 1}
-          showIcon={showIcon}
-        />
+        <List data={children} activeKey={activeKey} onItemClick={onItemClick} depth={depth + 1} showIcon={showIcon} />
       )}
     </>
   )

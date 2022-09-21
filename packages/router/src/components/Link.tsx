@@ -1,8 +1,6 @@
-import { useRouter } from '@/hooks'
 import { parsePath, Location, To } from 'history'
-import { ComponentType, PropsWithChildren, useCallback, useMemo } from 'react'
-
-import type { FC } from 'react'
+import { ComponentType, FC, PropsWithChildren, useCallback, useMemo } from 'react'
+import { useRouter } from '../hooks'
 
 export interface LinkProps extends PropsWithChildren {
   to: To

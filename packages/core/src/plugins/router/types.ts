@@ -1,14 +1,26 @@
 import { RouterContext } from './context'
-import { PageRoute } from './resolver'
 
 export type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>
+
+export interface PageRouteBase {
+  caseSensitive?: boolean
+  children?: PageRouteBase[]
+  element?: string
+  index?: boolean
+  path?: string
+  rawRoute: string
+}
+
+export interface PageRoute extends Omit<Optional<PageRouteBase, 'rawRoute' | 'path'>, 'children'> {
+  children?: PageRoute[]
+}
 
 export interface PageOptions {
   dir: string
   baseRoute: string
 }
 
-interface Options {
+export interface Options {
   pagesDir?: string | (string | PageOptions)[]
   extensions: string[]
   exclude: string[]

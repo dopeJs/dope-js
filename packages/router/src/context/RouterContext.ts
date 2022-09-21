@@ -1,18 +1,18 @@
-import { RouterCache } from '@/cache'
-import type { IRouterContext } from '@/types'
 import { createBrowserHistory } from 'history'
 import { createContext } from 'react'
+import { RouterCache } from '../cache'
+import type { IRouterContext } from '../types'
 
-export const defaultHistory = createBrowserHistory()
+export const browserHistory = createBrowserHistory()
 
 /**
  * context instance for router
  */
 const initValue: IRouterContext = {
   inControl: false,
-  history: defaultHistory,
-  location: defaultHistory.location,
-  prevLocation: defaultHistory.location,
+  history: browserHistory,
+  location: browserHistory.location,
+  prevLocation: browserHistory.location,
   error: null,
   notFound: null,
   redirect: null,

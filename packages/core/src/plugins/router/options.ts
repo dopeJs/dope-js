@@ -4,11 +4,7 @@ import { resolver } from './resolver'
 import { PageOptions, ResolvedOptions, RouterOptions } from './types'
 import { slash, toArray } from './utils'
 
-function resolvePageDirs(
-  dirs: string | (string | PageOptions)[],
-  root: string,
-  exclude: string[]
-) {
+function resolvePageDirs(dirs: string | (string | PageOptions)[], root: string, exclude: string[]) {
   dirs = toArray(dirs)
 
   return dirs.flatMap((dir) => {
@@ -21,10 +17,7 @@ function resolvePageDirs(
   })
 }
 
-export function resolveOptions(
-  options: RouterOptions,
-  root: string
-): ResolvedOptions {
+export function resolveOptions(options: RouterOptions, root: string): ResolvedOptions {
   const extensions = options.extensions || ['.tsx', '.mdx', '.md']
   const exclude = options.exclude || ['.tsx', '.mdx', '.md']
   const caseSensitive = !!options.caseSensitive

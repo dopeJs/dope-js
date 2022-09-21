@@ -1,8 +1,8 @@
-import { IBuildOptions, IDevOptions } from '@/types'
-import { getLogo } from '@/utils'
 import chalk from 'chalk'
 import { Command } from 'commander'
 import { resolve } from 'path'
+import { IBuildOptions, IDevOptions } from './types'
+import { getLogo } from './utils'
 
 export async function main() {
   const program = new Command()

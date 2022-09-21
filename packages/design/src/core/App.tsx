@@ -1,20 +1,7 @@
-import { commonTheme, darkColors, lightColors } from '@/theme'
-import {
-  ColorFn,
-  ColorType,
-  IErrorBoundaryProps,
-  IProviderConfig,
-  IThemeContext,
-} from '@/types'
-import {
-  createContext,
-  FC,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react'
+import { createContext, FC, useCallback, useEffect, useMemo, useState } from 'react'
 import { DefaultTheme, ThemeProvider } from 'styled-components'
+import { commonTheme, darkColors, lightColors } from '../theme'
+import { ColorFn, ColorType, IErrorBoundaryProps, IProviderConfig, IThemeContext } from '../types'
 import { ErrorBoundary } from './ErrorBoundary'
 import { GlobalStyle } from './GlobalStyle'
 
@@ -25,23 +12,13 @@ export interface IAppProps extends IErrorBoundaryProps {
   rootId?: string
 }
 
-export const App: FC<IAppProps> = ({
-  children,
-  options,
-  fallback,
-  onError,
-  rootId = 'root',
-}) => {
+export const App: FC<IAppProps> = ({ children, options, fallback, onError, rootId = 'root' }) => {
   const [dark, setDark] = useState(false)
 
-  const [primaryColor, setPrimary] = useState<ColorType>(
-    options?.primary || 'blue'
-  )
+  const [primaryColor, setPrimary] = useState<ColorType>(options?.primary || 'blue')
   const [dangerColor, setDanger] = useState<ColorType>(options?.danger || 'red')
   const [warnColor, setWarn] = useState<ColorType>(options?.warn || 'yellow')
-  const [successColor, setSuccess] = useState<ColorType>(
-    options?.success || 'green'
-  )
+  const [successColor, setSuccess] = useState<ColorType>(options?.success || 'green')
 
   const color = useCallback(
     (stage: number, type: ColorType, alpha = 1) => {
@@ -67,25 +44,13 @@ export const App: FC<IAppProps> = ({
     else setDark(false)
   }, [])
 
-  const primaryFn = useCallback(
-    (stage: number, alpha = 1) => color(stage, primaryColor, alpha),
-    [primaryColor, color]
-  )
+  const primaryFn = useCallback((stage: number, alpha = 1) => color(stage, primaryColor, alpha), [primaryColor, color])
 
-  const successFn = useCallback(
-    (stage: number, alpha = 1) => color(stage, successColor, alpha),
-    [successColor, color]
-  )
+  const successFn = useCallback((stage: number, alpha = 1) => color(stage, successColor, alpha), [successColor, color])
 
-  const dangerFn = useCallback(
-    (stage: number, alpha = 1) => color(stage, dangerColor, alpha),
-    [dangerColor, color]
-  )
+  const dangerFn = useCallback((stage: number, alpha = 1) => color(stage, dangerColor, alpha), [dangerColor, color])
 
-  const warnFn = useCallback(
-    (stage: number, alpha = 1) => color(stage, warnColor, alpha),
-    [warnColor, color]
-  )
+  const warnFn = useCallback((stage: number, alpha = 1) => color(stage, warnColor, alpha), [warnColor, color])
 
   const colorFns: Record<ColorType, ColorFn> = useMemo(() => {
     const colorMap = dark ? darkColors : lightColors
@@ -105,7 +70,7 @@ export const App: FC<IAppProps> = ({
       danger: dangerFn,
       warn: warnFn,
       ...colorFns,
-    }
+    } as unknown as DefaultTheme
   }, [dark])
 
   return (

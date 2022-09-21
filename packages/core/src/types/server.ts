@@ -1,9 +1,5 @@
 import { IncomingMessage, Server, ServerResponse } from 'http'
-import {
-  Http2SecureServer,
-  Http2ServerRequest,
-  Http2ServerResponse,
-} from 'http2'
+import { Http2SecureServer, Http2ServerRequest, Http2ServerResponse } from 'http2'
 
 export interface CredentialsInfo {
   cert: string | Buffer

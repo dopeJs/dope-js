@@ -1,5 +1,5 @@
-import { IErrorBoundaryProps } from '@/types'
 import { Component, ErrorInfo } from 'react'
+import { IErrorBoundaryProps } from '../types'
 
 export class ErrorBoundary extends Component<IErrorBoundaryProps> {
   state = { hasError: false, error: null }

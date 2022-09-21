@@ -43,23 +43,16 @@ export const useAnimation = <T extends HTMLElement>({
       if (typeof opts.timing === 'string') {
         opts.timing = SpeedMaps[opts.timing]
       }
-      animateRef.current = ref.current.animate(
-        opts.keyframes,
-        opts.timing || 300
-      )
+      animateRef.current = ref.current.animate(opts.keyframes, opts.timing || 300)
       if (auto === false) {
         animateRef.current.pause()
       }
       if (id) animateRef.current.id = id
-      onReady &&
-        animateRef.current.ready.then((animation) =>
-          onReady(animation.playState)
-        )
+      onReady && animateRef.current.ready.then((animation) => onReady(animation.playState))
 
       onFinish && animateRef.current.addEventListener('finish', onFinish)
 
-      return () =>
-        onFinish && animateRef.current?.removeEventListener('finish', onFinish)
+      return () => onFinish && animateRef.current?.removeEventListener('finish', onFinish)
     },
     [auto, id, onReady, onFinish]
   )

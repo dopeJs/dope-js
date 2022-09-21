@@ -39,9 +39,7 @@ export function normalizeCase(str: string, caseSensitive: boolean) {
 }
 
 export function extsToGlob(extensions: string[]) {
-  return extensions.length > 1
-    ? `{${extensions.join(',')}}`
-    : extensions[0] || ''
+  return extensions.length > 1 ? `{${extensions.join(',')}}` : extensions[0] || ''
 }
 
 export function isDynamicRoute(routePath: string) {

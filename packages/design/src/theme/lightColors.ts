@@ -1,4 +1,4 @@
-import { ColorMap } from '@/types'
+import { ColorMap } from '../types'
 
 export const lightColors: ColorMap = {
   blue: {

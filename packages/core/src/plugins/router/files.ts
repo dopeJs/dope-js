@@ -6,11 +6,7 @@ import { extsToGlob, slash } from './utils'
 /**
  * Resolves the page dirs for its for its given globs
  */
-export function getPageDirs(
-  pageOptions: PageOptions,
-  root: string,
-  exclude: string[]
-): PageOptions[] {
+export function getPageDirs(pageOptions: PageOptions, root: string, exclude: string[]): PageOptions[] {
   const dirs = fg.sync(slash(pageOptions.dir), {
     ignore: exclude,
     onlyDirectories: true,

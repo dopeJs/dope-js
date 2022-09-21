@@ -1,12 +1,12 @@
-import { RouterCache } from '@/cache'
-import { RedirectFunc, RedirectResult } from '@/types'
 import { History, Location, Path, To } from 'history'
 import { MutableRefObject, useLayoutEffect } from 'react'
+import { IRouterCache } from '../cache'
+import { RedirectFunc, RedirectResult } from '../types'
 import { appendPrefix, removePrefix } from './metainfo'
 import { parsePathname } from './parse'
 import { isPromise, pickBy } from './utils'
 
-const appendPreserveParams = (search: string, cache: RouterCache) => {
+const appendPreserveParams = (search: string, cache: IRouterCache) => {
   const preserveParams = cache.getPreserveParams()
 
   const searchParams = new URLSearchParams(search)
@@ -27,7 +27,7 @@ export const handleRoute = async (
   location: Location,
   pathname: string,
   redirect: RedirectFunc | null,
-  cache: RouterCache,
+  cache: IRouterCache,
   state?: unknown
 ): Promise<void> => {
   let partialPath: Path
@@ -109,7 +109,7 @@ export const useInitialRedirect = (
   location: Location,
   handler: History['replace'],
   redirect: RedirectFunc | undefined | null,
-  cache: RouterCache,
+  cache: IRouterCache,
   ref: MutableRefObject<boolean | string>
 ) => {
   useLayoutEffect(() => {

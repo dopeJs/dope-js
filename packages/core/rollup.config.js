@@ -1,26 +1,18 @@
-import alias from '@rollup/plugin-alias'
 import commonjs from '@rollup/plugin-commonjs'
 import json from '@rollup/plugin-json'
 import nodeResolve from '@rollup/plugin-node-resolve'
 import typescript from '@rollup/plugin-typescript'
-import * as path from 'path'
+import { resolve } from 'path'
 import { defineConfig } from 'rollup'
 import pkg from './package.json'
 
-const projectRootDir = path.resolve(__dirname)
-
-function createNodePlugins(isProduction, declarationDir) {
+function createPlugins(isProduction, declarationDir) {
   const sourceMap = !isProduction
 
   return [
-    alias({
-      entries: [
-        { find: '@', replacement: path.resolve(projectRootDir, 'src') },
-      ],
-    }),
     nodeResolve({ preferBuiltins: true }),
     typescript({
-      tsconfig: path.resolve(__dirname, 'src/tsconfig.json'),
+      tsconfig: resolve(__dirname, 'src/tsconfig.json'),
       sourceMap,
       declaration: declarationDir !== false,
       declarationDir: declarationDir !== false ? declarationDir : undefined,
@@ -33,7 +25,7 @@ function createNodePlugins(isProduction, declarationDir) {
   ]
 }
 
-function createNodeConfig(isProduction) {
+function createConfig(isProduction) {
   return defineConfig({
     treeshake: {
       moduleSideEffects: 'no-external',
@@ -41,11 +33,11 @@ function createNodeConfig(isProduction) {
       tryCatchDeoptimization: false,
     },
     input: {
-      index: path.resolve(__dirname, 'src/index.ts'),
-      cli: path.resolve(__dirname, 'src/cli.ts'),
+      index: resolve(__dirname, 'src/index.ts'),
+      cli: resolve(__dirname, 'src/cli.ts'),
     },
     output: {
-      dir: path.resolve(__dirname, 'lib'),
+      dir: resolve(__dirname, 'lib'),
       entryFileNames: `[name].js`,
       exports: 'named',
       format: 'cjs',
@@ -67,19 +59,12 @@ function createNodeConfig(isProduction) {
       }
       warn(warning)
     },
-    external: [
-      'fsevents',
-      ...Object.keys(pkg.dependencies),
-      ...(isProduction ? [] : Object.keys(pkg.devDependencies)),
-    ],
-    plugins: createNodePlugins(
-      isProduction,
-      isProduction ? false : path.resolve(__dirname, 'lib')
-    ),
+    external: ['fsevents', ...Object.keys(pkg.dependencies), ...(isProduction ? [] : Object.keys(pkg.devDependencies))],
+    plugins: createPlugins(isProduction, isProduction ? false : resolve(__dirname, 'lib')),
   })
 }
 
 export default (commandLineArgs) => {
   const isProduction = !commandLineArgs.watch
-  return defineConfig(createNodeConfig(isProduction))
+  return defineConfig(createConfig(isProduction))
 }

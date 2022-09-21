@@ -26,6 +26,7 @@
       "version": "detect"
     }
   },
+  "ignorePatterns": ["rollup.config.js", "lib", "dist", "temp-package-dir", "scripts/*.js", "**/*.js", "**/*.cjs"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
@@ -56,13 +57,10 @@
         }
       }
     ],
-    "import/no-unresolved": [
-      "error",
-      {
-        "ignore": ["@/.*", "@melon-js/.*", "~pages"]
-      }
-    ],
+    "import/no-unresolved": "off",
     "@typescript-eslint/no-empty-interface": "off",
-    "@typescript-eslint/no-non-null-assertion": "off"
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "react/prop-types": "off",
+    "@typescript-eslint/ban-types": "off"
   }
 }

@@ -34,7 +34,7 @@ export const formatRawLocation = (location: Location): Location => {
   return result
 }
 
-interface ISearchParam {
+export interface ISearchParam {
   obj: Record<string, string>
   raw: string
 }

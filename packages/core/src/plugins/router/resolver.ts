@@ -1,32 +1,13 @@
 import type { RouterContext } from './context'
 import { generateClientCode } from './stringify'
-import type { Optional, PageResolver, ResolvedOptions } from './types'
+import type { PageResolver, PageRoute, PageRouteBase, ResolvedOptions } from './types'
 import { buildRoutePath, countSlash, normalizeCase } from './utils'
 
-export interface PageRouteBase {
-  caseSensitive?: boolean
-  children?: PageRouteBase[]
-  element?: string
-  index?: boolean
-  path?: string
-  rawRoute: string
-}
-
-export interface PageRoute
-  extends Omit<Optional<PageRouteBase, 'rawRoute' | 'path'>, 'children'> {
-  children?: PageRoute[]
-}
-
-function prepareRoutes(
-  routes: PageRoute[],
-  options: ResolvedOptions,
-  parent?: PageRoute
-) {
+function prepareRoutes(routes: PageRoute[], options: ResolvedOptions, parent?: PageRoute) {
   for (const route of routes) {
     if (parent) route.path = route.path?.replace(/^\//, '')
 
-    if (route.children)
-      route.children = prepareRoutes(route.children, options, route)
+    if (route.children) route.children = prepareRoutes(route.children, options, route)
 
     delete route.rawRoute
   }

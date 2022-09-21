@@ -6,11 +6,7 @@
     "moduleResolution": "node",
     "declaration": true,
     "rootDir": "src",
-    "outDir": "lib",
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"]
-    }
+    "outDir": "lib"
   },
   "include": ["src/**/*.ts"],
   "exclude": ["lib", "node_modules", "bin"]

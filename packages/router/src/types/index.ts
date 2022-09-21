@@ -1,6 +1,6 @@
-import type { RouterCache } from '@/cache'
 import type { BrowserHistory, Location, Path, To } from 'history'
 import type { MutableRefObject, ReactElement } from 'react'
+import type { IRouterCache } from '../cache'
 
 export type RedirectResult = void | undefined | To
 
@@ -13,7 +13,7 @@ export interface IRouterContext {
   prevLocation: Location
   error: ReactElement | null
   notFound: ReactElement | null
-  cache: RouterCache
+  cache: IRouterCache
   redirect: RedirectFunc | null
   redirectRef: MutableRefObject<boolean | string> | null
 }
@@ -21,3 +21,5 @@ export interface IRouterContext {
 export interface IRouteContext {
   props: Record<string, string> | undefined
 }
+
+export type LayoutFunc = (page: ReactElement) => ReactElement

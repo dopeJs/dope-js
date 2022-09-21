@@ -73,12 +73,7 @@ export class RouterContext {
     debug.pages('add', path)
     for (const p of toArray(path)) {
       const pageDirPath = slash(resolve(this.root, pageDir.dir))
-      const route = slash(
-        join(
-          pageDir.baseRoute,
-          p.replace(`${pageDirPath}/`, '').replace(extname(p), '')
-        )
-      )
+      const route = slash(join(pageDir.baseRoute, p.replace(`${pageDirPath}/`, '').replace(extname(p), '')))
       this._pageRouteMap.set(p, {
         path: p,
         route,

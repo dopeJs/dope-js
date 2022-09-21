@@ -1,0 +1,1 @@
+{ "extends": ["plugin:@melon-js/recommended"], "plugins": ["@melon-js"] }

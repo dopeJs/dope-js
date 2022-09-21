@@ -1,7 +1,7 @@
-import { IBuildOptions } from '@/types'
-import { findConfigFile, getDefaultConfig, logger } from '@/utils'
 import { cwd as getCwd } from 'process'
 import { build as viteBuild, loadConfigFromFile, mergeConfig } from 'vite'
+import { IBuildOptions } from '../types'
+import { findConfigFile, getDefaultConfig, logger } from '../utils'
 
 export const build = async (options: IBuildOptions = {}) => {
   try {
@@ -9,10 +9,7 @@ export const build = async (options: IBuildOptions = {}) => {
     const cwd = _cwd || getCwd()
     const configFile = _config || (await findConfigFile(cwd))
 
-    const userConfig = await loadConfigFromFile(
-      { command: 'build', mode: 'production' },
-      configFile
-    )
+    const userConfig = await loadConfigFromFile({ command: 'build', mode: 'production' }, configFile)
     const defaultConfig = await getDefaultConfig(cwd, true)
     const mergedConfig = mergeConfig(defaultConfig, userConfig?.config || {})
 

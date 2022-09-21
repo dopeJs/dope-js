@@ -1,21 +1,20 @@
-import React, { PropsWithChildren } from 'react'
-import type { MutableRefObject, ReactElement, ReactNode } from 'react'
-import type { LayoutFunc } from './Route'
+import { Component, MutableRefObject, PropsWithChildren, ReactElement, ReactNode } from 'react'
+import { LayoutFunc } from '../types'
 
-interface Props extends PropsWithChildren {
+export interface ErrorBoundaryProps extends PropsWithChildren {
   fallback?: ReactNode
   pathname: string
   errorRef: MutableRefObject<ErrorBoundary | null>
   layout: LayoutFunc | null
 }
 
-interface State {
+export interface State {
   hasError: boolean
   pathname: string
 }
 
-export class ErrorBoundary extends React.Component<Props, State> {
-  constructor(props: Props) {
+export class ErrorBoundary extends Component<ErrorBoundaryProps, State> {
+  constructor(props: ErrorBoundaryProps) {
     super(props)
     this.props.errorRef.current = this
   }
@@ -30,7 +29,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
     return { hasError: true }
   }
 
-  static getDerivedStateFromProps(props: Props, state: State): Partial<State> | null {
+  static getDerivedStateFromProps(props: ErrorBoundaryProps, state: State): Partial<State> | null {
     if (props.pathname !== state.pathname) {
       return {
         pathname: props.pathname,

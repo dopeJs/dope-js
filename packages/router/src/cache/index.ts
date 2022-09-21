@@ -5,7 +5,15 @@
 
 import { useRef } from 'react'
 
-export class RouterCache {
+export interface IRouterCache {
+  setPreserveParams(key: string, value: string): void
+
+  getPreserveParams(): Record<string, string>
+  getPreserveParams(key: string): string | undefined
+  getPreserveParams(key?: string): string | undefined | Record<string, string>
+}
+
+export class RouterCache implements IRouterCache {
   private preserveParams: Record<string, string> = {}
 
   setPreserveParams = (key: string, value: string) => {

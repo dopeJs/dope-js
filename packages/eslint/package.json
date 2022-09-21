@@ -1,0 +1,59 @@
+{
+  "name": "@melon-js/eslint-plugin",
+  "version": "0.0.1",
+  "description": "MelonJS plugin for eslint",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/melonote-app/melon-js"
+  },
+  "engines": {
+    "node": "^14.18.0 || >=16.0.0"
+  },
+  "packageManager": "pnpm@7.12.0",
+  "author": "",
+  "license": "MIT",
+  "main": "./lib/index.js",
+  "files": [
+    "lib",
+    "files"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "directory": "temp-package-dir",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "start": "rimraf lib && pnpm run build-bundle -w",
+    "build": "rimraf lib && rollup -c",
+    "build-bundle": "rollup -c",
+    "build-types": "run-s build-temp-types roll-types",
+    "build-temp-types": "rimraf temp && tsc --emitDeclarationOnly --outDir temp -p src",
+    "roll-types": "api-extractor run && rimraf temp",
+    "clean-publish": "clean-publish --access public",
+    "prepublishOnly": "rimraf ./temp-package-dir && run-s build clean-publish",
+    "postpublish": "rimraf ./temp-package-dir",
+    "lint": "eslint --cache --ext .ts src/**"
+  },
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.37.0",
+    "@typescript-eslint/parser": "^5.37.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-typescript": "^3.5.1",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.8"
+  },
+  "peerDependencies": {
+    "eslint": "^6.0.0 || ^7.0.0 || ^8.0.0"
+  },
+  "devDependencies": {
+    "@microsoft/api-extractor": "^7.31.1",
+    "@rollup/plugin-commonjs": "^22.0.2",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^14.1.0",
+    "@rollup/plugin-typescript": "^8.5.0",
+    "rollup": "^2.79.0",
+    "tslib": "^2.4.0"
+  }
+}

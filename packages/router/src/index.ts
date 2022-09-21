@@ -1,4 +1,5 @@
+export { IRouterCache } from './cache'
 export * from './components'
-export { CustomMatch, MatchReturn } from './utils'
+export * from './utils'
 export * from './hooks'
 export * from './types'

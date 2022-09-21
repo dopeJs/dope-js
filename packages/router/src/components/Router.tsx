@@ -1,16 +1,13 @@
-import { useRouterCache } from '@/cache'
-import { RouterContext, defaultHistory } from '@/context'
-import type { RedirectFunc } from '@/types'
-import { formatRawLocation, setBase, useInitialRedirect } from '@/utils'
 import { BrowserHistory, Update as HistoryUpdate, Location } from 'history'
 import { FC, PropsWithChildren, ReactElement, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useRouterCache } from '../cache'
+import { browserHistory, RouterContext } from '../context'
+import { RedirectFunc } from '../types'
+import { formatRawLocation, setBase, useInitialRedirect } from '../utils'
+import { Route, RouteProps } from './Route'
+import { Switch } from './Switch'
 
 export interface RouterProps extends PropsWithChildren {
-  /**
-   * custom browser history instance
-   */
-  history?: BrowserHistory
-
   /**
    * path prefix
    */
@@ -33,12 +30,15 @@ export interface RouterProps extends PropsWithChildren {
    * router watcher
    */
   redirect?: RedirectFunc
+
+  /**
+   * routes, will ignore children
+   */
+  routes?: Array<RouteProps>
 }
 
-export const Router: FC<RouterProps> = ({ base = '', history: propHistory, children, error, notFound, redirect }) => {
-  const historyInstance = propHistory !== undefined ? propHistory : defaultHistory
-
-  const [location, setLocation] = useState<Location>(historyInstance.location)
+export const Router: FC<RouterProps> = ({ base = '', children, routes, error, notFound, redirect }) => {
+  const [location, setLocation] = useState<Location>(browserHistory.location)
 
   const prevRef = useRef<Location>(location)
 
@@ -46,13 +46,13 @@ export const Router: FC<RouterProps> = ({ base = '', history: propHistory, child
     prevRef.current = location
   }, [location])
 
-  const [prevLocation, setPrevLocation] = useState<Location>(historyInstance.location)
+  const [prevLocation, setPrevLocation] = useState<Location>(browserHistory.location)
 
   // update router global metainfo `base`
   setBase(base)
 
   // init browser history instance only once
-  const historyRef = useRef<BrowserHistory>(historyInstance)
+  const historyRef = useRef<BrowserHistory>(browserHistory)
 
   const pendingLocation = useRef<Location | null>(null)
 
@@ -82,7 +82,7 @@ export const Router: FC<RouterProps> = ({ base = '', history: propHistory, child
   // then the first dynamic promise will not render
   const redirectRef = useRef<boolean | string>(false)
 
-  useInitialRedirect(location, historyInstance.replace, redirect, cache, redirectRef)
+  useInitialRedirect(location, browserHistory.replace, redirect, cache, redirectRef)
 
   useEffect(() => {
     if (mounted.current === false) {
@@ -112,7 +112,15 @@ export const Router: FC<RouterProps> = ({ base = '', history: propHistory, child
         redirectRef: redirectRef,
       }}
     >
-      {children}
+      {Array.isArray(routes) && routes.length > 0 ? (
+        <Switch>
+          {routes.map((item) => (
+            <Route key={item.path} {...item} />
+          ))}
+        </Switch>
+      ) : (
+        children
+      )}
     </RouterContext.Provider>
   )
 }

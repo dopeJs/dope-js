@@ -1,12 +1,7 @@
-import { IDevOptions } from '@/types'
-import { findConfigFile, getDefaultConfig, logger } from '@/utils'
 import { cwd as getCwd } from 'process'
-import {
-  loadConfigFromFile,
-  mergeConfig,
-  preview as vitePreview,
-  UserConfig,
-} from 'vite'
+import { loadConfigFromFile, mergeConfig, preview as vitePreview, UserConfig } from 'vite'
+import { IDevOptions } from '../types'
+import { findConfigFile, getDefaultConfig, logger } from '../utils'
 
 export const preview = async (options: IDevOptions = {}) => {
   try {
@@ -14,15 +9,9 @@ export const preview = async (options: IDevOptions = {}) => {
     const cwd = _cwd || getCwd()
     const configFile = _config || (await findConfigFile(cwd))
 
-    const userConfig = await loadConfigFromFile(
-      { command: 'build', mode: 'production' },
-      configFile
-    )
+    const userConfig = await loadConfigFromFile({ command: 'build', mode: 'production' }, configFile)
     const defaultConfig = await getDefaultConfig(cwd, true, { host, port })
-    const mergedConfig: UserConfig = mergeConfig(
-      defaultConfig,
-      userConfig?.config || {}
-    )
+    const mergedConfig: UserConfig = mergeConfig(defaultConfig, userConfig?.config || {})
 
     const server = await vitePreview(mergedConfig)
     if (!server.httpServer) {

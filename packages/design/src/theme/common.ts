@@ -1,10 +1,9 @@
-import { ColorType } from '@/types'
 import { DefaultTheme } from 'styled-components'
+import { ColorType } from '../types'
 
-export const commonTheme: Omit<
-  DefaultTheme,
-  'primary' | 'danger' | 'warn' | 'success' | ColorType
-> = {
+type Colors = 'primary' | 'danger' | 'warn' | 'success' | ColorType
+
+export const commonTheme: Omit<DefaultTheme, Colors> = {
   borderRadius: '4px',
   light: 300,
   normal: 400,
