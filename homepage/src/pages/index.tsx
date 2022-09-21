@@ -1,7 +1,27 @@
+import { Button, css, useTheme, styled } from '@melon-js/design'
 import { FC } from 'react'
 
+const Wrapper = styled.div(
+  ({ theme: { neutral } }) => css`
+    background-color: ${neutral(500)};
+  `
+)
+
 const Home: FC = () => {
-  return <div>index page1</div>
+  const { dark, setDark } = useTheme()
+
+  return (
+    <Wrapper>
+      <Button
+        onClick={() => {
+          console.log('index')
+          setDark(!dark)
+        }}
+      >
+        index
+      </Button>
+    </Wrapper>
+  )
 }
 
 export default Home

@@ -48,14 +48,18 @@ importers:
       '@melon-js/router': workspace:*
       '@types/react': ^18.0.20
       '@types/react-dom': ^18.0.6
+      '@types/styled-components': ^5.1.26
       eslint: ^8.23.1
       react: ^18.2.0
       react-dom: ^18.2.0
+      react-is: ^18.2.0
     dependencies:
       '@melon-js/design': link:../packages/design
       '@melon-js/router': link:../packages/router
+      '@types/styled-components': 5.1.26
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+      react-is: 18.2.0
     devDependencies:
       '@melon-js/core': link:../packages/core
       '@melon-js/eslint-plugin': link:../packages/eslint
@@ -77,6 +81,7 @@ importers:
       '@types/mime-types': ^2.1.1
       '@types/react': ^18.0.20
       '@vitejs/plugin-react': ^2.1.0
+      babel-plugin-styled-components: ^2.0.7
       chalk: ^4.1.2
       clean-publish: ^4.0.1
       commander: ^9.4.0
@@ -86,6 +91,7 @@ importers:
       fast-glob: ^3.2.12
       find-up: ^5.0.0
       mime-types: ^2.1.35
+      react: ''
       rollup: ^2.79.0
       tsc-alias: ^1.7.0
       tslib: ^2.4.0
@@ -101,6 +107,7 @@ importers:
       '@rollup/plugin-dynamic-import-vars': 1.4.4_rollup@2.79.0
       '@types/mime-types': 2.1.1
       '@vitejs/plugin-react': 2.1.0_vite@3.1.2
+      babel-plugin-styled-components: 2.0.7_styled-components@5.3.5
       chalk: 4.1.2
       commander: 9.4.0
       debug: 4.3.4
@@ -109,6 +116,7 @@ importers:
       fast-glob: 3.2.12
       find-up: 5.0.0
       mime-types: 2.1.35
+      react: 18.2.0
       vite: 3.1.2
       vite-plugin-eslint: 1.8.1_eslint@8.23.1+vite@3.1.2
       vite-plugin-html: 3.2.0_vite@3.1.2
@@ -147,7 +155,6 @@ importers:
       rc-tree: ^5.7.0
       react: '>=17.0.2'
       react-is: ^18.2.0
-      react-model: ^4.2.1
       rollup: ^2.79.0
       styled-components: ^5.3.5
       tsc-alias: ^1.7.0
@@ -159,7 +166,6 @@ importers:
       rc-tree: 5.7.0_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-is: 18.2.0
-      react-model: 4.2.1_bb2lpehc4sm6fnn2zwweqmbmoy
       styled-components: 5.3.5_7i5myeigehqah43i5u7wbekgba
     devDependencies:
       '@babel/plugin-transform-runtime': 7.19.1_@babel+core@7.19.1
@@ -1977,7 +1983,6 @@ packages:
     dependencies:
       '@types/react': 18.0.20
       hoist-non-react-statics: 3.3.2
-    dev: true
 
   /@types/json-schema/7.0.11:
     resolution: {integrity: sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==}
@@ -2063,7 +2068,6 @@ packages:
       '@types/hoist-non-react-statics': 3.3.1
       '@types/react': 18.0.20
       csstype: 3.1.1
-    dev: true
 
   /@types/tmp/0.0.33:
     resolution: {integrity: sha512-gVC1InwyVrO326wbBZw+AO3u2vRXz/iRWq9jYhpG4W8LXyIgDv3ZmcLQ5Q4Gs+gFMyqx+viFoFT+l3p61QFCmQ==}
@@ -4532,10 +4536,6 @@ packages:
     resolution: {integrity: sha512-CmxgYGiEPCLhfLnpPp1MoRmifwEIOgjcHXxOBjv7mY96c+eWScsOP9c112ZyLdWHi0FxHjI+4uVhKYp/gcdRmQ==}
     engines: {node: '>= 4'}
 
-  /immer/9.0.15:
-    resolution: {integrity: sha512-2eB/sswms9AEUSkOm4SbV5Y7Vmt/bKRwByd52jfLkW4OLYeaTP3EEiJ9agqU0O/tq6Dk62Zfj+TJSqfm1rLVGQ==}
-    dev: false
-
   /import-fresh/3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}
     engines: {node: '>=6'}
@@ -6275,19 +6275,6 @@ packages:
 
   /react-is/18.2.0:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
-    dev: false
-
-  /react-model/4.2.1_bb2lpehc4sm6fnn2zwweqmbmoy:
-    resolution: {integrity: sha512-vFHuIJW+AtSAHQSP9sWDf0B+NimBzvAiAhnJ+umZ/ipOk8hK0FQsRn0vglWeeZhdrfYF8Y0Xy6IDVG8WhhDUxg==}
-    peerDependencies:
-      react: '>=16.3.0'
-      react-dom: '>=16.3.0'
-      typescript: '>=3.9.0'
-    dependencies:
-      immer: 9.0.15
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      typescript: 4.8.3
     dev: false
 
   /react-refresh/0.14.0:

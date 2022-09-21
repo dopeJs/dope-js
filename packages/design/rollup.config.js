@@ -36,7 +36,8 @@ function getExternals(isProduction) {
   const set = new Set([
     ...Object.keys(globals),
     'fsevents',
-    // ...Object.keys(pkg.dependencies),
+    'styled-components',
+    ...Object.keys(pkg.dependencies),
     ...(isProduction ? [] : Object.keys(pkg.devDependencies)),
   ])
 

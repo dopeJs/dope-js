@@ -52,7 +52,7 @@ export async function getDefaultConfig(cwd: string, isProduction: boolean, serve
   const plugins: Array<PluginOption> = [
     react({
       babel: {
-        plugins: ['@babel/plugin-transform-runtime'],
+        plugins: ['@babel/plugin-transform-runtime', 'babel-plugin-styled-components'],
         presets: [
           [
             '@babel/preset-react',

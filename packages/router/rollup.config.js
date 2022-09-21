@@ -33,7 +33,12 @@ const globals = { react: 'React' }
 const formats = ['cjs', 'es', 'umd']
 
 function getExternals(isProduction) {
-  const set = new Set([...Object.keys(globals), 'fsevents', ...(isProduction ? [] : Object.keys(pkg.devDependencies))])
+  const set = new Set([
+    ...Object.keys(globals),
+    'fsevents',
+    ...Object.keys(pkg.dependencies),
+    ...(isProduction ? [] : Object.keys(pkg.devDependencies)),
+  ])
   return Array.from(set)
 }
 

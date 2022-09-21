@@ -7,12 +7,12 @@ import { GlobalStyle } from './GlobalStyle'
 
 export const ThemeContext = createContext<IThemeContext | null>(null)
 
-export interface IAppProps extends IErrorBoundaryProps {
+export interface AppProps extends IErrorBoundaryProps {
   options?: IProviderConfig
   rootId?: string
 }
 
-export const App: FC<IAppProps> = ({ children, options, fallback, onError, rootId = 'root' }) => {
+export const App: FC<AppProps> = ({ children, options, fallback, onError, rootId = 'root' }) => {
   const [dark, setDark] = useState(false)
 
   const [primaryColor, setPrimary] = useState<ColorType>(options?.primary || 'blue')

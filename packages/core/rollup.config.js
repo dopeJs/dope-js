@@ -37,10 +37,11 @@ function createConfig(isProduction) {
     output: {
       dir: resolve(__dirname, 'lib'),
       entryFileNames: `[name].js`,
-      exports: 'named',
+      // exports: 'named',
+      // file: `lib/[name].js`,
       format: 'cjs',
-      externalLiveBindings: false,
-      freeze: false,
+      // externalLiveBindings: false,
+      // freeze: false,
       sourcemap: !isProduction,
     },
     onwarn(warning, warn) {
