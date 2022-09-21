@@ -6,7 +6,7 @@
   "npmClientArgs": ["--ignore-engines"],
   "command": {
     "run": { "ignore": ["melon-js-homepage"], "ignoreChanges": ["homepage/**/*"] },
-    "version": { "ignore": ["melon-js-homepage"], "ignoreChanges": ["homepage/**/*"] },
+    "version": { "ignoreChanges": ["melon-js-homepage"] },
     "publish": { "ignore": ["melon-js-homepage"], "ignoreChanges": ["homepage/**/*"] },
     "bootstrap": { "npmClientArgs": ["--no-package-lock"] }
   }
