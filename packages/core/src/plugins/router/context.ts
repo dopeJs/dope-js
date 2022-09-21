@@ -1,14 +1,11 @@
+import chalk from 'chalk'
 import { extname, join, resolve } from 'path'
 import type { FSWatcher, Logger, ModuleNode, ViteDevServer } from 'vite'
+import { moduleId } from './constant'
 import { getPageFiles } from './files'
 import { resolveOptions } from './options'
 import { PageOptions, ResolvedOptions, RouterOptions } from './types'
-import { debug, isTarget, slash, toArray } from './utils'
-// import type { FSWatcher } from 'fs'
-// import { extname, join, resolve } from 'path'
-// import { MelonRouterOptions } from '.'
-// import { getPageFiles } from './files'
-// import { resolveOptions } from './options'
+import { isTarget, slash, toArray } from './utils'
 
 export interface PageRoute {
   path: string
@@ -27,9 +24,7 @@ export class RouterContext {
   constructor(options: RouterOptions, viteRoot: string = process.cwd()) {
     this.rawOptions = options
     this.root = slash(viteRoot)
-    debug.env('root', this.root)
     this.options = resolveOptions(options, this.root)
-    debug.options(this.options)
   }
 
   setLogger(logger: Logger) {
@@ -76,9 +71,12 @@ export class RouterContext {
   }
 
   addPage(path: string | string[], pageDir: PageOptions) {
-    debug.pages('add', path)
+    this.logger?.info(chalk.green.bold('new page found'))
+
     for (const p of toArray(path)) {
       const route = this.getRoute(p, pageDir)
+
+      this.logger?.info(`${chalk.bold.bgBlue.white(`${route}`)} - ${chalk.gray.italic(p)}`)
 
       this._pageRouteMap.set(p, {
         path: p,
@@ -88,7 +86,7 @@ export class RouterContext {
   }
 
   removePage(path: string) {
-    debug.pages('remove', path)
+    this.logger?.info(`${chalk.red.bold('page deleted')} - ${chalk.gray.italic(path)}`)
     this._pageRouteMap.delete(path)
   }
 
@@ -96,7 +94,7 @@ export class RouterContext {
     if (!this._server) return
 
     const { moduleGraph } = this._server
-    const mods = moduleGraph.getModulesByFile('/@vite-plugin-pages/generated-pages')
+    const mods = moduleGraph.getModulesByFile(moduleId)
     if (mods) {
       const seen = new Set<ModuleNode>()
       mods.forEach((mod) => {
@@ -104,7 +102,7 @@ export class RouterContext {
       })
     }
 
-    debug.hmr('Reload generated pages.')
+    this.logger?.info(`Reload pages...`)
     this._server.ws.send({
       type: 'full-reload',
     })
@@ -120,18 +118,12 @@ export class RouterContext {
       const pagesDirPath = slash(resolve(this.options.root, page.dir))
       const files = getPageFiles(pagesDirPath, this.options)
 
-      debug.search(page.dir, files)
       return {
         ...page,
         files: files.map((file) => slash(file)),
       }
     })
     for (const page of pageDirFiles) this.addPage(page.files, page)
-    debug.cache(this.pageRouteMap)
-  }
-
-  get debug() {
-    return debug
   }
 
   get pageRouteMap() {

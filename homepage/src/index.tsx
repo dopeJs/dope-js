@@ -1,5 +1,5 @@
 import { App } from '@melon-js/design'
-import { RouteProps, Router } from '@melon-js/router'
+import { Route, RouteProps, Router } from '@melon-js/router'
 import { FC, useMemo } from 'react'
 import { createRoot } from 'react-dom/client'
 import pages from '~pages'
@@ -19,7 +19,11 @@ const Entry: FC = () => {
 
   return (
     <App options={{ primary: 'orange' }}>
-      <Router routes={routes} />
+      <Router routes={routes}>
+        {/* {routes.map((item) => (
+          <Route key={item.path} path={item.path}></Route>
+        ))} */}
+      </Router>
     </App>
   )
 }

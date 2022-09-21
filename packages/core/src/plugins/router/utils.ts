@@ -1,4 +1,3 @@
-import Debug from 'debug'
 import { resolve } from 'path'
 import { ResolvedOptions } from './types'
 
@@ -6,17 +5,6 @@ export const dynamicRouteRE = /^\[(.+)\]$/
 export const cacheAllRouteRE = /^\[\.{3}(.*)\]$/
 export const replaceDynamicRouteRE = /^\[(?:\.{3})?(.*)\]$/
 export const countSlashRE = /\//g
-
-export const debug = {
-  hmr: Debug('@melon-js/router-plugin:hmr'),
-  routeBlock: Debug('@melon-js/router-plugin:routeBlock'),
-  options: Debug('@melon-js/router-plugin:options'),
-  pages: Debug('@melon-js/router-plugin:pages'),
-  search: Debug('@melon-js/router-plugin:search'),
-  env: Debug('@melon-js/router-plugin:env'),
-  cache: Debug('@melon-js/router-plugin:cache'),
-  resolver: Debug('@melon-js/router-plugin:resolver'),
-}
 
 export function countSlash(value: string) {
   return (value.match(countSlashRE) || []).length

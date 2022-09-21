@@ -1,4 +1,3 @@
-import { melonRouter } from '@/plugins'
 import { IServerOption } from '@/types'
 import react from '@vitejs/plugin-react'
 import findUp from 'find-up'
@@ -65,7 +64,6 @@ export async function getDefaultConfig(cwd: string, isProduction: boolean, serve
       },
     }),
     eslint(),
-    melonRouter(),
   ]
 
   const config: UserConfig = {

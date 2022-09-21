@@ -1,8 +1,7 @@
 import { Plugin } from 'vite'
+import { moduleId } from './constant'
 import { RouterContext } from './context'
 import { RouterOptions } from './types'
-
-const moduleId = '/@vite-plugin-pages/melonJS-pages'
 
 export function melonRouter(options?: RouterOptions): Plugin {
   let ctx: RouterContext
@@ -10,18 +9,13 @@ export function melonRouter(options?: RouterOptions): Plugin {
   return {
     name: '@melon-js/router-plugin',
     enforce: 'pre',
-    async configResolved(config) {
+    configResolved(config) {
       ctx = new RouterContext(options || {}, config.root)
       ctx.setLogger(config.logger)
-      await ctx.searchGlob()
+      ctx.searchGlob()
     },
     configureServer(server) {
       ctx.setupViteServer(server)
-    },
-    api: {
-      // getResolvedRoutes() {
-      //   return ctx.options.resolver.getComputedRoutes(ctx)
-      // },
     },
     resolveId(id) {
       if (id == '~pages') return moduleId
@@ -30,7 +24,6 @@ export function melonRouter(options?: RouterOptions): Plugin {
     async load(id) {
       if (id === moduleId) {
         const routes = ctx.resolveRoutes()
-        console.log('routes', routes)
         return `export default ${JSON.stringify({ routes })};`
       }
 
