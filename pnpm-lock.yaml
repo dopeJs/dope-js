@@ -183,6 +183,7 @@ importers:
       '@rollup/plugin-typescript': ^8.5.0
       '@typescript-eslint/eslint-plugin': ^5.37.0
       '@typescript-eslint/parser': ^5.37.0
+      clean-publish: ^4.0.1
       eslint: ^6.0.0 || ^7.0.0 || ^8.0.0
       eslint-config-prettier: ^8.5.0
       eslint-import-resolver-typescript: ^3.5.1
@@ -205,6 +206,7 @@ importers:
       '@rollup/plugin-json': 4.1.0_rollup@2.79.0
       '@rollup/plugin-node-resolve': 14.1.0_rollup@2.79.0
       '@rollup/plugin-typescript': 8.5.0_tznp6w7csbjledp5nresoxoky4
+      clean-publish: 4.0.1
       rollup: 2.79.0
       tslib: 2.4.0
     publishDirectory: temp-package-dir
