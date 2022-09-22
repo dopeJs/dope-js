@@ -11,19 +11,19 @@
     "node": "^14.18.0 || >=16.0.0"
   },
   "packageManager": "pnpm@7.12.0",
-  "main": "lib/design.cjs.js",
-  "module": "lib/design.es.js",
-  "browser": "lib/design.umd.js",
-  "types": "src/index.ts",
+  "main": "lib/index.cjs.js",
+  "module": "lib/index.es.js",
+  "browser": "lib/index.umd.js",
+  "types": "lib/index.d.ts",
   "files": [
     "lib",
     "theme.d.ts"
   ],
   "exports": {
     ".": {
-      "import": "./lib/design.es.js",
-      "require": "./lib/design.cjs.js",
-      "default": "./lib/design.umd.js"
+      "import": "./lib/index.es.js",
+      "require": "./lib/index.cjs.js",
+      "default": "./lib/index.umd.js"
     },
     "./lib/*": "./lib/*",
     "./package.json": "./package.json",
@@ -34,16 +34,13 @@
   "publishConfig": {
     "types": "lib/index.d.ts",
     "access": "public",
-    "directory": "temp-package-dir",
+    "directory": ".melon.publish",
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "start": "rimraf lib && rollup -cw",
-    "build": "rimraf lib && rollup -c && tsc-alias",
-    "clean-publish": "clean-publish --access public",
-    "prepublishOnly": "rimraf ./temp-package-dir && run-s build clean-publish",
-    "postpublish": "rimraf ./temp-package-dir",
+    "prepublishOnly": "rimraf ./.melon.publish && clean-publish --access public",
+    "postpublish": "rimraf ./.melon.publish",
     "lint": "eslint --cache --ext .ts src/**"
   },
   "author": "",
@@ -57,19 +54,10 @@
     "styled-components": "^5.3.5"
   },
   "devDependencies": {
-    "@babel/plugin-transform-runtime": "^7.19.1",
-    "@rollup/plugin-babel": "^5.3.1",
-    "@rollup/plugin-commonjs": "^22.0.2",
-    "@rollup/plugin-json": "^4.1.0",
-    "@rollup/plugin-node-resolve": "^14.1.0",
-    "@rollup/plugin-typescript": "^8.5.0",
     "@types/node": "^18.7.18",
     "@types/react": "^18.0.20",
     "@types/styled-components": "^5.1.26",
-    "clean-publish": "^4.0.1",
-    "rollup": "^2.79.0",
-    "tsc-alias": "^1.7.0",
-    "tslib": "^2.4.0"
+    "clean-publish": "^4.0.1"
   },
   "peerDependencies": {
     "react": ">=17.0.2"

@@ -1,11 +1,8 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "../../tsconfig.root.json",
   "compilerOptions": {
-    "moduleResolution": "node",
-    "declaration": true,
-    "rootDir": "src",
-    "outDir": "lib"
+    "moduleResolution": "node"
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["lib", "node_modules", "bin"]
+  "exclude": ["node_modules"]
 }

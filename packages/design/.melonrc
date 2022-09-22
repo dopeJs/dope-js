@@ -1,0 +1,12 @@
+{
+  "react": true,
+  "typing": true,
+  "entry": {
+    "index": "src/index.ts"
+  },
+  "formats": [
+    "cjs",
+    "es",
+    "umd"
+  ]
+}

@@ -23,7 +23,7 @@ yarn-error.log*
 
 lib
 dist
-temp-package-dir
+.melon.publish
 
 # local env files
 .env*.local

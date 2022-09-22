@@ -45,6 +45,8 @@ jobs:
 
           echo "New version: $RELEASE_VERSION"
           npx lerna version $RELEASE_VERSION --no-private --no-commit-hooks -y
+      - name: Build
+        run: pnpm build
       - name: Publish
         run: |
           npm config set registry=https://registry.npmjs.org/

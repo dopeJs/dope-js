@@ -1,4 +1,4 @@
-const recommended = {
+const recommended: { [key: string]: unknown } = {
   env: {
     browser: true,
     es2021: true,

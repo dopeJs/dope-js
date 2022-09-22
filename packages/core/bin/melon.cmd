@@ -1,2 +1,2 @@
 @echo off
-node --no-warnings "%~dp0\index.js" %*
+node --no-warnings "%~dp0\melon.js" %*

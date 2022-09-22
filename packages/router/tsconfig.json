@@ -1,15 +1,11 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "jsx": "react-jsx",
-    "downlevelIteration": true,
-    "rootDir": "src",
-    "outDir": "lib",
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["src/*"]
-    }
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "./lib/.typing.temp",
+    "declarationDir": "./lib/.typing.temp"
   },
-  "include": ["src/**/*.tsx", "router.d.ts", "src/index.ts"],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx"],
   "exclude": ["lib", "node_modules"]
 }

@@ -14,19 +14,18 @@
   "bin": {
     "melon": "./bin/melon.js"
   },
-  "main": "./lib/index.js",
+  "main": "./lib/index.cjs.js",
   "types": "src/index.ts",
   "files": [
     "bin",
     "lib",
-    "files",
     "typings.d.ts"
   ],
   "exports": {
     ".": {
       "types": "./lib/index.d.ts",
-      "import": "./lib/index.js",
-      "require": "./lib/index.js"
+      "import": "./lib/index.cjs.js",
+      "require": "./lib/index.cjs.js"
     },
     "./lib/*": "./lib/*",
     "./package.json": "./package.json",
@@ -37,48 +36,30 @@
   "publishConfig": {
     "types": "lib/index.d.ts",
     "access": "public",
-    "directory": "temp-package-dir",
+    "directory": ".melon.publish",
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "start": "rimraf lib && rollup -cw",
-    "build": "rimraf lib && rollup -c && tsc-alias",
-    "clean-publish": "clean-publish --access public",
-    "prepublishOnly": "rimraf ./temp-package-dir && run-s build clean-publish",
-    "postpublish": "rimraf ./temp-package-dir",
+    "prepublishOnly": "rimraf ./.melon.publish && pnpm clean-publish --access public",
+    "postpublish": "rimraf ./.melon.publish",
     "lint": "eslint --cache --ext .ts src/**"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^22.0.2",
-    "@rollup/plugin-json": "^4.1.0",
-    "@rollup/plugin-node-resolve": "^14.1.0",
-    "@rollup/plugin-typescript": "^8.5.0",
-    "@types/debug": "^4.1.7",
-    "@types/etag": "^1.8.1",
     "@types/react": "^18.0.20",
-    "clean-publish": "^4.0.1",
-    "rollup": "^2.79.0",
-    "tsc-alias": "^1.7.0",
-    "tslib": "^2.4.0"
+    "clean-publish": "^4.0.1"
   },
   "dependencies": {
     "@babel/plugin-transform-runtime": "^7.19.1",
     "@babel/preset-react": "^7.18.6",
-    "@rollup/plugin-dynamic-import-vars": "^1.4.4",
-    "@types/mime-types": "^2.1.1",
     "@vitejs/plugin-react": "^2.1.0",
     "babel-plugin-styled-components": "^2.0.7",
     "chalk": "^4.1.2",
     "commander": "^9.4.0",
-    "debug": "^4.3.4",
-    "devcert": "^1.2.2",
-    "etag": "^1.8.1",
     "fast-glob": "^3.2.12",
     "find-up": "^5.0.0",
-    "mime-types": "^2.1.35",
     "vite": "^3.1.2",
     "vite-plugin-eslint": "^1.8.1",
     "vite-plugin-html": "^3.2.0",

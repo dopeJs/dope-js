@@ -1,0 +1,10 @@
+{
+  "react": false,
+  "typing": false,
+  "entry": {
+    "index": "src/index.ts"
+  },
+  "formats": [
+    "cjs"
+  ]
+}

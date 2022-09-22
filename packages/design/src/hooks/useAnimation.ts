@@ -1,17 +1,24 @@
 import { useEffect, useRef, useCallback } from 'react'
 
-const SpeedMaps = {
+export interface ISpeedMaps {
+  immediately: number
+  quickly: number
+  normal: number
+  slowly: number
+}
+
+const SpeedMaps: ISpeedMaps = {
   immediately: 100,
   quickly: 200,
   normal: 300,
   slowly: 400,
-} as const
+}
 
 export interface Options {
   id?: string
   auto?: boolean
   keyframes?: Keyframe[] | PropertyIndexedKeyframes
-  timing?: number | EffectTiming | keyof typeof SpeedMaps
+  timing?: number | EffectTiming | keyof ISpeedMaps
   onReady?: (playState: AnimationPlayState) => void
   onFinish?: (event: AnimationPlaybackEvent) => unknown
 }

@@ -13,5 +13,5 @@
     "allowSyntheticDefaultImports": true,
     "downlevelIteration": true
   },
-  "include": ["rollup.config.ts", "scripts/**/*.ts"]
+  "exclude": ["**/*.js", "node_modules"]
 }

@@ -3,5 +3,5 @@
     "independent"
   ],
   "withoutPublish": true,
-  "tempDir": "temp-package-dir"
+  "tempDir": ".melon.publish"
 }

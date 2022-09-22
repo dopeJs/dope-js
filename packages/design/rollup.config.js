@@ -12,7 +12,7 @@ function createPlugins(isProduction) {
     nodeResolve({ preferBuiltins: true }),
     typescript({
       sourceMap: !isProduction,
-      declaration: true,
+      declaration: !isProduction,
       declarationDir: resolve(__dirname, 'lib'),
       lib: ['ESNext', 'DOM'],
       jsx: 'react-jsx',

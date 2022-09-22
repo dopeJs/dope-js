@@ -13,23 +13,19 @@
   "packageManager": "pnpm@7.12.0",
   "author": "",
   "license": "MIT",
-  "main": "./lib/index.js",
+  "main": "./lib/index.cjs.js",
   "files": [
-    "lib",
-    "files"
+    "lib"
   ],
   "publishConfig": {
     "access": "public",
-    "directory": "temp-package-dir",
+    "directory": ".melon.publish",
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "start": "rimraf lib && rollup -cw",
-    "build": "rimraf lib && rollup -c",
-    "clean-publish": "clean-publish --access public",
-    "prepublishOnly": "rimraf ./temp-package-dir && run-s build clean-publish",
-    "postpublish": "rimraf ./temp-package-dir",
+    "prepublishOnly": "rimraf ./.melon.publish && clean-publish --access public",
+    "postpublish": "rimraf ./.melon.publish",
     "lint": "eslint --cache --ext .ts src/**"
   },
   "dependencies": {
@@ -45,12 +41,6 @@
     "eslint": "^6.0.0 || ^7.0.0 || ^8.0.0"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^22.0.2",
-    "@rollup/plugin-json": "^4.1.0",
-    "@rollup/plugin-node-resolve": "^14.1.0",
-    "@rollup/plugin-typescript": "^8.5.0",
-    "clean-publish": "^4.0.1",
-    "rollup": "^2.79.0",
-    "tslib": "^2.4.0"
+    "clean-publish": "^4.0.1"
   }
 }
