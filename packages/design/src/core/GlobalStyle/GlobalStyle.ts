@@ -15,8 +15,6 @@ export interface IGlobalStyleProps {
   rootId?: string
 }
 
-const k = css``
-
 export const GlobalStyle = createGlobalStyle<IGlobalStyleProps>(
   ({ css: _css, reset, rootId }) => css`
     ${reset

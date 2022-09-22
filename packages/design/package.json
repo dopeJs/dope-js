@@ -41,7 +41,7 @@
     "preinstall": "npx only-allow pnpm",
     "prepublishOnly": "rimraf ./.melon.publish && clean-publish --access public",
     "postpublish": "rimraf ./.melon.publish",
-    "lint": "eslint --cache --ext .ts src/**"
+    "lint": "eslint --cache --ext .ts,.tsx src/**"
   },
   "author": "",
   "license": "MIT",

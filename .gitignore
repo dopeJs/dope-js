@@ -20,6 +20,7 @@ yarn-error.log*
 
 .rollup.cache
 .melon.cache
+.eslintcache
 
 lib
 dist

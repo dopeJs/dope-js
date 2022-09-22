@@ -27,8 +27,8 @@
     "rollup": "rollup -c rollup.config.ts --configPlugin typescript",
     "start:home": "cd homepage && pnpm start",
     "build:home": "cd homepage && pnpm build",
-    "lint": "eslint .",
-    "publish": "lerna run --scope @melon-js/* --stream publish"
+    "publish": "lerna run --scope @melon-js/* --stream publish",
+    "lint": "lerna run --stream lint"
   },
   "author": "",
   "license": "MIT",
