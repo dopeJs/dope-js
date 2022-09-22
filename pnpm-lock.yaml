@@ -129,7 +129,7 @@ importers:
     devDependencies:
       '@types/react': 18.0.20
       clean-publish: 4.0.1
-    publishDirectory: temp-package-dir
+    publishDirectory: .melon.publish
 
   packages/design:
     specifiers:
@@ -157,7 +157,7 @@ importers:
       '@types/react': 18.0.20
       '@types/styled-components': 5.1.26
       clean-publish: 4.0.1
-    publishDirectory: temp-package-dir
+    publishDirectory: .melon.publish
 
   packages/eslint:
     specifiers:
@@ -181,7 +181,7 @@ importers:
       eslint-plugin-react: 7.31.8_eslint@8.23.1
     devDependencies:
       clean-publish: 4.0.1
-    publishDirectory: temp-package-dir
+    publishDirectory: .melon.publish
 
   packages/router:
     specifiers:
@@ -199,7 +199,7 @@ importers:
     devDependencies:
       '@types/react': 18.0.20
       clean-publish: 4.0.1
-    publishDirectory: temp-package-dir
+    publishDirectory: .melon.publish
 
 packages:
 
