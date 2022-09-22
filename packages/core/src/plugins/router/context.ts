@@ -4,7 +4,7 @@ import type { FSWatcher, Logger, ModuleNode, ViteDevServer } from 'vite'
 import { moduleId } from './constant'
 import { getPageFiles } from './files'
 import { resolveOptions } from './options'
-import { PageOptions, ResolvedOptions, RouterOptions } from './types'
+import { ResolvedOptions, RouterOptions } from './types'
 import { isTarget, slash, toArray } from './utils'
 
 export interface PageRoute {
@@ -38,6 +38,10 @@ export class RouterContext {
     this.setupWatcher(server.watcher)
   }
 
+  getPagesRoot() {
+    return join(this.options.root, this.options.pagesRoot, '**/*{.tsx,.jsx,.md,.mdx}')
+  }
+
   setupWatcher(watcher: FSWatcher) {
     watcher.on('unlink', (path) => {
       path = slash(path)
@@ -49,15 +53,14 @@ export class RouterContext {
     watcher.on('add', (path) => {
       path = slash(path)
       if (!isTarget(path, this.options)) return
-      const page = this.options.dirs.find((i) => path.startsWith(slash(resolve(this.root, i.dir))))!
-      this.addPage(path, page)
+      this.addPage(path, this.options.pagesRoot)
       this.onUpdate()
     })
   }
 
-  getRoute(path: string, pageDir: PageOptions) {
-    const pageDirPath = slash(resolve(this.root, pageDir.dir))
-    let route = '/' + slash(join(pageDir.baseRoute, path.replace(`${pageDirPath}/`, '').replace(extname(path), '')))
+  getRoute(path: string, pageDir: string) {
+    const pageDirPath = slash(resolve(this.root, pageDir))
+    let route = '/' + slash(path.replace(`${pageDirPath}/`, '').replace(extname(path), ''))
     if (route.endsWith('/index')) route = route.slice(0, -6)
     route = route.trim()
     if (route.length === 0) route = '/'
@@ -70,16 +73,17 @@ export class RouterContext {
     return route
   }
 
-  addPage(path: string | string[], pageDir: PageOptions) {
+  addPage(paths: string | string[], pageDir: string) {
     this.logger?.info(chalk.green.bold('new page found'))
 
-    for (const p of toArray(path)) {
+    for (const p of toArray(paths)) {
       const route = this.getRoute(p, pageDir)
 
       this.logger?.info(`${chalk.bold.bgBlue.white(`${route}`)} - ${chalk.gray.italic(p)}`)
 
+      const path = p.slice(this.root.length)
       this._pageRouteMap.set(p, {
-        path: p,
+        path,
         route,
       })
     }
@@ -114,19 +118,23 @@ export class RouterContext {
   }
 
   searchGlob() {
-    const pageDirFiles = this.options.dirs.map((page) => {
-      const pagesDirPath = slash(resolve(this.options.root, page.dir))
-      const files = getPageFiles(pagesDirPath, this.options)
+    const pagesDirPath = slash(resolve(this.options.root, this.options.pagesRoot))
+    const files = getPageFiles(pagesDirPath, this.options)
 
-      return {
-        ...page,
-        files: files.map((file) => slash(file)),
-      }
-    })
-    for (const page of pageDirFiles) this.addPage(page.files, page)
+    const page = {
+      dir: pagesDirPath,
+      files: files.map((file) => slash(file)),
+    }
+
+    this.addPage(page.files, pagesDirPath)
   }
 
   get pageRouteMap() {
     return this._pageRouteMap
+  }
+
+  getFileContent() {
+    const routes = this.resolveRoutes()
+    return `export const routes = ${JSON.stringify(routes)}`
   }
 }

@@ -1,13 +1,13 @@
 import fg from 'fast-glob'
 import { join } from 'path'
-import type { PageOptions, ResolvedOptions } from './types'
+import type { ResolvedOptions } from './types'
 import { extsToGlob, slash } from './utils'
 
 /**
  * Resolves the page dirs for its for its given globs
  */
-export function getPageDirs(pageOptions: PageOptions, root: string, exclude: string[]): PageOptions[] {
-  const dirs = fg.sync(slash(pageOptions.dir), {
+export function getPageDirs(pagesRoot: string, root: string, exclude: Array<string>): Array<string> {
+  const dirs = fg.sync(slash(pagesRoot), {
     ignore: exclude,
     onlyDirectories: true,
     dot: true,
@@ -15,12 +15,7 @@ export function getPageDirs(pageOptions: PageOptions, root: string, exclude: str
     cwd: root,
   })
 
-  const pageDirs = dirs.map((dir) => ({
-    ...pageOptions,
-    dir,
-  }))
-
-  return pageDirs
+  return dirs
 }
 
 /**
@@ -32,7 +27,7 @@ export function getPageFiles(path: string, options: ResolvedOptions): string[] {
   const ext = extsToGlob(extensions)
 
   const files = fg.sync(slash(join(path, `**/*${ext}`)), {
-    ignore: exclude,
+    ignore: [...exclude, '**/_app.tsx'],
     onlyFiles: true,
   })
 

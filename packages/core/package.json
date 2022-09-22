@@ -4,7 +4,8 @@
   "description": "React router like nextjs.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/melonote-app/melon-js"
+    "url": "https://github.com/melonote-app/melon-js",
+    "directory": "packages/core"
   },
   "engines": {
     "node": "^14.18.0 || >=16.0.0"
@@ -19,7 +20,7 @@
     "bin",
     "lib",
     "files",
-    "routes.d.ts"
+    "typings.d.ts"
   ],
   "exports": {
     ".": {
@@ -29,8 +30,8 @@
     },
     "./lib/*": "./lib/*",
     "./package.json": "./package.json",
-    "./routes": {
-      "types": "./routes.d.ts"
+    "./typings": {
+      "types": "./typings.d.ts"
     }
   },
   "publishConfig": {

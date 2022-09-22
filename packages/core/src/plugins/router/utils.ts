@@ -61,11 +61,8 @@ export function buildRoutePath(node: string): string | undefined {
 }
 
 function isPagesDir(path: string, options: ResolvedOptions) {
-  for (const page of options.dirs) {
-    const dirPath = slash(resolve(options.root, page.dir))
-    if (path.startsWith(dirPath)) return true
-  }
-  return false
+  const dirPath = slash(resolve(options.root, options.pagesRoot))
+  return path.startsWith(dirPath)
 }
 
 export function isTarget(path: string, options: ResolvedOptions) {

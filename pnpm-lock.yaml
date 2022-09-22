@@ -46,6 +46,7 @@ importers:
       '@melon-js/design': workspace:*
       '@melon-js/eslint-plugin': workspace:*
       '@melon-js/router': workspace:*
+      '@types/prettier': ^2.7.0
       '@types/react': ^18.0.20
       '@types/react-dom': ^18.0.6
       eslint: ^8.23.1
@@ -61,6 +62,7 @@ importers:
     devDependencies:
       '@melon-js/core': link:../packages/core
       '@melon-js/eslint-plugin': link:../packages/eslint
+      '@types/prettier': 2.7.0
       '@types/react': 18.0.20
       '@types/react-dom': 18.0.6
       eslint: 8.23.1
@@ -2027,6 +2029,10 @@ packages:
 
   /@types/parse-json/4.0.0:
     resolution: {integrity: sha512-//oorEZjL6sbPcKUaCdIGlIUeH26mgzimjBB77G6XRgnDl/L5wOnpyBGRe/Mmf5CVW3PwEBE1NjiMZ/ssFh4wA==}
+    dev: true
+
+  /@types/prettier/2.7.0:
+    resolution: {integrity: sha512-RI1L7N4JnW5gQw2spvL7Sllfuf1SaHdrZpCHiBlCXjIlufi1SMNnbu2teze3/QE67Fg2tBlH7W+mi4hVNk4p0A==}
     dev: true
 
   /@types/prop-types/15.7.5:

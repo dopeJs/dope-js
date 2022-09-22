@@ -15,13 +15,8 @@ export interface PageRoute extends Omit<Optional<PageRouteBase, 'rawRoute' | 'pa
   children?: PageRoute[]
 }
 
-export interface PageOptions {
-  dir: string
-  baseRoute: string
-}
-
 export interface Options {
-  pagesDir?: string | (string | PageOptions)[]
+  pagesRoot?: string
   extensions: string[]
   exclude: string[]
   caseSensitive: boolean
@@ -49,6 +44,6 @@ export interface PageResolver {
 
 export interface ResolvedOptions extends Omit<Options, 'pagesDir'> {
   root: string
-  dirs: Array<PageOptions>
+  pagesRoot: string
   extensionsRE: RegExp
 }

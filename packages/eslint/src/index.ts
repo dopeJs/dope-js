@@ -34,7 +34,7 @@ const recommended = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  ignorePatterns: ['dist', 'scripts/*.js', '**/*.js', '**/*.cjs'],
+  ignorePatterns: ['dist', '@melon-js/runtime', 'scripts/*.js', '**/*.js', '**/*.cjs'],
   plugins: ['@typescript-eslint', 'react', 'import', 'prettier'],
   rules: {
     'import/order': [

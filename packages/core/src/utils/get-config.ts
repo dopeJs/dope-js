@@ -63,7 +63,7 @@ export async function getDefaultConfig(cwd: string, isProduction: boolean, serve
         ],
       },
     }),
-    eslint(),
+    eslint({ ignore: !isProduction, exclude: ['/melon-js/runtime/*', '**/*.js', '**/*.cjs'] }),
   ]
 
   const config: UserConfig = {

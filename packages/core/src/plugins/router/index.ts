@@ -1,5 +1,5 @@
 import { Plugin } from 'vite'
-import { moduleId } from './constant'
+import { displayId, moduleId } from './constant'
 import { RouterContext } from './context'
 import { RouterOptions } from './types'
 
@@ -18,13 +18,12 @@ export function melonRouter(options?: RouterOptions): Plugin {
       ctx.setupViteServer(server)
     },
     resolveId(id) {
-      if (id == '~pages') return moduleId
+      if (id == displayId) return moduleId
       return null
     },
-    async load(id) {
+    load(id) {
       if (id === moduleId) {
-        const routes = ctx.resolveRoutes()
-        return `export default ${JSON.stringify({ routes })};`
+        return ctx.getFileContent()
       }
 
       return null

@@ -4,7 +4,8 @@
   "description": "MelonJS plugin for eslint",
   "repository": {
     "type": "git",
-    "url": "https://github.com/melonote-app/melon-js"
+    "url": "https://github.com/melonote-app/melon-js",
+    "directory": "packages/eslint"
   },
   "engines": {
     "node": "^14.18.0 || >=16.0.0"
