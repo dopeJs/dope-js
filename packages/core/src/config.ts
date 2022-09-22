@@ -14,7 +14,7 @@ export type UserConfig = Omit<ViteUserConfig, 'root' | 'mode' | 'cacheDir'> & {
 export function defineConfig(config?: UserConfig) {
   const router = config?.router
   const title = config?.title || 'MelonJS'
-  const entry = config?.entry || 'src/index.tsx'
+  const entry = config?.entry || '/index.tsx'
 
   const pageDirs = router?.pagesRoot || 'src/pages'
 
