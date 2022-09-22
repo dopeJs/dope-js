@@ -41,8 +41,10 @@ jobs:
         uses: actions/configure-pages@v2
       - name: Install dependencies
         run: pnpm install --no-lockfile
-      - name: Build
+      - name: Build melon-js
         run: pnpm build
+      - name: Build pages
+        run: pnpm build:home
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
