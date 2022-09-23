@@ -14,7 +14,7 @@
   "main": "lib/index.cjs.js",
   "module": "lib/index.es.js",
   "browser": "lib/index.umd.js",
-  "types": "lib/index.d.ts",
+  "types": "src/index.ts",
   "files": [
     "lib",
     "theme.d.ts"

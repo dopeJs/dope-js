@@ -11,11 +11,11 @@ export const startDevServer = async (options: IDevOptions = {}) => {
 
     const configFile = _config || (await findConfigFile(cwd))
 
-    const userConfig = await loadConfigFromFile({ command: 'serve', mode: 'development' }, configFile)
+    const userConfig = await loadConfigFromFile({ command: 'serve', mode: 'production' }, configFile)
     const defaultConfig = await getDefaultConfig(cwd, false, { host, port })
     const mergedConfig: UserConfig = mergeConfig(defaultConfig, userConfig?.config || {})
 
-    const server = await createServer(mergedConfig)
+    const server = await createServer({ ...mergedConfig, mode: 'production' })
     if (!server.httpServer) {
       throw new Error('HTTP server not available')
     }

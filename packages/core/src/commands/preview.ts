@@ -1,7 +1,7 @@
 import { IDevOptions } from '@/types'
 import { findConfigFile, getDefaultConfig, logger } from '@/utils'
 import { cwd as getCwd } from 'process'
-import { loadConfigFromFile, mergeConfig, preview as vitePreview, UserConfig } from 'vite'
+import { build as viteBuild, loadConfigFromFile, mergeConfig, preview as vitePreview, UserConfig } from 'vite'
 
 export const preview = async (options: IDevOptions = {}) => {
   try {
@@ -13,6 +13,7 @@ export const preview = async (options: IDevOptions = {}) => {
     const defaultConfig = await getDefaultConfig(cwd, true, { host, port })
     const mergedConfig: UserConfig = mergeConfig(defaultConfig, userConfig?.config || {})
 
+    await viteBuild(mergedConfig)
     const server = await vitePreview(mergedConfig)
     if (!server.httpServer) {
       throw new Error('HTTP server not available')

@@ -1,7 +1,7 @@
+import { DopeApp } from '@dope-js/core'
 import { App } from '@dope-js/design'
-import { FC, ReactNode } from 'react'
 
-const MyApp: FC<{ page: ReactNode }> = ({ page }) => {
+const MyApp: DopeApp = ({ page }) => {
   return <App>{page}</App>
 }
 

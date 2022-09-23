@@ -1,5 +1,5 @@
-import { css, styled } from '@/styled'
 import { FC, ReactNode } from 'react'
+import styled, { css } from 'styled-components'
 
 export interface ButtonProps {
   onClick: () => void

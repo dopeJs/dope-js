@@ -1,6 +1,23 @@
-import { ColorFn, ColorType } from '@dope-js/design'
+import {} from 'styled-components'
 
 declare module 'styled-components' {
+  export type ColorFn = (stage: number, alpha?: number) => string
+
+  export type ColorType =
+    | 'blue'
+    | 'wathet'
+    | 'turquoise'
+    | 'green'
+    | 'lime'
+    | 'yellow'
+    | 'orange'
+    | 'red'
+    | 'carmine'
+    | 'violet'
+    | 'indigo'
+    | 'purple'
+    | 'neutral'
+
   type ColorFns = Record<ColorType, ColorFn>
 
   export interface DefaultTheme extends ColorFns {

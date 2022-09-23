@@ -1,7 +1,7 @@
 import { commonTheme, darkColors, lightColors } from '@/styles'
-import { ColorFn, ColorType, IErrorBoundaryProps, IProviderConfig, IThemeContext } from '@/types'
+import { IErrorBoundaryProps, IProviderConfig, IThemeContext } from '@/types'
 import { createContext, FC, useCallback, useEffect, useMemo, useState } from 'react'
-import { DefaultTheme, ThemeProvider } from 'styled-components'
+import { ColorFn, ColorType, DefaultTheme, ThemeProvider } from 'styled-components'
 import { ErrorBoundary } from './ErrorBoundary'
 import { GlobalStyle } from './GlobalStyle'
 

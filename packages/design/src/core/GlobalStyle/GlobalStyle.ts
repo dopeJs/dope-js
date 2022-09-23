@@ -16,7 +16,7 @@ export interface IGlobalStyleProps {
 }
 
 export const GlobalStyle = createGlobalStyle<IGlobalStyleProps>(
-  ({ css: _css, reset, rootId }) => css`
+  ({ css: _css, reset, rootId, theme: { neutral } }) => css`
     ${reset
       ? css`
           @import url('https://fonts.font.im/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i|Source+Code+Pro:200,300,400,500,600,700,900&subset=latin-ext,vietnamese');
@@ -34,6 +34,7 @@ export const GlobalStyle = createGlobalStyle<IGlobalStyleProps>(
             overflow: hidden;
             font-size: 14px;
             font-family: 'Nunito', sans-serif;
+            background-color: ${neutral(0)};
           }
         `
       : css``}

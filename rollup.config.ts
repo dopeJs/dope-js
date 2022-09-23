@@ -3,9 +3,9 @@ import commonjs from '@rollup/plugin-commonjs'
 import json from '@rollup/plugin-json'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 import typescript, { RollupTypescriptOptions } from '@rollup/plugin-typescript'
-import { existsSync, statSync } from 'fs'
 import { resolve } from 'path'
 import { defineConfig, OutputOptions, Plugin } from 'rollup'
+import { terser } from 'rollup-plugin-terser'
 import { getPackages, IPkgInfo } from './scripts/get-packages'
 import { typingPlugin } from './scripts/typing-plugin'
 
@@ -41,6 +41,7 @@ function getPlugins(info: IPkgInfo, isProduction: boolean) {
       ignoreDynamicRequires: true,
     }),
     json(),
+    terser(),
   ]
 
   if (info.typing) {
@@ -51,7 +52,18 @@ function getPlugins(info: IPkgInfo, isProduction: boolean) {
     plugins.push(
       babel({
         babelHelpers: 'runtime',
-        plugins: ['@babel/plugin-transform-runtime'],
+        runtimeHelpers: true,
+        exclude: 'node_modules/**',
+        presets: [
+          '@babel/preset-env',
+          [
+            '@babel/preset-react',
+            {
+              runtime: 'automatic',
+            },
+          ],
+        ],
+        plugins: ['@babel/plugin-transform-runtime', 'babel-plugin-styled-components'],
       })
     )
   }
@@ -82,14 +94,22 @@ function getInput(info: IPkgInfo) {
 }
 
 function getOutput(info: IPkgInfo, isProduction: boolean): Array<OutputOptions> {
-  return info.formats.map((item) => ({
-    name: `dopejs-${info.name}`,
-    dir: resolve(getPkgRoot(info), 'lib'),
-    entryFileNames: `[name].${item}.js`,
-    format: item,
-    globals: getGlobals(info),
-    sourcemap: !isProduction,
-  }))
+  return info.formats.map((item) => {
+    const conf: OutputOptions = {
+      name: `dopejs-${info.name}`,
+      dir: resolve(getPkgRoot(info), 'lib'),
+      entryFileNames: `[name].${item}.js`,
+      format: item,
+      globals: getGlobals(info),
+      sourcemap: !isProduction,
+    }
+
+    if (info.name === 'design') {
+      conf.chunkFileNames = `[name].${item}.[chunk].js`
+    }
+
+    return conf
+  })
 }
 
 function createBundleConfig(info: IPkgInfo, isProduction: boolean) {
