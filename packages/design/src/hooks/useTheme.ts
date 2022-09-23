@@ -4,5 +4,6 @@ import { useContext } from 'react'
 
 export function useTheme(): IThemeContext {
   const ctx = useContext(ThemeContext)!
+
   return ctx
 }

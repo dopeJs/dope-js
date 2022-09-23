@@ -1,9 +1,10 @@
-import { Button, css, useTheme, styled } from '@dope-js/design'
+import { Button, useTheme } from '@dope-js/design'
 import { FC } from 'react'
+import styled, { css } from 'styled-components'
 
 const Wrapper = styled.div(
-  ({ theme: { neutral } }) => css`
-    background-color: ${neutral(500)};
+  ({ theme }) => css`
+    background-color: ${theme.carmine(200)};
   `
 )
 

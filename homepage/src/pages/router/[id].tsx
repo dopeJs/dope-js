@@ -1,9 +1,9 @@
 import { DopePage } from '@dope-js/core'
-import { css, styled } from '@dope-js/design'
+import styled, { css } from 'styled-components'
 
 const Text = styled.div(
-  ({ theme: { green } }) => css`
-    color: ${green(500)};
+  ({ theme }) => css`
+    color: ${theme.green(500)};
   `
 )
 

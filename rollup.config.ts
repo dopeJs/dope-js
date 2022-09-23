@@ -5,6 +5,7 @@ import { nodeResolve } from '@rollup/plugin-node-resolve'
 import typescript, { RollupTypescriptOptions } from '@rollup/plugin-typescript'
 import { resolve } from 'path'
 import { defineConfig, OutputOptions, Plugin } from 'rollup'
+import peerDepsExternal from 'rollup-plugin-peer-deps-external'
 import { terser } from 'rollup-plugin-terser'
 import { getPackages, IPkgInfo } from './scripts/get-packages'
 import { typingPlugin } from './scripts/typing-plugin'
@@ -34,6 +35,7 @@ function getPlugins(info: IPkgInfo, isProduction: boolean) {
   }
 
   const plugins: Array<Plugin> = [
+    peerDepsExternal() as Plugin,
     nodeResolve({ preferBuiltins: true }),
     typescript(tsOpts),
     commonjs({
@@ -52,7 +54,6 @@ function getPlugins(info: IPkgInfo, isProduction: boolean) {
     plugins.push(
       babel({
         babelHelpers: 'runtime',
-        runtimeHelpers: true,
         exclude: 'node_modules/**',
         presets: [
           '@babel/preset-env',
@@ -63,7 +64,13 @@ function getPlugins(info: IPkgInfo, isProduction: boolean) {
             },
           ],
         ],
-        plugins: ['@babel/plugin-transform-runtime', 'babel-plugin-styled-components'],
+        plugins: [
+          '@babel/plugin-transform-runtime',
+          [
+            'babel-plugin-styled-components',
+            { namespace: `dope-${info.name}`, preprocess: false, fileName: false, displayName: false },
+          ],
+        ],
       })
     )
   }
@@ -71,17 +78,16 @@ function getPlugins(info: IPkgInfo, isProduction: boolean) {
   return plugins
 }
 
-function getGlobals(info: IPkgInfo): Record<string, string> {
-  return info.react ? { react: 'React' } : {}
+function getGlobals(info: IPkgInfo): Record<string, string> | undefined {
+  return info.react ? { react: 'React', 'styled-components': 'styled' } : undefined
 }
 
 function getExternals(info: IPkgInfo, isProduction: boolean) {
   const set = new Set([
-    ...Object.keys(getGlobals(info)),
-    'fsevents',
     ...Object.keys(info.pkg.dependencies),
     ...(isProduction ? [] : Object.keys(info.pkg.devDependencies)),
   ])
+
   return Array.from(set)
 }
 
@@ -102,6 +108,7 @@ function getOutput(info: IPkgInfo, isProduction: boolean): Array<OutputOptions> 
       format: item,
       globals: getGlobals(info),
       sourcemap: !isProduction,
+      extend: info.name === 'design',
     }
 
     if (info.name === 'design') {
@@ -114,11 +121,11 @@ function getOutput(info: IPkgInfo, isProduction: boolean): Array<OutputOptions> 
 
 function createBundleConfig(info: IPkgInfo, isProduction: boolean) {
   return defineConfig({
-    treeshake: {
-      moduleSideEffects: 'no-external',
-      propertyReadSideEffects: false,
-      tryCatchDeoptimization: false,
-    },
+    // treeshake: {
+    //   moduleSideEffects: 'no-external',
+    //   propertyReadSideEffects: false,
+    //   tryCatchDeoptimization: false,
+    // },
     input: getInput(info),
     output: getOutput(info, isProduction),
     onwarn(warning, warn) {

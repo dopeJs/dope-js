@@ -73,13 +73,25 @@ export class RouterContext {
     return route
   }
 
-  addPage(paths: string | string[], pageDir: string) {
-    this.logger?.info(chalk.green.bold('new page found'))
+  printPages(arr: Array<{ route: string; path: string }>) {
+    const routeLen = arr.reduce((acc, curr) => (curr.route.trim().length > acc ? curr.route.trim().length : acc), 0)
+    arr.forEach(({ route, path }) => {
+      if (route.startsWith('/')) route = route.slice(1).trim()
+      if (route.length === 0) route = chalk.blue(':root'.padEnd(routeLen))
+      else route = chalk.blue(route.padEnd(routeLen))
 
+      const str = [chalk.green('[route]'), chalk.blue(route), chalk.green('→'), chalk.bold.blue(path)].join(' ')
+
+      this.logger?.info(str)
+    })
+  }
+
+  addPage(paths: string | string[], pageDir: string) {
+    const arr: Array<{ route: string; path: string }> = []
     for (const p of toArray(paths)) {
       const route = this.getRoute(p, pageDir)
 
-      this.logger?.info(`${chalk.bold.bgBlue.white(`${route}`)} - ${chalk.gray.italic(p)}`)
+      arr.push({ route, path: p })
 
       const path = p.slice(this.root.length)
       this._pageRouteMap.set(p, {
@@ -87,10 +99,12 @@ export class RouterContext {
         route,
       })
     }
+
+    this.printPages(arr)
   }
 
   removePage(path: string) {
-    this.logger?.info(`${chalk.red.bold('page deleted')} - ${chalk.gray.italic(path)}`)
+    this.logger?.info(`${chalk.red.bold('deleted')}: ${chalk.gray.italic(path)}`)
     this._pageRouteMap.delete(path)
   }
 

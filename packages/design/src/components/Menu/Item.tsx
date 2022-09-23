@@ -1,5 +1,5 @@
-import { styled, css } from '@/styled'
 import { FC, useCallback, useEffect, useMemo, useState } from 'react'
+import styled, { css } from 'styled-components'
 import { List } from './List'
 import { IMenuItemProps } from './types'
 

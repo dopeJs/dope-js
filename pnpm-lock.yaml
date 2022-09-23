@@ -16,8 +16,10 @@ importers:
       '@rollup/plugin-typescript': ^8.5.0
       '@types/node': ^18.7.18
       '@types/rimraf': ^3.0.2
+      '@types/rollup-plugin-peer-deps-external': ^2.2.1
       '@typescript-eslint/eslint-plugin': ^5.37.0
       '@typescript-eslint/parser': ^5.37.0
+      babel-plugin-macros: ^3.1.0
       babel-plugin-styled-components: ^2.0.7
       chalk: ^4.1.2
       eslint: ^8.23.1
@@ -31,6 +33,7 @@ importers:
       prettier: ^2.7.1
       rimraf: ^3.0.2
       rollup: ^2.79.0
+      rollup-plugin-peer-deps-external: ^2.2.4
       rollup-plugin-terser: ^7.0.2
       semver: ^7.3.7
       shelljs: ^0.8.5
@@ -51,8 +54,10 @@ importers:
       '@rollup/plugin-typescript': 8.5.0_tznp6w7csbjledp5nresoxoky4
       '@types/node': 18.7.18
       '@types/rimraf': 3.0.2
+      '@types/rollup-plugin-peer-deps-external': 2.2.1
       '@typescript-eslint/eslint-plugin': 5.37.0_22c5fnooleyfkzrkkgdmel5kmi
       '@typescript-eslint/parser': 5.37.0_irgkl5vooow2ydyo6aokmferha
+      babel-plugin-macros: 3.1.0
       babel-plugin-styled-components: 2.0.7_styled-components@5.3.5
       chalk: 4.1.2
       eslint: 8.23.1
@@ -66,6 +71,7 @@ importers:
       prettier: 2.7.1
       rimraf: 3.0.2
       rollup: 2.79.0
+      rollup-plugin-peer-deps-external: 2.2.4_rollup@2.79.0
       rollup-plugin-terser: 7.0.2_rollup@2.79.0
       semver: 7.3.7
       shelljs: 0.8.5
@@ -83,22 +89,24 @@ importers:
       '@types/prettier': ^2.7.0
       '@types/react': ^18.0.20
       '@types/react-dom': ^18.0.6
+      '@types/styled-components': ^5.1.26
       eslint: ^8.23.1
       react: ^18.2.0
       react-dom: ^18.2.0
-      react-is: ^18.2.0
+      styled-components: ^5.3.5
     dependencies:
       '@dope-js/design': link:../packages/design
       '@dope-js/router': link:../packages/router
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-      react-is: 18.2.0
+      styled-components: 5.3.5_7i5myeigehqah43i5u7wbekgba
     devDependencies:
       '@dope-js/core': link:../packages/core
       '@dope-js/eslint-plugin': link:../packages/eslint
       '@types/prettier': 2.7.0
       '@types/react': 18.0.20
       '@types/react-dom': 18.0.6
+      '@types/styled-components': 5.1.26
       eslint: 8.23.1
 
   packages/core:
@@ -113,7 +121,7 @@ importers:
       commander: ^9.4.0
       fast-glob: ^3.2.12
       find-up: ^5.0.0
-      react: ''
+      react: ^18.2.0
       vite: ^3.1.2
       vite-plugin-eslint: ^1.8.1
       vite-plugin-html: ^3.2.0
@@ -129,7 +137,6 @@ importers:
       commander: 9.4.0
       fast-glob: 3.2.12
       find-up: 5.0.0
-      react: 18.2.0
       vite: 3.1.2
       vite-plugin-eslint: 1.8.1_eslint@8.23.1+vite@3.1.2
       vite-plugin-html: 3.2.0_vite@3.1.2
@@ -139,6 +146,7 @@ importers:
     devDependencies:
       '@types/react': 18.0.20
       clean-publish: 4.0.1
+      react: 18.2.0
     publishDirectory: .dope.publish
 
   packages/design:
@@ -151,22 +159,20 @@ importers:
       clean-publish: ^4.0.1
       rc-dialog: ^8.9.0
       rc-tree: ^5.7.0
-      react: '>=17.0.2'
-      react-is: ^18.2.0
+      react: ^18.2.0
       styled-components: ^5.3.5
     dependencies:
       '@floating-ui/react-dom': 1.0.0_biqbaboplfbrettd7655fr4n2y
       '@floating-ui/react-dom-interactions': 0.9.3_7ey2zzynotv32rpkwno45fsx4e
       rc-dialog: 8.9.0_biqbaboplfbrettd7655fr4n2y
       rc-tree: 5.7.0_biqbaboplfbrettd7655fr4n2y
-      react: 18.2.0
-      react-is: 18.2.0
-      styled-components: 5.3.5_7i5myeigehqah43i5u7wbekgba
     devDependencies:
       '@types/node': 18.7.18
       '@types/react': 18.0.20
       '@types/styled-components': 5.1.26
       clean-publish: 4.0.1
+      react: 18.2.0
+      styled-components: 5.3.5_7i5myeigehqah43i5u7wbekgba
     publishDirectory: .dope.publish
 
   packages/eslint:
@@ -174,7 +180,7 @@ importers:
       '@typescript-eslint/eslint-plugin': ^5.37.0
       '@typescript-eslint/parser': ^5.37.0
       clean-publish: ^4.0.1
-      eslint: ^6.0.0 || ^7.0.0 || ^8.0.0
+      eslint: ^8.23.1
       eslint-config-prettier: ^8.5.0
       eslint-import-resolver-typescript: ^3.5.1
       eslint-plugin-import: ^2.26.0
@@ -183,7 +189,6 @@ importers:
     dependencies:
       '@typescript-eslint/eslint-plugin': 5.37.0_22c5fnooleyfkzrkkgdmel5kmi
       '@typescript-eslint/parser': 5.37.0_irgkl5vooow2ydyo6aokmferha
-      eslint: 8.23.1
       eslint-config-prettier: 8.5.0_eslint@8.23.1
       eslint-import-resolver-typescript: 3.5.1_hdzsmr7kawaomymueo2tso6fjq
       eslint-plugin-import: 2.26.0_dnpzw43gx7nu2gqo7farhnkjku
@@ -191,6 +196,7 @@ importers:
       eslint-plugin-react: 7.31.8_eslint@8.23.1
     devDependencies:
       clean-publish: 4.0.1
+      eslint: 8.23.1
     publishDirectory: .dope.publish
 
   packages/router:
@@ -199,16 +205,16 @@ importers:
       clean-publish: ^4.0.1
       history: ^5.3.0
       path-to-regexp: ^6.2.1
-      react: '>=17.0.2'
+      react: ^18.2.0
       url-toolkit: ^2.2.5
     dependencies:
       history: 5.3.0
       path-to-regexp: 6.2.1
-      react: 18.2.0
       url-toolkit: 2.2.5
     devDependencies:
       '@types/react': 18.0.20
       clean-publish: 4.0.1
+      react: 18.2.0
     publishDirectory: .dope.publish
 
 packages:
@@ -2941,6 +2947,13 @@ packages:
       '@types/node': 18.7.18
     dev: true
 
+  /@types/rollup-plugin-peer-deps-external/2.2.1:
+    resolution: {integrity: sha512-CUK4Mi3M3A/0coRUeo4McvUFOxR5H6UYd6Wt3D+K4c4fJupolMSoIxsZaBG1g/BJQOaujf78Pf7KhgfhrX1FZA==}
+    dependencies:
+      '@types/node': 18.7.18
+      rollup: 0.63.5
+    dev: true
+
   /@types/scheduler/0.16.2:
     resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==}
 
@@ -3293,6 +3306,15 @@ packages:
     resolution: {integrity: sha512-jZVI+s9Zg3IqA/kdi0i6UDCybUI3aSBLnglhYbSSjKlV7yF1F/5LWv8MakQmvYpnbJDS6fcBL2KzHSxNCMtWSQ==}
     dependencies:
       object.assign: 4.1.4
+    dev: true
+
+  /babel-plugin-macros/3.1.0:
+    resolution: {integrity: sha512-Cg7TFGpIr01vOQNODXOOaGz2NpCU5gl8x1qJFbb6hbZxR7XrcE2vtbAsTAbJ7/xwJtUuJEw8K8Zr/AE0LHlesg==}
+    engines: {node: '>=10', npm: '>=6'}
+    dependencies:
+      '@babel/runtime': 7.19.0
+      cosmiconfig: 7.0.1
+      resolve: 1.22.1
     dev: true
 
   /babel-plugin-polyfill-corejs2/0.3.3_@babel+core@7.19.1:
@@ -7287,6 +7309,14 @@ packages:
     dependencies:
       glob: 7.2.3
 
+  /rollup-plugin-peer-deps-external/2.2.4_rollup@2.79.0:
+    resolution: {integrity: sha512-AWdukIM1+k5JDdAqV/Cxd+nejvno2FVLVeZ74NKggm3Q5s9cbbcOgUPGdbxPi4BXu7xGaZ8HG12F+thImYu/0g==}
+    peerDependencies:
+      rollup: '*'
+    dependencies:
+      rollup: 2.79.0
+    dev: true
+
   /rollup-plugin-terser/7.0.2_rollup@2.79.0:
     resolution: {integrity: sha512-w3iIaU4OxcF52UUXiZNsNeuXIMDvFrr+ZXK6bFZ0Q60qyVfq4uLptoS4bbq3paG3x216eQllFZX7zt6TIImguQ==}
     peerDependencies:
@@ -7297,6 +7327,14 @@ packages:
       rollup: 2.79.0
       serialize-javascript: 4.0.0
       terser: 5.15.0
+    dev: true
+
+  /rollup/0.63.5:
+    resolution: {integrity: sha512-dFf8LpUNzIj3oE0vCvobX6rqOzHzLBoblyFp+3znPbjiSmSvOoK2kMKx+Fv9jYduG1rvcCfCveSgEaQHjWRF6g==}
+    hasBin: true
+    dependencies:
+      '@types/estree': 0.0.39
+      '@types/node': 18.7.18
     dev: true
 
   /rollup/2.78.1:
