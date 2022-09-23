@@ -1,21 +1,37 @@
 {
-  "packages": ["packages/*", "homepage"],
-  "version": "0.0.6",
+  "packages": [
+    "packages/*",
+    "homepage"
+  ],
+  "version": "0.0.7",
   "npmClient": "pnpm",
   "useWorkspaces": true,
-  "npmClientArgs": ["--ignore-engines"],
+  "npmClientArgs": [
+    "--ignore-engines"
+  ],
   "command": {
     "run": {
-      "ignoreChanges": ["dopejs-home", "dope-js"]
+      "ignoreChanges": [
+        "dopejs-home",
+        "dope-js"
+      ]
     },
     "version": {
-      "ignoreChanges": ["dopejs-home", "dope-js"]
+      "ignoreChanges": [
+        "dopejs-home",
+        "dope-js"
+      ]
     },
     "publish": {
-      "ignoreChanges": ["dopejs-home", "dope-js"]
+      "ignoreChanges": [
+        "dopejs-home",
+        "dope-js"
+      ]
     },
     "bootstrap": {
-      "npmClientArgs": ["--no-package-lock"]
+      "npmClientArgs": [
+        "--no-package-lock"
+      ]
     }
   }
 }
