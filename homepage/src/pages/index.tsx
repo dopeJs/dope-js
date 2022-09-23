@@ -1,4 +1,4 @@
-import { Button, css, useTheme, styled } from '@melon-js/design'
+import { Button, css, useTheme, styled } from '@dope-js/design'
 import { FC } from 'react'
 
 const Wrapper = styled.div(

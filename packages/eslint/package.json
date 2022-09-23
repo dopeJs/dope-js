@@ -1,10 +1,10 @@
 {
-  "name": "@melon-js/eslint-plugin",
+  "name": "@dope-js/eslint-plugin",
   "version": "0.0.6",
-  "description": "MelonJS plugin for eslint",
+  "description": "DopeJs plugin for eslint",
   "repository": {
     "type": "git",
-    "url": "https://github.com/melonote-app/melon-js",
+    "url": "https://github.com/dopeJs/dope-js",
     "directory": "packages/eslint"
   },
   "engines": {
@@ -19,13 +19,13 @@
   ],
   "publishConfig": {
     "access": "public",
-    "directory": ".melon.publish",
+    "directory": ".dope.publish",
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "prepublishOnly": "rimraf ./.melon.publish && clean-publish --access public",
-    "postpublish": "rimraf ./.melon.publish",
+    "prepublishOnly": "rimraf ./.dope.publish && clean-publish --access public",
+    "postpublish": "rimraf ./.dope.publish",
     "lint": "eslint --cache --ext .ts src/**"
   },
   "dependencies": {

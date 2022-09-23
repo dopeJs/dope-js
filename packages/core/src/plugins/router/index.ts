@@ -3,11 +3,11 @@ import { displayId, moduleId } from './constant'
 import { RouterContext } from './context'
 import { RouterOptions } from './types'
 
-export function melonRouter(options?: RouterOptions): Plugin {
+export function dopeRouter(options?: RouterOptions): Plugin {
   let ctx: RouterContext
 
   return {
-    name: '@melon-js/router-plugin',
+    name: '@dope-js/router-plugin',
     enforce: 'pre',
     configResolved(config) {
       ctx = new RouterContext(options || {}, config.root)

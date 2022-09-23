@@ -1,1 +1,1 @@
-{ "extends": ["plugin:@melon-js/recommended"], "plugins": ["@melon-js"] }
+{ "extends": ["plugin:@dope-js/recommended"], "plugins": ["@dope-js"] }

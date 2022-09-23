@@ -8,14 +8,14 @@ export interface IPkgMeta {
   devDependencies: Record<string, string>
 }
 
-export interface IMelonRc {
+export interface IDopeRc {
   react: boolean
   typing: boolean
   entry: Record<string, string>
   formats: Array<ModuleFormat>
 }
 
-export interface IPkgInfo extends IMelonRc {
+export interface IPkgInfo extends IDopeRc {
   name: string
   pkg: IPkgMeta
 }
@@ -46,13 +46,13 @@ export function getPackages(cwd?: string): Array<IPkgInfo> {
   const packages: Array<IPkgInfo> = []
   pkgNames.forEach((name) => {
     const pkgMetaPath = resolve(cwd!, 'packages', name, 'package.json')
-    const melonRcPath = resolve(cwd!, 'packages', name, '.melonrc')
-    if (fileExists(pkgMetaPath) && fileExists(melonRcPath)) {
+    const dopeRcPath = resolve(cwd!, 'packages', name, '.doperc')
+    if (fileExists(pkgMetaPath) && fileExists(dopeRcPath)) {
       const pkgMeta = readJSON<IPkgMeta>(pkgMetaPath)
-      const melonRc = readJSON<IMelonRc>(melonRcPath)
+      const dopeRc = readJSON<IDopeRc>(dopeRcPath)
 
       if (isQualifiedPackage(pkgMeta)) {
-        packages.push({ name, pkg: pkgMeta, ...melonRc })
+        packages.push({ name, pkg: pkgMeta, ...dopeRc })
       }
     }
   })

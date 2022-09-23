@@ -1,4 +1,4 @@
-import { ColorFn, ColorType } from '@melon-js/design'
+import { ColorFn, ColorType } from '@dope-js/design'
 
 declare module 'styled-components' {
   type ColorFns = Record<ColorType, ColorFn>

@@ -1,5 +1,5 @@
-import { MelonPage } from '@melon-js/core'
-import { css, styled } from '@melon-js/design'
+import { DopePage } from '@dope-js/core'
+import { css, styled } from '@dope-js/design'
 
 const Text = styled.div(
   ({ theme: { green } }) => css`
@@ -7,7 +7,7 @@ const Text = styled.div(
   `
 )
 
-const Test: MelonPage<'id'> = ({ params: { id } }) => {
+const Test: DopePage<'id'> = ({ params: { id } }) => {
   return <Text>router: {id}</Text>
 }
 

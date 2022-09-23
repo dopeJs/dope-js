@@ -1,7 +1,7 @@
 const semver = require('semver')
 const shell = require('shelljs')
 
-const package = '@melon-js/core'
+const package = '@dope-js/core'
 
 const getVersions = () => {
   const str = shell

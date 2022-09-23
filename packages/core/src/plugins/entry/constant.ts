@@ -1,7 +1,7 @@
 import { Options } from 'prettier'
 
-export const moduleId = '/melon-js/runtime/index.tsx'
-export const displayId = '@melon-js/runtime'
+export const moduleId = '/dopejs-js/runtime/index.tsx'
+export const displayId = '@dopejs-js/runtime'
 
 export const prettierCfg: Options = {
   parser: 'typescript',

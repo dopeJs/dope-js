@@ -1,34 +1,21 @@
 {
-  "packages": [
-    "packages/*",
-    "homepage"
-  ],
+  "packages": ["packages/*", "homepage"],
   "version": "0.0.6",
   "npmClient": "pnpm",
   "useWorkspaces": true,
-  "npmClientArgs": [
-    "--ignore-engines"
-  ],
+  "npmClientArgs": ["--ignore-engines"],
   "command": {
     "run": {
-      "ignoreChanges": [
-        "melon-js-homepage"
-      ]
+      "ignoreChanges": ["dope-js-homepage"]
     },
     "version": {
-      "ignoreChanges": [
-        "melon-js-homepage"
-      ]
+      "ignoreChanges": ["dope-js-homepage"]
     },
     "publish": {
-      "ignoreChanges": [
-        "melon-js-homepage"
-      ]
+      "ignoreChanges": ["dope-js-homepage"]
     },
     "bootstrap": {
-      "npmClientArgs": [
-        "--no-package-lock"
-      ]
+      "npmClientArgs": ["--no-package-lock"]
     }
   }
 }

@@ -22,7 +22,7 @@ export function handlePrivate(path: string) {
 }
 
 export async function findConfigFile(cwd: string) {
-  const files = ['melon.config.ts', 'melon.config.js']
+  const files = ['dope.config.ts', 'dope.config.js']
 
   const cacheKey = getFindFileCacheKey(cwd, files)
   if (Reflect.has(findFileCache, cacheKey)) {
@@ -63,13 +63,13 @@ export async function getDefaultConfig(cwd: string, isProduction: boolean, serve
         ],
       },
     }),
-    eslint({ ignore: !isProduction, exclude: ['/melon-js/runtime/*', '**/*.js', '**/*.cjs'] }),
+    eslint({ ignore: !isProduction, exclude: ['/dope-js/runtime/*', '**/*.js', '**/*.cjs'] }),
   ]
 
   const config: UserConfig = {
     root: cwd,
     mode: isProduction ? 'production' : 'development',
-    cacheDir: 'node_modules/.melon.cache',
+    cacheDir: 'node_modules/.dope.cache',
     resolve: {
       alias: { '@': join(cwd, 'src') },
       extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.mdx', '.md'],

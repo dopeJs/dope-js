@@ -1,10 +1,10 @@
 {
-  "name": "melon-js-homepage",
+  "name": "dope-js-homepage",
   "version": "0.0.1",
   "description": "A simple design system and UI library.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/melonote-app/melon-design",
+    "url": "https://github.com/dopeJs/dope-js",
     "directory": "homepage"
   },
   "type": "module",
@@ -15,21 +15,21 @@
   "packageManager": "pnpm@7.12.0",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "start": "melon start",
-    "build": "melon build",
-    "preview": "melon preview",
+    "start": "dope start",
+    "build": "dope build",
+    "preview": "dope preview",
     "lint": "eslint --cache --ext .ts,.tsx src/**"
   },
   "dependencies": {
-    "@melon-js/design": "workspace:*",
-    "@melon-js/router": "workspace:*",
+    "@dope-js/design": "workspace:*",
+    "@dope-js/router": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-is": "^18.2.0"
   },
   "devDependencies": {
-    "@melon-js/core": "workspace:*",
-    "@melon-js/eslint-plugin": "workspace:*",
+    "@dope-js/core": "workspace:*",
+    "@dope-js/eslint-plugin": "workspace:*",
     "@types/prettier": "^2.7.0",
     "@types/react": "^18.0.20",
     "@types/react-dom": "^18.0.6",

@@ -83,7 +83,7 @@ function getInput(info: IPkgInfo) {
 
 function getOutput(info: IPkgInfo, isProduction: boolean): Array<OutputOptions> {
   return info.formats.map((item) => ({
-    name: `melonjs-${info.name}`,
+    name: `dopejs-${info.name}`,
     dir: resolve(getPkgRoot(info), 'lib'),
     entryFileNames: `[name].${item}.js`,
     format: item,

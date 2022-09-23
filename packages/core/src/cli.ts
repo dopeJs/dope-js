@@ -14,7 +14,7 @@ export async function main() {
 
   program
     .command('init [projectName]')
-    .description('create a new project powered by melon.')
+    .description('create a new project powered by DopeJs.')
     .action((projectName) => {
       console.log(projectName)
     })
@@ -24,7 +24,7 @@ export async function main() {
     .alias('s')
     .option('-h --host <port>', 'assign dev host')
     .option('-p --port <port>', 'assign dev port')
-    .option('-c --config <configPath>', 'assign a melon.config file')
+    .option('-c --config <configPath>', 'assign a dope.config file')
     .option('--cwd <cwd>', 'assign workspace root')
     .description('start a unbundle esm development server powered by vite.')
     .action(async ({ host, port, config, cwd }: IDevOptions) => {
@@ -42,7 +42,7 @@ export async function main() {
     .command('build')
     .alias('b')
     .description('build esm output.')
-    .option('-c --config <configPath>', 'assign a melon.config file')
+    .option('-c --config <configPath>', 'assign a dope.config file')
     .option('--cwd <cwd>', 'assign workspace root')
     .action(async ({ config, cwd }: IBuildOptions) => {
       const { build } = await import('./commands/build')
@@ -55,7 +55,7 @@ export async function main() {
     .description('build esm output.')
     .option('-h --host <port>', 'assign dev host')
     .option('-p --port <port>', 'assign dev port')
-    .option('-c --config <configPath>', 'assign a melon.config file')
+    .option('-c --config <configPath>', 'assign a dope.config file')
     .option('--cwd <cwd>', 'assign workspace root')
     .action(async ({ host, port, config, cwd }: IDevOptions) => {
       const { preview } = await import('./commands/preview')

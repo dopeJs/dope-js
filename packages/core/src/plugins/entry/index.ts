@@ -2,11 +2,11 @@ import { Plugin } from 'vite'
 import { displayId, moduleId } from './constant'
 import { EntryContext } from './context'
 
-export function melonEntry(pageDir: string): Plugin {
+export function dopeEntry(pageDir: string): Plugin {
   let ctx: EntryContext
 
   return {
-    name: '@melon-js/plugin-entry',
+    name: '@dope-js/plugin-entry',
     enforce: 'pre',
     configResolved(config) {
       ctx = new EntryContext(pageDir, config.root)

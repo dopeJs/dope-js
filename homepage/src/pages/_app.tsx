@@ -1,4 +1,4 @@
-import { App } from '@melon-js/design'
+import { App } from '@dope-js/design'
 import { FC, ReactNode } from 'react'
 
 const MyApp: FC<{ page: ReactNode }> = ({ page }) => {

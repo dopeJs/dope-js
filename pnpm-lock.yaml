@@ -66,10 +66,10 @@ importers:
 
   homepage:
     specifiers:
-      '@melon-js/core': workspace:*
-      '@melon-js/design': workspace:*
-      '@melon-js/eslint-plugin': workspace:*
-      '@melon-js/router': workspace:*
+      '@dope-js/core': workspace:*
+      '@dope-js/design': workspace:*
+      '@dope-js/eslint-plugin': workspace:*
+      '@dope-js/router': workspace:*
       '@types/prettier': ^2.7.0
       '@types/react': ^18.0.20
       '@types/react-dom': ^18.0.6
@@ -78,14 +78,14 @@ importers:
       react-dom: ^18.2.0
       react-is: ^18.2.0
     dependencies:
-      '@melon-js/design': link:../packages/design
-      '@melon-js/router': link:../packages/router
+      '@dope-js/design': link:../packages/design
+      '@dope-js/router': link:../packages/router
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-is: 18.2.0
     devDependencies:
-      '@melon-js/core': link:../packages/core
-      '@melon-js/eslint-plugin': link:../packages/eslint
+      '@dope-js/core': link:../packages/core
+      '@dope-js/eslint-plugin': link:../packages/eslint
       '@types/prettier': 2.7.0
       '@types/react': 18.0.20
       '@types/react-dom': 18.0.6
@@ -129,7 +129,7 @@ importers:
     devDependencies:
       '@types/react': 18.0.20
       clean-publish: 4.0.1
-    publishDirectory: .melon.publish
+    publishDirectory: .dope.publish
 
   packages/design:
     specifiers:
@@ -157,7 +157,7 @@ importers:
       '@types/react': 18.0.20
       '@types/styled-components': 5.1.26
       clean-publish: 4.0.1
-    publishDirectory: .melon.publish
+    publishDirectory: .dope.publish
 
   packages/eslint:
     specifiers:
@@ -181,7 +181,7 @@ importers:
       eslint-plugin-react: 7.31.8_eslint@8.23.1
     devDependencies:
       clean-publish: 4.0.1
-    publishDirectory: .melon.publish
+    publishDirectory: .dope.publish
 
   packages/router:
     specifiers:
@@ -199,7 +199,7 @@ importers:
     devDependencies:
       '@types/react': 18.0.20
       clean-publish: 4.0.1
-    publishDirectory: .melon.publish
+    publishDirectory: .dope.publish
 
 packages:
 

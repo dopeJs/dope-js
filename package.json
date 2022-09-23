@@ -1,10 +1,10 @@
 {
-  "name": "melon-design",
+  "name": "dope-js",
   "version": "0.0.1",
   "description": "A simple design system and UI library.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/melonote-app/melon-design"
+    "url": "https://github.com/dopeJs/dope-js"
   },
   "workspaces": [
     "packages/core",
@@ -19,7 +19,7 @@
   "packageManager": "pnpm@7.12.0",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "melon": "./packages/core/bin/melon",
+    "dope": "./packages/core/bin/dope",
     "start": "run-s clear-build watch",
     "build": "run-s clear-build rollup",
     "clear-build": "tsx ./scripts/clear-build.ts",
@@ -27,7 +27,7 @@
     "rollup": "rollup -c rollup.config.ts --configPlugin typescript",
     "start:home": "cd homepage && pnpm start",
     "build:home": "cd homepage && pnpm build",
-    "publish": "lerna run --scope @melon-js/* --stream publish",
+    "publish": "lerna run --scope @dope-js/* --stream publish",
     "lint": "lerna run --stream lint"
   },
   "author": "",

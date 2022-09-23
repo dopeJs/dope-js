@@ -1,10 +1,10 @@
 {
-  "name": "@melon-js/core",
+  "name": "@dope-js/core",
   "version": "0.0.6",
   "description": "React router like nextjs.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/melonote-app/melon-js",
+    "url": "https://github.com/dopeJs/dope-js",
     "directory": "packages/core"
   },
   "engines": {
@@ -12,7 +12,7 @@
   },
   "packageManager": "pnpm@7.12.0",
   "bin": {
-    "melon": "./bin/melon.js"
+    "dope": "./bin/dope.js"
   },
   "main": "./lib/index.cjs.js",
   "types": "src/index.ts",
@@ -36,13 +36,13 @@
   "publishConfig": {
     "types": "lib/index.d.ts",
     "access": "public",
-    "directory": ".melon.publish",
+    "directory": ".dope.publish",
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "prepublishOnly": "rimraf ./.melon.publish && pnpm clean-publish --access public",
-    "postpublish": "rimraf ./.melon.publish",
+    "prepublishOnly": "rimraf ./.dopejs.publish && pnpm clean-publish --access public",
+    "postpublish": "rimraf ./.dopejs.publish",
     "lint": "eslint --cache --ext .ts src/**"
   },
   "author": "",

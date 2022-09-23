@@ -34,7 +34,7 @@ const recommended: { [key: string]: unknown } = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  ignorePatterns: ['dist', '@melon-js/runtime', 'scripts/*.js', '**/*.js', '**/*.cjs'],
+  ignorePatterns: ['dist', '@dope-js/runtime', 'scripts/*.js', '**/*.js', '**/*.cjs'],
   plugins: ['@typescript-eslint', 'react', 'import', 'prettier'],
   rules: {
     'import/order': [

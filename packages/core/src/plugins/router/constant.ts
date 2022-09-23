@@ -1,2 +1,2 @@
-export const moduleId = '/melon-js/runtime/routes.ts'
-export const displayId = '@melon-js/routes'
+export const moduleId = '/dope-js/runtime/routes.ts'
+export const displayId = '@dope-js/routes'

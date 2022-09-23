@@ -37,7 +37,7 @@ jobs:
         uses: actions/configure-pages@v2
       - name: Install dependencies
         run: pnpm install --no-lockfile
-      - name: Build melon-js
+      - name: Build dope-js
         run: pnpm build
       - name: Build pages
         run: pnpm build:home

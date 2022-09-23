@@ -1,7 +1,7 @@
 import { defineConfig as viteDefineConfig, mergeConfig, UserConfig as ViteUserConfig } from 'vite'
 import { createHtmlPlugin } from 'vite-plugin-html'
-import { melonRouter, RouterOptions } from './plugins'
-import { melonEntry } from './plugins/entry'
+import { dopeRouter, RouterOptions } from './plugins'
+import { dopeEntry } from './plugins/entry'
 
 export { Options, RouterOptions } from './plugins'
 
@@ -13,15 +13,15 @@ export type UserConfig = Omit<ViteUserConfig, 'root' | 'mode' | 'cacheDir'> & {
 
 export function defineConfig(config?: UserConfig) {
   const router = config?.router
-  const title = config?.title || 'MelonJS'
+  const title = config?.title || 'DopeJS Page'
   const entry = config?.entry || '/index.tsx'
 
   const pageDirs = router?.pagesRoot || 'src/pages'
 
   const defaultConfig: UserConfig = {
     plugins: [
-      melonRouter({ ...router }),
-      melonEntry(pageDirs),
+      dopeRouter({ ...router }),
+      dopeEntry(pageDirs),
       createHtmlPlugin({
         minify: true,
         template: '/index.html',

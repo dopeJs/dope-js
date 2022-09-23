@@ -19,12 +19,12 @@ yarn-error.log*
 .pnpm-debug.log*
 
 .rollup.cache
-.melon.cache
+.dope.cache
 .eslintcache
 
 lib
 dist
-.melon.publish
+.dope.publish
 
 # local env files
 .env*.local

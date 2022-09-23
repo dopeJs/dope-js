@@ -23,8 +23,8 @@ export class EntryContext {
     const hasAppFile = await this.checkUnderScoreAppFile()
 
     return `
-    import { LazyFunc, RouteProps, Router } from '@melon-js/router'
-    import { routes as _routes } from '@melon-js/routes'
+    import { LazyFunc, RouteProps, Router } from '@dope-js/router'
+    import { routes as _routes } from '@dope-js/routes'
     import React from 'react'
     import ReactDom from 'react-dom/client'
     ${hasAppFile ? `import Container from '/${this.pageDir}/_app'` : ''}

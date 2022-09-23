@@ -17,6 +17,6 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "melon.config.ts", "melon.d.ts", "index.tsx"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "dope.config.ts", "dope.d.ts", "index.tsx"],
   "exclude": ["dist", "node_modules"]
 }

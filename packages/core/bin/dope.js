@@ -2,7 +2,7 @@
 const { existsSync } = require('fs')
 const { resolve } = require('path')
 
-async function melon() {
+async function dope() {
   const entry = resolve(__dirname, '..', 'lib', 'cli.cjs.js')
 
   const isEntryExist = existsSync(entry)
@@ -10,8 +10,8 @@ async function melon() {
   if (isEntryExist) {
     require(entry)
   } else {
-    console.warn('Melon JS core file missing, please reinstall @melon-js/core globally')
+    console.warn('DopeJS core file missing, please reinstall @dope-js/core globally')
   }
 }
 
-melon()
+dope()

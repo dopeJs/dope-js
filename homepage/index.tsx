@@ -1,3 +1,3 @@
-import { runApp } from '@melon-js/runtime'
+import { runApp } from '@dope-js/runtime'
 
 runApp()
