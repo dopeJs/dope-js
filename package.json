@@ -1,5 +1,5 @@
 {
-  "name": "dope-js",
+  "name": "dopejs",
   "version": "0.0.1",
   "description": "A simple design system and UI library.",
   "repository": {
@@ -27,7 +27,7 @@
     "rollup": "rollup -c rollup.config.ts --configPlugin typescript",
     "start:home": "cd homepage && pnpm start",
     "build:home": "cd homepage && pnpm build",
-    "publish": "lerna run --scope @dope-js/* --stream publish",
+    "publish": "lerna run --scope @dope-js/* --ignore dopejs --no-private --stream publish",
     "lint": "lerna run --stream lint"
   },
   "author": "",

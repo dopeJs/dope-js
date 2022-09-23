@@ -64,4 +64,4 @@ jobs:
 
           echo "Dist tag: $DIST_TAG"
 
-          pnpm publish -r --tag $DIST_TAG --no-git-checks
+          pnpm publish -r --tag $DIST_TAG --no-git-checks --filter "@dope-js/*"
