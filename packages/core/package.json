@@ -41,8 +41,8 @@
   },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "prepublishOnly": "rimraf ./.dopejs.publish && pnpm clean-publish --access public",
-    "postpublish": "rimraf ./.dopejs.publish",
+    "prepublishOnly": "rimraf ./.dope.publish && pnpm clean-publish --access public",
+    "postpublish": "rimraf ./.dope.publish",
     "lint": "eslint --cache --ext .ts src/**"
   },
   "author": "",
