@@ -1,13 +1,12 @@
-import { babel } from '@rollup/plugin-babel'
 import commonjs from '@rollup/plugin-commonjs'
 import json from '@rollup/plugin-json'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
-import typescript, { RollupTypescriptOptions } from '@rollup/plugin-typescript'
+import typescript from '@rollup/plugin-typescript'
 import { resolve } from 'path'
-import { defineConfig, OutputOptions, Plugin } from 'rollup'
+import { defineConfig, Plugin } from 'rollup'
 import peerDepsExternal from 'rollup-plugin-peer-deps-external'
 import { terser } from 'rollup-plugin-terser'
-import { getPackages, IPkgInfo } from './scripts/get-packages'
+import { getPkgs, IPkgInfo } from './scripts/get-pkgs'
 import { typingPlugin } from './scripts/typing-plugin'
 
 function getPkgRoot(info: IPkgInfo) {
@@ -15,71 +14,30 @@ function getPkgRoot(info: IPkgInfo) {
 }
 
 function getPlugins(info: IPkgInfo, isProduction: boolean) {
-  const tsOpts: RollupTypescriptOptions = {
-    tsconfig: info.typing
-      ? resolve(getPkgRoot(info), 'tsconfig.base.json')
-      : resolve(getPkgRoot(info), 'tsconfig.json'),
-    sourceMap: !isProduction,
-    declaration: true,
-    lib: ['ESNext', 'DOM'],
-  }
-
-  if (info.typing) {
-    tsOpts.declarationDir = resolve(getPkgRoot(info), 'lib', '.typing.temp')
-  } else {
-    tsOpts.declarationDir = resolve(getPkgRoot(info), 'lib')
-  }
-
-  if (info.react) {
-    tsOpts.jsx = 'react-jsx'
-  }
-
   const plugins: Array<Plugin> = [
     peerDepsExternal() as Plugin,
     nodeResolve({ preferBuiltins: true }),
-    typescript(tsOpts),
+    typescript({
+      tsconfig: info.typing
+        ? resolve(getPkgRoot(info), 'tsconfig.base.json')
+        : resolve(getPkgRoot(info), 'tsconfig.json'),
+      sourceMap: !isProduction,
+      declaration: true,
+      declarationDir: info.typing ? resolve(getPkgRoot(info), 'lib', '.typing.temp') : resolve(getPkgRoot(info), 'lib'),
+      lib: ['ESNext', 'DOM'],
+      ...(info.tsOpts || {}),
+    }),
     commonjs({
       extensions: ['.js'],
       ignoreDynamicRequires: true,
     }),
     json(),
     terser(),
+    ...(info.typing ? [typingPlugin(info.name, resolve(__dirname))] : []),
+    ...(info.plugins || []),
   ]
 
-  if (info.typing) {
-    plugins.push(typingPlugin(info.name, resolve(__dirname)))
-  }
-
-  if (info.react) {
-    plugins.push(
-      babel({
-        babelHelpers: 'runtime',
-        exclude: 'node_modules/**',
-        presets: [
-          '@babel/preset-env',
-          [
-            '@babel/preset-react',
-            {
-              runtime: 'automatic',
-            },
-          ],
-        ],
-        plugins: [
-          '@babel/plugin-transform-runtime',
-          [
-            'babel-plugin-styled-components',
-            { namespace: `dope-${info.name}`, preprocess: false, fileName: false, displayName: false },
-          ],
-        ],
-      })
-    )
-  }
-
   return plugins
-}
-
-function getGlobals(info: IPkgInfo): Record<string, string> | undefined {
-  return info.react ? { react: 'React', 'styled-components': 'styled' } : undefined
 }
 
 function getExternals(info: IPkgInfo, isProduction: boolean) {
@@ -91,34 +49,6 @@ function getExternals(info: IPkgInfo, isProduction: boolean) {
   return Array.from(set)
 }
 
-function getInput(info: IPkgInfo) {
-  return Object.keys(info.entry).reduce((acc, curr) => {
-    acc[curr] = resolve(getPkgRoot(info), info.entry[curr])
-
-    return acc
-  }, {} as Record<string, string>)
-}
-
-function getOutput(info: IPkgInfo, isProduction: boolean): Array<OutputOptions> {
-  return info.formats.map((item) => {
-    const conf: OutputOptions = {
-      name: `dopejs-${info.name}`,
-      dir: resolve(getPkgRoot(info), 'lib'),
-      entryFileNames: `[name].${item}.js`,
-      format: item,
-      globals: getGlobals(info),
-      sourcemap: !isProduction,
-      extend: info.name === 'design',
-    }
-
-    if (info.name === 'design') {
-      conf.chunkFileNames = `[name].${item}.[chunk].js`
-    }
-
-    return conf
-  })
-}
-
 function createBundleConfig(info: IPkgInfo, isProduction: boolean) {
   return defineConfig({
     // treeshake: {
@@ -126,8 +56,8 @@ function createBundleConfig(info: IPkgInfo, isProduction: boolean) {
     //   propertyReadSideEffects: false,
     //   tryCatchDeoptimization: false,
     // },
-    input: getInput(info),
-    output: getOutput(info, isProduction),
+    input: info.input,
+    output: info.output,
     onwarn(warning, warn) {
       if (warning.message.includes('Package subpath')) {
         return
@@ -145,7 +75,8 @@ function createBundleConfig(info: IPkgInfo, isProduction: boolean) {
   })
 }
 
-export default (args: { watch: boolean }) => {
+export default async (args: { watch: boolean }) => {
   const isProduction = !args.watch
-  return getPackages(process.cwd()).map((info) => createBundleConfig(info, isProduction))
+  const pkgs = await getPkgs(process.cwd())
+  return pkgs.map((info) => createBundleConfig(info, isProduction))
 }
