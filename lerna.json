@@ -6,13 +6,13 @@
   "npmClientArgs": ["--ignore-engines"],
   "command": {
     "run": {
-      "ignoreChanges": ["dope-js-homepage"]
+      "ignoreChanges": ["dopejs-home", "dope-js"]
     },
     "version": {
-      "ignoreChanges": ["dope-js-homepage"]
+      "ignoreChanges": ["dopejs-home", "dope-js"]
     },
     "publish": {
-      "ignoreChanges": ["dope-js-homepage"]
+      "ignoreChanges": ["dopejs-home", "dope-js"]
     },
     "bootstrap": {
       "npmClientArgs": ["--no-package-lock"]
