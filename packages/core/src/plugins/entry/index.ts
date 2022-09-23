@@ -12,14 +12,11 @@ export function dopeEntry(pageDir: string): Plugin {
       ctx = new EntryContext(pageDir, config.root)
     },
     resolveId(id) {
-      if (id == displayId) return moduleId
+      if (id === displayId) return moduleId
       return null
     },
     async load(id) {
-      if (id === moduleId) {
-        return ctx.getFileContent()
-      }
-
+      if (id === moduleId) return ctx.getFileContent()
       return null
     },
   }

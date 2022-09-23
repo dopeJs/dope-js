@@ -22,10 +22,7 @@ export function dopeRouter(options?: RouterOptions): Plugin {
       return null
     },
     load(id) {
-      if (id === moduleId) {
-        return ctx.getFileContent()
-      }
-
+      if (id === moduleId) return ctx.getFileContent()
       return null
     },
   }
