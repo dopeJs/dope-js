@@ -1,6 +1,6 @@
 {
   "name": "@dope-js/core",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "React router like nextjs.",
   "repository": {
     "type": "git",

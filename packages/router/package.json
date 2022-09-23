@@ -1,6 +1,6 @@
 {
   "name": "@dope-js/router",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Router for DopeJs.",
   "repository": {
     "type": "git",
