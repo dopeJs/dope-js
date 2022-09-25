@@ -1,5 +1,5 @@
 import { commonTheme, darkColors, lightColors } from '@/styles'
-import { IErrorBoundaryProps, IProviderConfig, IThemeContext } from '@/types'
+import { AppProps, IThemeContext } from '@/types'
 import { createContext, FC, useCallback, useEffect, useMemo, useState } from 'react'
 import { ColorFn, ColorType, DefaultTheme, ThemeProvider } from 'styled-components'
 import { ErrorBoundary } from './ErrorBoundary'
@@ -7,12 +7,7 @@ import { GlobalStyle } from './GlobalStyle'
 
 export const ThemeContext = createContext<IThemeContext | null>(null)
 
-export interface AppProps extends IErrorBoundaryProps {
-  options?: IProviderConfig
-  rootId?: string
-}
-
-export const App: FC<AppProps> = ({ children, options, fallback, onError, rootId = 'root' }) => {
+export const App: FC<AppProps> = ({ children, rootId, options, fallback, onError }) => {
   const [dark, setDark] = useState(false)
 
   const [primaryColor, setPrimary] = useState<ColorType>(options?.primary || 'blue')

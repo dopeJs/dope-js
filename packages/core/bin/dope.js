@@ -3,7 +3,7 @@ const { existsSync } = require('fs')
 const { resolve } = require('path')
 
 async function dope() {
-  const entry = resolve(__dirname, '..', 'lib', 'cli.cjs.js')
+  const entry = resolve(__dirname, '..', 'lib', 'cli.js')
 
   const isEntryExist = existsSync(entry)
 

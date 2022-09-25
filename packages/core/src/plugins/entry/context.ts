@@ -30,8 +30,8 @@ export class EntryContext {
     ${hasAppFile ? `import Container from '/${this.pageDir}/_app'` : ''}
     
     export function runApp() {
-      const container = document.getElementById('root') || document.createElement('div')
-      container.id = 'root'
+      const container = document.getElementById('__dope__') || document.createElement('div')
+      container.id = '__dope__'
       document.body.appendChild(container)
       
       const modules = import.meta.glob(['/${this.pageDir}/**/*{.tsx,.jsx,.md,.mdx}', '!**/_app.tsx'])
@@ -39,6 +39,7 @@ export class EntryContext {
       const Entry: React.FC = () => {
         const routes: Array<RouteProps> = React.useMemo(() => {
           if (!Array.isArray(_routes) || _routes.length === 0) return []
+          console.log(_routes)
       
           return _routes.map((item) => {
             return { path: item.route, dynamic: modules[item.path] as LazyFunc }

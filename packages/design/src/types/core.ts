@@ -13,6 +13,11 @@ export interface IErrorBoundaryProps {
   children?: ReactNode
 }
 
+export interface AppProps extends IErrorBoundaryProps {
+  options?: IProviderConfig
+  rootId?: string
+}
+
 export type ColorMap = Record<ColorType, Record<number, string>>
 
 export interface IProviderConfig {

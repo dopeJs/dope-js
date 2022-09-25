@@ -1,9 +1,10 @@
 import { babel } from '@rollup/plugin-babel'
 import { resolve } from 'path'
+import postcss from 'rollup-plugin-postcss'
 import { IDopeRc } from '../../@types'
 
 const root = resolve(__dirname)
-const globals = { react: 'React', 'styled-components': 'styled' }
+const globals = { react: 'React' }
 
 const config: IDopeRc = {
   typing: true,
@@ -16,7 +17,6 @@ const config: IDopeRc = {
       format: 'cjs',
       globals,
       sourcemap: true,
-      extend: true,
     },
     {
       name: `dopejs-design`,
@@ -25,6 +25,7 @@ const config: IDopeRc = {
       format: 'es',
       globals,
       sourcemap: true,
+      esModule: true,
     },
     {
       name: `dopejs-design`,
@@ -39,7 +40,8 @@ const config: IDopeRc = {
   plugins: [
     babel({
       babelHelpers: 'runtime',
-      exclude: 'node_modules/**',
+      exclude: /node_modules/,
+      extensions: ['.js', '.ts', '.tsx'],
       presets: [
         '@babel/preset-env',
         [
@@ -56,6 +58,9 @@ const config: IDopeRc = {
           { namespace: `dope-design`, preprocess: false, fileName: false, displayName: false },
         ],
       ],
+    }),
+    postcss({
+      modules: true,
     }),
   ],
 }

@@ -13,7 +13,7 @@ function getPkgRoot(info: IPkgInfo) {
   return resolve(__dirname, 'packages', info.name)
 }
 
-function getPlugins(info: IPkgInfo, isProduction: boolean) {
+function getPlugins(info: IPkgInfo) {
   const plugins: Array<Plugin> = [
     peerDepsExternal() as Plugin,
     nodeResolve({ preferBuiltins: true }),
@@ -21,7 +21,7 @@ function getPlugins(info: IPkgInfo, isProduction: boolean) {
       tsconfig: info.typing
         ? resolve(getPkgRoot(info), 'tsconfig.base.json')
         : resolve(getPkgRoot(info), 'tsconfig.json'),
-      sourceMap: !isProduction,
+      sourceMap: true,
       declaration: true,
       declarationDir: info.typing ? resolve(getPkgRoot(info), 'lib', '.typing.temp') : resolve(getPkgRoot(info), 'lib'),
       lib: ['ESNext', 'DOM'],
@@ -29,7 +29,6 @@ function getPlugins(info: IPkgInfo, isProduction: boolean) {
     }),
     commonjs({
       extensions: ['.js'],
-      ignoreDynamicRequires: true,
     }),
     json(),
     terser(),
@@ -44,6 +43,8 @@ function getExternals(info: IPkgInfo, isProduction: boolean) {
   const set = new Set([
     ...Object.keys(info.pkg.dependencies),
     ...(isProduction ? [] : Object.keys(info.pkg.devDependencies)),
+    'react',
+    'styled-components',
   ])
 
   return Array.from(set)
@@ -51,11 +52,11 @@ function getExternals(info: IPkgInfo, isProduction: boolean) {
 
 function createBundleConfig(info: IPkgInfo, isProduction: boolean) {
   return defineConfig({
-    // treeshake: {
-    //   moduleSideEffects: 'no-external',
-    //   propertyReadSideEffects: false,
-    //   tryCatchDeoptimization: false,
-    // },
+    treeshake: {
+      moduleSideEffects: 'no-external',
+      propertyReadSideEffects: false,
+      tryCatchDeoptimization: false,
+    },
     input: info.input,
     output: info.output,
     onwarn(warning, warn) {
@@ -71,7 +72,7 @@ function createBundleConfig(info: IPkgInfo, isProduction: boolean) {
       warn(warning)
     },
     external: getExternals(info, isProduction),
-    plugins: getPlugins(info, isProduction),
+    plugins: getPlugins(info),
   })
 }
 

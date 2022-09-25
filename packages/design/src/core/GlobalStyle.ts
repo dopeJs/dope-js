@@ -1,4 +1,5 @@
 import { createGlobalStyle, css, FlattenSimpleInterpolation } from 'styled-components'
+import { fontCss } from './Fonts'
 
 export interface IGlobalStyleProps {
   /**
@@ -16,17 +17,17 @@ export interface IGlobalStyleProps {
 }
 
 export const GlobalStyle = createGlobalStyle<IGlobalStyleProps>(
-  ({ css: _css, reset, rootId, theme: { neutral } }) => css`
+  ({ css: _css, reset, rootId = '__dope__', theme: { neutral } }) => css`
     ${reset
       ? css`
-          @import url('https://fonts.font.im/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i|Source+Code+Pro:200,300,400,500,600,700,900&subset=latin-ext,vietnamese');
+          ${fontCss}
 
           html {
             font-size: 14px;
           }
 
           body,
-          #${rootId} {
+          ${rootId} {
             padding: 0;
             margin: 0;
             height: 100vh;

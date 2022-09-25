@@ -6,6 +6,7 @@
     "type": "git",
     "url": "https://github.com/dopeJs/dope-js"
   },
+  "private": "true",
   "workspaces": [
     "packages/core",
     "packages/eslint",
@@ -20,10 +21,9 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "dope": "./packages/core/bin/dope",
-    "start": "run-s clear-build watch",
+    "watch": "pnpm clear-build && pnpm rollup -w",
     "build": "run-s clear-build rollup",
     "clear-build": "tsx ./scripts/clear-build.ts",
-    "watch": "pnpm rollup -w",
     "rollup": "rollup -c rollup.config.ts --configPlugin typescript",
     "home": "cd homepage && pnpm start",
     "build:home": "cd homepage && pnpm build",

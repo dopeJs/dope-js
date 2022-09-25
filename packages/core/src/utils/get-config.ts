@@ -1,8 +1,9 @@
 import { IServerOption } from '@/types'
+import commonjs from '@rollup/plugin-commonjs'
 import react from '@vitejs/plugin-react'
 import findUp from 'find-up'
 import { join } from 'path'
-import { PluginOption, UserConfig } from 'vite'
+import { Plugin, PluginOption, UserConfig } from 'vite'
 import eslint from 'vite-plugin-eslint'
 
 const findFileCache: Record<string, string> = {}
@@ -63,6 +64,9 @@ export async function getDefaultConfig(cwd: string, isProduction: boolean, serve
         ],
       },
     }),
+    commonjs({
+      extensions: ['.js'],
+    }) as Plugin,
     eslint({ ignore: !isProduction, exclude: ['/dope-js/runtime/*', '**/*.js', '**/*.cjs'] }),
   ]
 
