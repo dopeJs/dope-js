@@ -39,7 +39,6 @@ export class EntryContext {
       const Entry: React.FC = () => {
         const routes: Array<RouteProps> = React.useMemo(() => {
           if (!Array.isArray(_routes) || _routes.length === 0) return []
-          console.log(_routes)
       
           return _routes.map((item) => {
             return { path: item.route, dynamic: modules[item.path] as LazyFunc }
