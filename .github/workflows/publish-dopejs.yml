@@ -28,7 +28,9 @@ jobs:
         with:
           version: 7.12.0
       - name: Install dependencies
-        run: pnpm install --no-lockfile
+        run: |
+          pnpm config set auto-install-peers true --location .
+          pnpm install --no-lockfile
       - name: Get new version
         run: echo "RELEASE_VERSION="$(node scripts/new-version.js)"" >> $GITHUB_ENV
         env:
