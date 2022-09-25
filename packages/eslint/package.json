@@ -1,6 +1,6 @@
 {
   "name": "@dope-js/eslint-plugin",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "DopeJs plugin for eslint",
   "repository": {
     "type": "git",
