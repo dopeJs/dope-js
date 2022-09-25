@@ -67,3 +67,12 @@ jobs:
           echo "Dist tag: $DIST_TAG"
 
           pnpm publish -r --tag $DIST_TAG --no-git-checks --filter "@dope-js/*"
+      - name: Build pages
+        run: pnpm build:home
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: './homepage/dist'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
