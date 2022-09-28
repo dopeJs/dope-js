@@ -5,13 +5,13 @@ export class EntryContext {
   private pageDir: string
   private root: string
 
-  constructor(pageDir: string, viteRoot: string = process.cwd()) {
+  constructor(pageDir: string, root = process.cwd()) {
     this.pageDir = pageDir
       .replace(/^\/+/g, '')
       .replace(/\/$/g, '')
       .replace(/\/{2,}/g, '/')
 
-    this.root = viteRoot.replace(/\\/g, '/')
+    this.root = root.replace(/\\/g, '/')
   }
 
   checkUnderScoreAppFile() {
@@ -36,12 +36,12 @@ export class EntryContext {
       
       const modules = import.meta.glob(['/${this.pageDir}/**/*{.tsx,.jsx,.md,.mdx}', '!**/_app.tsx'])
       
-      const Entry: React.FC = () => {
-        const routes: Array<RouteProps> = React.useMemo(() => {
+      const Entry = () => {
+        const routes = React.useMemo(() => {
           if (!Array.isArray(_routes) || _routes.length === 0) return []
       
           return _routes.map((item) => {
-            return { path: item.route, dynamic: modules[item.path] as LazyFunc }
+            return { path: item.route, dynamic: modules[item.path] }
           })
         }, [_routes])
       

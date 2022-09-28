@@ -17,6 +17,7 @@
     "preinstall": "npx only-allow pnpm",
     "start": "dope start",
     "build": "dope build",
+    "build-new": "dope build-new",
     "preview": "dope preview",
     "lint": "eslint --cache --ext .ts,.tsx src/**"
   },

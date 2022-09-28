@@ -51,6 +51,18 @@ export async function main() {
     })
 
   program
+    .command('build-new')
+    .alias('b')
+    .description('build esm output.')
+    .option('-c --config <configPath>', 'assign a dope.config file')
+    .option('--cwd <cwd>', 'assign workspace root')
+    .action(async ({ config, cwd }: IBuildOptions) => {
+      const { build } = await import('./commands/build-new')
+
+      build()
+    })
+
+  program
     .command('preview')
     .description('build esm output.')
     .option('-h --host <port>', 'assign dev host')
@@ -68,7 +80,6 @@ export async function main() {
     console.log(chalk.yellowBright(getLogo()))
   }
 
-  // handle fe install
   program.parseAsync(args)
 }
 

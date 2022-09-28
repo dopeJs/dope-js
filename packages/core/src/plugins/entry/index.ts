@@ -1,4 +1,4 @@
-import { Plugin } from 'vite'
+import { Plugin } from 'rollup'
 import { displayId, moduleId } from './constant'
 import { EntryContext } from './context'
 
@@ -7,9 +7,13 @@ export function dopeEntry(pageDir: string): Plugin {
 
   return {
     name: '@dope-js/plugin-entry',
-    enforce: 'pre',
-    configResolved(config) {
-      ctx = new EntryContext(pageDir, config.root)
+    // enforce: 'pre',
+    // configResolved(config) {
+    //   ctx = new EntryContext(pageDir, config.root)
+    // },
+    options(opts) {
+      console.log('opts', opts)
+      ctx = new EntryContext(pageDir, process.cwd())
     },
     resolveId(id) {
       if (id === displayId) return moduleId

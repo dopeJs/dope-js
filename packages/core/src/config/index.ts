@@ -1,15 +1,8 @@
-import { defineConfig as viteDefineConfig, mergeConfig, UserConfig as ViteUserConfig } from 'vite'
+import { mdxPlugin } from '@/mdx'
+import { dopeEntry, dopeRouter } from '@/plugins'
+import { UserConfig } from '@/types'
+import { defineConfig as viteDefineConfig, mergeConfig, Plugin } from 'vite'
 import { createHtmlPlugin } from 'vite-plugin-html'
-import { dopeRouter, RouterOptions } from './plugins'
-import { dopeEntry } from './plugins/entry'
-
-export { Options, RouterOptions } from './plugins'
-
-export type UserConfig = Omit<ViteUserConfig, 'root' | 'mode' | 'cacheDir'> & {
-  router?: RouterOptions
-  title?: string
-  entry?: string
-}
 
 export function defineConfig(config?: UserConfig) {
   const router = config?.router
@@ -21,7 +14,7 @@ export function defineConfig(config?: UserConfig) {
   const defaultConfig: UserConfig = {
     plugins: [
       dopeRouter({ ...router }),
-      dopeEntry(pageDirs),
+      dopeEntry(pageDirs) as Plugin,
       createHtmlPlugin({
         minify: true,
         template: '/index.html',
@@ -30,8 +23,11 @@ export function defineConfig(config?: UserConfig) {
           data: { title },
         },
       }),
+      mdxPlugin(config?.mdx),
     ],
   }
+
+  delete config?.mdx
 
   const mergedConfig: UserConfig = mergeConfig(defaultConfig, config || {})
 
