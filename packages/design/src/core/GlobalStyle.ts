@@ -1,5 +1,4 @@
 import { createGlobalStyle, css, FlattenSimpleInterpolation } from 'styled-components'
-import { fontCss } from './Fonts'
 
 export interface IGlobalStyleProps {
   /**
@@ -17,13 +16,11 @@ export interface IGlobalStyleProps {
 }
 
 export const GlobalStyle = createGlobalStyle<IGlobalStyleProps>(
-  ({ css: _css, reset, rootId = '__dope__', theme: { neutral } }) => css`
+  ({ css: _css, reset, rootId = '__dope__', theme }) => css`
     ${reset
       ? css`
-          ${fontCss}
-
           html {
-            font-size: 14px;
+            font-size: ${theme.fontSize.base};
           }
 
           body,
@@ -33,9 +30,8 @@ export const GlobalStyle = createGlobalStyle<IGlobalStyleProps>(
             height: 100vh;
             width: 100vw;
             overflow: hidden;
-            font-size: 14px;
-            font-family: 'Nunito', sans-serif;
-            background-color: ${neutral(0)};
+            font-size: ${theme.fontSize.base};
+            background-color: ${theme.colors.neutral(0)};
           }
         `
       : css``}

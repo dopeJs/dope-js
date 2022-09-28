@@ -20,19 +20,23 @@ export interface AppProps extends IErrorBoundaryProps {
 
 export type ColorMap = Record<ColorType, Record<number, string>>
 
-export interface IProviderConfig {
-  primary?: ColorType
-  danger?: ColorType
-  success?: ColorType
-  warn?: ColorType
-}
+export type FontFamilyFn = (defaults: Array<string>) => Array<string>
+export type FontFamilySetter = string | FontFamilyFn
 
-export interface IThemeContext {
-  dark: boolean
-  setDark: (dark: boolean) => void
-  setPrimary: (color: ColorType) => void
-  setDanger: (color: ColorType) => void
-  setSuccess: (color: ColorType) => void
-  setWarn: (color: ColorType) => void
-  theme: DefaultTheme
+export type Colors = 'primary' | 'danger' | 'warn' | 'success' | ColorType
+
+export type CommonTheme = Omit<DefaultTheme, 'colors'>
+
+export type DeepPartial<T> = T extends object
+  ? {
+      [P in keyof T]?: DeepPartial<T[P]>
+    }
+  : T
+
+export interface IProviderConfig extends DeepPartial<Omit<DefaultTheme, 'colors' | 'fontFamily'>> {
+  colors?: { primary?: ColorType; danger?: ColorType; success?: ColorType; warn?: ColorType }
+  fontFamily?: {
+    base?: FontFamilySetter
+    monospace?: FontFamilySetter
+  }
 }

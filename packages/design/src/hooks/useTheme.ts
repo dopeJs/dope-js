@@ -1,9 +1,8 @@
 import { ThemeContext } from '@/core'
-import { IThemeContext } from '@/types'
 import { useContext } from 'react'
 
-export function useTheme(): IThemeContext {
-  const ctx = useContext(ThemeContext)!
+export function useTheme() {
+  const { theme, setPrimary, setSuccess, setWarn, setDanger } = useContext(ThemeContext)!
 
-  return ctx
+  return { theme, setPrimary, setSuccess, setWarn, setDanger }
 }

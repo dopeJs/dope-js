@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 
 const Text = styled.div(
   ({ theme }) => css`
-    color: ${theme.green(500)};
+    color: ${theme.colors.green(500)};
   `
 )
 

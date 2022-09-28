@@ -1,4 +1,5 @@
-import { Plugin } from 'vite'
+import { logger } from '@/utils'
+import { Plugin } from 'rollup'
 import { displayId, moduleId } from './constant'
 import { RouterContext } from './context'
 import { RouterOptions } from './types'
@@ -7,16 +8,15 @@ export function dopeRouter(options?: RouterOptions): Plugin {
   let ctx: RouterContext
 
   return {
-    name: '@dope-js/router-plugin',
-    enforce: 'pre',
-    configResolved(config) {
-      ctx = new RouterContext(options || {}, config.root)
-      ctx.setLogger(config.logger)
+    name: '@dope-js/plugin-router',
+    options(opts) {
+      ctx = new RouterContext(options || {}, process.cwd())
+      // ctx.setLogger(logger)
       ctx.searchGlob()
     },
-    configureServer(server) {
-      ctx.setupViteServer(server)
-    },
+    // configureServer(server) {
+    //   ctx.setupViteServer(server)
+    // },
     resolveId(id) {
       if (id == displayId) return moduleId
       return null

@@ -11,17 +11,17 @@ const StyledItem = styled.div<{ isActive: boolean; depth: number }>(
     display: flex;
     align-items: center;
     cursor: pointer;
-    color: ${theme.neutral(800)};
-    font-weight: ${theme.semiBold};
+    color: ${theme.colors.neutral(800)};
+    font-weight: ${theme.fontWeight.semiBold};
 
     ${isActive &&
     css`
-      color: ${theme.primary(500)};
-      background-color: ${theme.neutral(200)};
+      color: ${theme.colors.primary(500)};
+      background-color: ${theme.colors.neutral(200)};
     `}
 
     &:hover {
-      background-color: ${theme.neutral(200)};
+      background-color: ${theme.colors.neutral(200)};
     }
   `
 )

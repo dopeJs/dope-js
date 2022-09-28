@@ -1,6 +1,6 @@
-import { FC } from 'react'
+import { DopePage } from '@dope-js/core'
 
-const Test: FC = () => {
+const Test: DopePage = () => {
   return <div>test1</div>
 }
 

@@ -1,8 +1,27 @@
+import { fontCss } from '@/components'
 import { DopeApp } from '@dope-js/core'
-import { App } from '@dope-js/design'
+import { App, IProviderConfig } from '@dope-js/design'
+import { createGlobalStyle } from 'styled-components'
+
+const GlobalStyle = createGlobalStyle`
+  ${fontCss}
+`
 
 const MyApp: DopeApp = ({ page }) => {
-  return <App onError={console.error}>{page}</App>
+  const options: IProviderConfig = {
+    colors: { primary: 'orange' },
+    fontFamily: {
+      base: (defaults) => ['Nunito', ...defaults],
+      monospace: (defaults) => ['Source Code Pro', ...defaults],
+    },
+  }
+
+  return (
+    <App options={options}>
+      <GlobalStyle />
+      {page}
+    </App>
+  )
 }
 
 export default MyApp

@@ -1,4 +1,4 @@
-import { commonTheme, darkColors, lightColors } from '@/styles'
+import { getCommonTheme, darkColors, lightColors } from '@/styles'
 import { AppProps, IThemeContext } from '@/types'
 import { createContext, FC, useCallback, useEffect, useMemo, useState } from 'react'
 import { ColorFn, ColorType, DefaultTheme, ThemeProvider } from 'styled-components'
@@ -10,10 +10,10 @@ export const ThemeContext = createContext<IThemeContext | null>(null)
 export const App: FC<AppProps> = ({ children, rootId, options, fallback, onError }) => {
   const [dark, setDark] = useState(false)
 
-  const [primaryColor, setPrimary] = useState<ColorType>(options?.primary || 'blue')
-  const [dangerColor, setDanger] = useState<ColorType>(options?.danger || 'red')
-  const [warnColor, setWarn] = useState<ColorType>(options?.warn || 'yellow')
-  const [successColor, setSuccess] = useState<ColorType>(options?.success || 'green')
+  const [primaryColor, setPrimary] = useState<ColorType>(options?.colors?.primary || 'blue')
+  const [dangerColor, setDanger] = useState<ColorType>(options?.colors?.danger || 'red')
+  const [warnColor, setWarn] = useState<ColorType>(options?.colors?.warn || 'yellow')
+  const [successColor, setSuccess] = useState<ColorType>(options?.colors?.success || 'green')
 
   const color = useCallback(
     (stage: number, type: ColorType, alpha = 1) => {
@@ -58,15 +58,13 @@ export const App: FC<AppProps> = ({ children, rootId, options, fallback, onError
   }, [color, dark])
 
   const theme: DefaultTheme = useMemo(() => {
+    const commonTheme = getCommonTheme(options)
+
     return {
       ...commonTheme,
-      primary: primaryFn,
-      success: successFn,
-      danger: dangerFn,
-      warn: warnFn,
-      ...colorFns,
-    } as unknown as DefaultTheme
-  }, [dark])
+      colors: { primary: primaryFn, success: successFn, danger: dangerFn, warn: warnFn, ...colorFns },
+    }
+  }, [dark, options])
 
   return (
     <ErrorBoundary fallback={fallback} onError={onError}>

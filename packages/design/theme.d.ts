@@ -20,17 +20,36 @@ declare module 'styled-components' {
 
   type ColorFns = Record<ColorType, ColorFn>
 
-  export interface DefaultTheme extends ColorFns {
-    borderRadius: string
+  export interface FontWeightTheme {
     light: number
     normal: number
     bold: number
     semiBold: number
-    fontFamilyBase: string
-    fontFamilyMonospace: string
+  }
+
+  export interface FontSizeTheme {
+    base: string
+    heading: { h1: string; h2: string; h3: string; h4: string; h5: string; h6: string }
+    small: string
+  }
+
+  export interface FontFamilyTheme {
+    base: string
+    monospace: string
+  }
+
+  export interface ColorTheme extends ColorFns {
     primary: ColorFn
     danger: ColorFn
     warn: ColorFn
     success: ColorFn
+  }
+
+  export interface DefaultTheme {
+    colors: ColorTheme
+    fontFamily: FontFamilyTheme
+    fontSize: FontSizeTheme
+    fontWeight: FontWeightTheme
+    borderRadius: string
   }
 }

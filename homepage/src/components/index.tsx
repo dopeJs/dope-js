@@ -1,5 +1,1 @@
-import { FC } from 'react'
-
-export const Layout: FC = () => {
-  return <></>
-}
+export * from './Fonts'

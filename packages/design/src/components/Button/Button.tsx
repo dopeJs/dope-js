@@ -7,24 +7,24 @@ export interface ButtonProps {
 }
 
 const _Button = styled.div(
-  ({ theme: { neutral, borderRadius, fontFamilyBase } }) => css`
+  ({ theme }) => css`
     padding: 8px 12px;
-    border: solid 1px ${neutral(200)};
+    border: solid 1px ${theme.colors.neutral(200)};
     cursor: pointer;
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    border-radius: ${borderRadius};
-    color: ${neutral(1000)};
-    background-color: ${neutral(50)};
-    font-family: ${fontFamilyBase};
+    border-radius: ${theme.borderRadius};
+    color: ${theme.colors.neutral(1000)};
+    background-color: ${theme.colors.neutral(50)};
+    font-family: ${theme.fontFamily.base};
 
     &:hover {
-      background-color: ${neutral(100)};
+      background-color: ${theme.colors.neutral(100)};
     }
 
     &:active {
-      background-color: ${neutral(200)};
+      background-color: ${theme.colors.neutral(200)};
     }
   `
 )

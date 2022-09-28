@@ -1,15 +1,15 @@
-import { Button, useTheme } from '@dope-js/design'
-import { FC } from 'react'
+import { DopePage } from '@dope-js/core'
+import { Button, useDark } from '@dope-js/design'
 import styled, { css } from 'styled-components'
 
 const Wrapper = styled.div(
   ({ theme }) => css`
-    background-color: ${theme.carmine(200)};
+    background-color: ${theme.colors.carmine(200)};
   `
 )
 
-const Home: FC = () => {
-  const { dark, setDark } = useTheme()
+const Home: DopePage = () => {
+  const { dark, setDark } = useDark()
 
   return (
     <Wrapper>
