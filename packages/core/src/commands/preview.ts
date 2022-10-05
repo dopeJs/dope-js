@@ -1,9 +1,10 @@
 import { IDevOptions } from '@/types'
 import { findConfigFile, getDefaultConfig, logger } from '@/utils'
+import { Command } from 'commander'
 import { cwd as getCwd } from 'process'
 import { build as viteBuild, loadConfigFromFile, mergeConfig, preview as vitePreview, UserConfig } from 'vite'
 
-export const preview = async (options: IDevOptions = {}) => {
+async function goPreview(options: IDevOptions) {
   try {
     const { cwd: _cwd, config: _config, host, port } = options
     const cwd = _cwd || getCwd()
@@ -30,4 +31,13 @@ export const preview = async (options: IDevOptions = {}) => {
 
     process.exit(1)
   }
+}
+
+export function registerPreview(program: Command) {
+  program
+    .command('preview')
+    .description('Start a preview web server.')
+    .option('-c --config <configPath>', 'Specify a dope.config file')
+    .option('--cwd <cwd>', 'Specify workspace root')
+    .action(goPreview)
 }

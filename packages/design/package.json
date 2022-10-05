@@ -4,9 +4,10 @@
   "description": "A simple design system and UI library.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dopeJs/dope-js",
+    "url": "git+https://github.com/dopeJs/dope-js",
     "directory": "packages/design"
   },
+  "homepage": "https://dopejs.dev/design",
   "engines": {
     "node": "^14.18.0 || >=16.0.0"
   },
@@ -43,7 +44,7 @@
     "postpublish": "rimraf ./.dope.publish",
     "lint": "eslint --cache --ext .ts,.tsx src/**"
   },
-  "author": "",
+  "author": "John Zhang",
   "license": "MIT",
   "dependencies": {
     "@floating-ui/react-dom": "^1.0.0",

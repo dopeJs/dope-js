@@ -1,9 +1,10 @@
 import { IDevOptions } from '@/types'
 import { findConfigFile, getDefaultConfig, logger } from '@/utils'
+import { Command } from 'commander'
 import { cwd as getCwd } from 'process'
 import { createServer, loadConfigFromFile, mergeConfig, UserConfig } from 'vite'
 
-export const startDevServer = async (options: IDevOptions = {}) => {
+async function startDevServer(options: IDevOptions) {
   try {
     const { host, port, config: _config, cwd: _cwd } = options
 
@@ -33,4 +34,16 @@ export const startDevServer = async (options: IDevOptions = {}) => {
 
     process.exit(1)
   }
+}
+
+export function registerStart(program: Command) {
+  program
+    .command('start')
+    .alias('s')
+    .description('start a unbundle esm development server.')
+    .option('-h --host <host>', 'Specify dev host')
+    .option('-p --port <port>', 'Specify dev port')
+    .option('-c --config <configPath>', 'Specify a dope.config file')
+    .option('--cwd <cwd>', 'Specify workspace root')
+    .action(startDevServer)
 }

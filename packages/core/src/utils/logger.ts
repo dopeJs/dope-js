@@ -42,6 +42,7 @@ class Logger {
             format.printf(({ level, message, timestamp }) =>
               [chalk.whiteBright(timestamp), `[${level}]`, message].join(' ')
             )
+            // format.
           ),
         }),
       ],

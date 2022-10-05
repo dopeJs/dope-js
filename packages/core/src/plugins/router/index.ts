@@ -1,15 +1,16 @@
-import { logger } from '@/utils'
+import { resolve } from 'path/posix'
 import { Plugin } from 'rollup'
-import { displayId, moduleId } from './constant'
+import { displayId, moduleId as _moduleId } from './constant'
 import { RouterContext } from './context'
 import { RouterOptions } from './types'
 
-export function dopeRouter(options?: RouterOptions): Plugin {
+export function dopeRouter(root: string, options?: RouterOptions): Plugin {
   let ctx: RouterContext
+  const moduleId = resolve(root, _moduleId)
 
   return {
     name: '@dope-js/plugin-router',
-    options(opts) {
+    options() {
       ctx = new RouterContext(options || {}, process.cwd())
       // ctx.setLogger(logger)
       ctx.searchGlob()

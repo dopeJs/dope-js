@@ -4,14 +4,14 @@
   "description": "DopeJs plugin for eslint",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dopeJs/dope-js",
+    "url": "git+https://github.com/dopeJs/dope-js",
     "directory": "packages/eslint"
   },
   "engines": {
     "node": "^14.18.0 || >=16.0.0"
   },
   "packageManager": "pnpm@7.12.0",
-  "author": "",
+  "author": "John Zhang",
   "license": "MIT",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",

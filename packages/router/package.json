@@ -4,9 +4,10 @@
   "description": "Router for DopeJs.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dopeJs/dope-js",
+    "url": "git+https://github.com/dopeJs/dope-js",
     "directory": "packages/router"
   },
+  "homepage": "https://dopejs.dev",
   "engines": {
     "node": "^14.18.0 || >=16.0.0"
   },
@@ -14,7 +15,7 @@
   "main": "lib/index.cjs.js",
   "module": "lib/index.es.js",
   "browser": "lib/index.umd.js",
-  "types": "src/index.ts",
+  "types": "lib/index.d.ts",
   "files": [
     "lib"
   ],
@@ -39,7 +40,7 @@
     "postpublish": "rimraf ./.dope.publish",
     "lint": "eslint --cache --ext .ts,.tsx src/**"
   },
-  "author": "",
+  "author": "John Zhang",
   "license": "MIT",
   "devDependencies": {
     "@types/react": "^18.0.20",

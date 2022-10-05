@@ -1,9 +1,11 @@
+import { resolve } from 'path/posix'
 import { Plugin } from 'rollup'
-import { displayId, moduleId } from './constant'
+import { displayId, moduleId as _moduleId } from './constant'
 import { EntryContext } from './context'
 
 export function dopeEntry(pageDir: string, root: string): Plugin {
   const ctx = new EntryContext(pageDir, root)
+  const moduleId = resolve(root, _moduleId)
 
   return {
     name: '@dope-js/plugin-runtime',

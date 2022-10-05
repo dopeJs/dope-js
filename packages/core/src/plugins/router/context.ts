@@ -149,6 +149,7 @@ export class RouterContext {
 
   getFileContent() {
     const routes = this.resolveRoutes()
+    console.log(routes)
     return `export const routes = ${JSON.stringify(routes)}`
   }
 }

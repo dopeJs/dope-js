@@ -1,74 +1,32 @@
 import chalk from 'chalk'
 import { Command } from 'commander'
-import { resolve } from 'path'
-import { IBuildOptions, IDevOptions } from './types'
-import { getLogo } from './utils'
+import { getLogo, loadPkgJson, logger } from './utils'
 
-export async function main() {
-  const program = new Command()
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const packageInfo = require(resolve(__dirname, '..', 'package.json'))
+const program = new Command()
+const pkgJson = loadPkgJson(__dirname)
+program.version(pkgJson?.version || '0.0.1')
 
-  const version = packageInfo.version
-  program.version(version)
+async function loadCommands() {
+  const { registerStart } = await import(`./commands/start`)
+  registerStart(program)
 
-  program
-    .command('init [projectName]')
-    .description('create a new project powered by DopeJs.')
-    .action((projectName) => {
-      console.log(projectName)
-    })
+  const { registerBuild } = await import(`./commands/build`)
+  registerBuild(program)
 
-  program
-    .command('start')
-    .alias('s')
-    .option('-h --host <port>', 'assign dev host')
-    .option('-p --port <port>', 'assign dev port')
-    .option('-c --config <configPath>', 'assign a dope.config file')
-    .option('--cwd <cwd>', 'assign workspace root')
-    .description('start a unbundle esm development server powered by vite.')
-    .action(async ({ host, port, config, cwd }: IDevOptions) => {
-      const { startDevServer } = await import('./commands/start')
-
-      startDevServer({
-        host,
-        port,
-        config,
-        cwd,
-      })
-    })
-
-  program
-    .command('build')
-    .alias('b')
-    .description('build esm output.')
-    .option('-c --config <configPath>', 'assign a dope.config file')
-    .option('--cwd <cwd>', 'assign workspace root')
-    .action(async ({ config, cwd }: IBuildOptions) => {
-      const { build } = await import('./commands/build')
-
-      build({ config, cwd })
-    })
-
-  program
-    .command('preview')
-    .description('build esm output.')
-    .option('-h --host <port>', 'assign dev host')
-    .option('-p --port <port>', 'assign dev port')
-    .option('-c --config <configPath>', 'assign a dope.config file')
-    .option('--cwd <cwd>', 'assign workspace root')
-    .action(async ({ host, port, config, cwd }: IDevOptions) => {
-      const { preview } = await import('./commands/preview')
-
-      preview({ host, port, config, cwd })
-    })
-
-  const args = process.argv
-  if (args.length < 3 || args[2] === 'help' || args[2] === '-h') {
-    console.log(chalk.yellowBright(getLogo()))
-  }
-
-  program.parseAsync(args)
+  const { registerPreview } = await import(`./commands/preview`)
+  registerPreview(program)
 }
 
-main()
+loadCommands()
+  .then(() => {
+    const args = process.argv
+    if (args.length < 3 || args[2] === 'help' || args[2] === '-h') {
+      console.log(chalk.yellowBright(getLogo()))
+    }
+
+    program.parseAsync(args)
+  })
+  .catch((err: Error) => {
+    logger.error(err.message)
+    process.exit(1)
+  })
