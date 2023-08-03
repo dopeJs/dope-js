@@ -29,10 +29,22 @@
     "start:home": "cd homepage && pnpm start",
     "build:home": "cd homepage && pnpm build",
     "preview:home": "cd homepage && pnpm preview",
-    "lint": "lerna run --stream lint"
+    "lint": "lerna run --stream lint",
+    "commit": "git-cz",
+    "prepare": "husky install"
   },
   "author": "John Zhang",
   "license": "MIT",
+  "commitlint": {
+    "extends": [
+      "./scripts/commitlint-config"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./scripts/cz-prompt"
+    }
+  },
   "devDependencies": {
     "@babel/core": "^7.19.1",
     "@babel/plugin-transform-runtime": "^7.19.1",
@@ -52,6 +64,7 @@
     "babel-plugin-macros": "^3.1.0",
     "babel-plugin-styled-components": "^2.0.7",
     "chalk": "^4.1.2",
+    "commitizen": "^4.3.0",
     "esbuild": "^0.15.9",
     "eslint": "^8.23.1",
     "eslint-config-prettier": "^8.5.0",
@@ -59,7 +72,9 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.31.8",
+    "husky": "^8.0.3",
     "lerna": "^5.5.1",
+    "lint-staged": "^13.2.3",
     "prettier": "^2.7.1",
     "rimraf": "^3.0.2",
     "rollup": "^2.79.0",
