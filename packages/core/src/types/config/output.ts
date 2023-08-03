@@ -1,13 +1,13 @@
-import { ModuleFormat } from 'rollup'
+import { ModuleFormat } from 'rollup';
 
 export interface OutputConfig {
-  dir?: string
-  format?: ModuleFormat
-  sourcemap?: boolean
+  dir?: string;
+  format?: ModuleFormat;
+  sourcemap?: boolean;
 }
 
 export interface NormalizedOutputConfig {
-  dir: string
-  format: ModuleFormat
-  sourcemap: boolean
+  dir: string;
+  format: ModuleFormat;
+  sourcemap: boolean;
 }

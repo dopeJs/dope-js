@@ -1,11 +1,11 @@
-import debug from 'debug'
+import debug from 'debug';
 
-export type DopeDebugNamespace = `dope:${string}`
+export type DopeDebugNamespace = `dope:${string}`;
 
-export type DopeDebugger = debug.Debugger['log']
+export type DopeDebugger = debug.Debugger['log'];
 
 export function createDebugger(namespace: DopeDebugNamespace): DopeDebugger {
-  const log = debug(namespace)
+  const log = debug(namespace);
 
   // const { onlyWhenFocused } = options
   // const focus = typeof onlyWhenFocused === 'string' ? onlyWhenFocused : namespace
@@ -17,6 +17,6 @@ export function createDebugger(namespace: DopeDebugNamespace): DopeDebugger {
     // if (onlyWhenFocused && !DEBUG?.includes(focus)) {
     //   return
     // }
-    log(msg, ...args)
-  }
+    log(msg, ...args);
+  };
 }

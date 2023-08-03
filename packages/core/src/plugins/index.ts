@@ -1,3 +1,2 @@
-export * from './entry'
-export * from './resolve'
-export * from './router'
+export * from './entry';
+export * from './router';

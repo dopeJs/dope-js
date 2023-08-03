@@ -1,5 +1,5 @@
-import { CommonTheme, FontFamilySetter, IProviderConfig } from '@/types'
-import { FontSizeTheme, FontWeightTheme } from 'styled-components'
+import { CommonTheme, FontFamilySetter, IProviderConfig } from '@/types';
+import { FontSizeTheme, FontWeightTheme } from 'styled-components';
 
 const defaultFontFamilyBase = [
   '-apple-system',
@@ -14,24 +14,24 @@ const defaultFontFamilyBase = [
   'Segoe UI Emoji',
   'Segoe UI Symbol',
   'Noto Color Emoji',
-]
+];
 
-const defaultFontFamilyMonospace = ['Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', 'monospace']
+const defaultFontFamilyMonospace = ['Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', 'monospace'];
 
 function normalizeFontName(fontName: string) {
-  fontName = fontName.trim()
-  if (!/\s+/g.test(fontName)) return fontName
-  if (!fontName.startsWith(`'`)) fontName = `'${fontName}`
-  if (!fontName.endsWith(`'`)) fontName = `${fontName}'`
-  return fontName
+  fontName = fontName.trim();
+  if (!/\s+/g.test(fontName)) return fontName;
+  if (!fontName.startsWith(`'`)) fontName = `'${fontName}`;
+  if (!fontName.endsWith(`'`)) fontName = `${fontName}'`;
+  return fontName;
 }
 
 function getFontFamily(defaults: Array<string>, setter?: FontFamilySetter) {
-  if (!setter) return defaults.map(normalizeFontName).join(', ')
+  if (!setter) return defaults.map(normalizeFontName).join(', ');
   if (typeof setter === 'function') {
-    return setter(defaults).map(normalizeFontName).join(', ')
+    return setter(defaults).map(normalizeFontName).join(', ');
   }
-  return setter
+  return setter;
 }
 
 function getFontWeightTheme(options?: IProviderConfig): FontWeightTheme {
@@ -40,7 +40,7 @@ function getFontWeightTheme(options?: IProviderConfig): FontWeightTheme {
     normal: options?.fontWeight?.normal || 400,
     semiBold: options?.fontWeight?.semiBold || 500,
     bold: options?.fontWeight?.bold || 600,
-  }
+  };
 }
 
 function getFontSizeTheme(options?: IProviderConfig): FontSizeTheme {
@@ -55,7 +55,7 @@ function getFontSizeTheme(options?: IProviderConfig): FontSizeTheme {
       h5: options?.fontSize?.heading?.h5 || '24px',
       h6: options?.fontSize?.heading?.h6 || '24px',
     },
-  }
+  };
 }
 
 export function getCommonTheme(options?: IProviderConfig): CommonTheme {
@@ -67,5 +67,5 @@ export function getCommonTheme(options?: IProviderConfig): CommonTheme {
       base: getFontFamily(defaultFontFamilyBase, options?.fontFamily?.base),
       monospace: getFontFamily(defaultFontFamilyMonospace, options?.fontFamily?.monospace),
     },
-  }
+  };
 }

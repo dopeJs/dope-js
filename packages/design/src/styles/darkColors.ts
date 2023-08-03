@@ -1,4 +1,4 @@
-import { ColorMap } from '@/types'
+import { ColorMap } from '@/types';
 
 export const darkColors: ColorMap = {
   blue: {
@@ -161,4 +161,4 @@ export const darkColors: ColorMap = {
     [950]: '#f8f8f8',
     [1000]: '#ffffff',
   },
-}
+};

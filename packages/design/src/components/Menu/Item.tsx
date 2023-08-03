@@ -1,7 +1,7 @@
-import { FC, useCallback, useEffect, useMemo, useState } from 'react'
-import styled, { css } from 'styled-components'
-import { List } from './List'
-import { IMenuItemProps } from './types'
+import { FC, useCallback, useEffect, useMemo, useState } from 'react';
+import styled, { css } from 'styled-components';
+import { List } from './List';
+import { IMenuItemProps } from './types';
 
 const StyledItem = styled.div<{ isActive: boolean; depth: number }>(
   ({ isActive, depth, theme }) => css`
@@ -24,32 +24,24 @@ const StyledItem = styled.div<{ isActive: boolean; depth: number }>(
       background-color: ${theme.colors.neutral(200)};
     }
   `
-)
+);
 
-export const Item: FC<IMenuItemProps> = ({
-  title,
-  itemKey,
-  children,
-  onItemClick,
-  activeKey,
-  depth,
-  showIcon = false,
-}) => {
-  const isActive = useMemo(() => activeKey === itemKey, [activeKey, itemKey])
-  const isDir = useMemo(() => Array.isArray(children), [children])
-  const [fold, setFold] = useState(false)
+export const Item: FC<IMenuItemProps> = ({ title, itemKey, children, onItemClick, activeKey, depth, showIcon = false }) => {
+  const isActive = useMemo(() => activeKey === itemKey, [activeKey, itemKey]);
+  const isDir = useMemo(() => Array.isArray(children), [children]);
+  const [fold, setFold] = useState(false);
 
   useEffect(() => {
-    if (activeKey.startsWith(itemKey)) setFold(false)
-  }, [itemKey, activeKey])
+    if (activeKey.startsWith(itemKey)) setFold(false);
+  }, [itemKey, activeKey]);
 
   const onClick = useCallback(() => {
     if (isDir) {
-      setFold(!fold)
+      setFold(!fold);
     } else {
-      onItemClick(itemKey)
+      onItemClick(itemKey);
     }
-  }, [itemKey, isDir, fold])
+  }, [itemKey, isDir, fold]);
 
   return (
     <>
@@ -60,5 +52,5 @@ export const Item: FC<IMenuItemProps> = ({
         <List data={children} activeKey={activeKey} onItemClick={onItemClick} depth={depth + 1} showIcon={showIcon} />
       )}
     </>
-  )
-}
+  );
+};

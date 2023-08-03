@@ -1,10 +1,10 @@
-import { DefaultTheme } from 'styled-components'
+import { DefaultTheme } from 'styled-components';
 
-export * from './components'
-export * from './core'
-export * from './hooks'
-export * from './types'
+export * from './components';
+export * from './core';
+export * from './hooks';
+export * from './types';
 
 export interface ThemedComponent {
-  theme: DefaultTheme
+  theme: DefaultTheme;
 }

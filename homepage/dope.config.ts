@@ -1,3 +1,3 @@
-import { defineConfig } from '@dope-js/core'
+import { defineConfig } from '@dope-js/core';
 
-export default defineConfig()
+export default defineConfig();

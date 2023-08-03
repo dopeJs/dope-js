@@ -1,15 +1,15 @@
-import { useRouter } from '@/hooks'
-import { computeMatch, defaultMatchOptions } from '@/utils'
-import { Children, cloneElement, FC, isValidElement, PropsWithChildren, ReactElement, ReactPortal } from 'react'
+import { useRouter } from '@/hooks';
+import { computeMatch, defaultMatchOptions } from '@/utils';
+import { Children, cloneElement, FC, isValidElement, PropsWithChildren, ReactElement, ReactPortal } from 'react';
 
 export const Switch: FC<PropsWithChildren> = ({ children }) => {
-  const { pathname } = useRouter()
+  const { pathname } = useRouter();
 
   if (children === undefined) {
-    return null
+    return null;
   }
 
-  let renderTarget: ReactElement | ReactPortal | null = null
+  let renderTarget: ReactElement | ReactPortal | null = null;
 
   Children.forEach(children, (child) => {
     if (renderTarget === null && isValidElement(child)) {
@@ -19,22 +19,22 @@ export const Switch: FC<PropsWithChildren> = ({ children }) => {
         strict = defaultMatchOptions.strict,
         sensitive = defaultMatchOptions.sensitive,
         customMatch,
-      } = child.props || {}
+      } = child.props || {};
       const [matched, params] = computeMatch(pathname, path, {
         exact,
         strict,
         sensitive,
         customMatch,
-      })
+      });
       if (matched) {
         renderTarget = cloneElement(child, {
           ...child.props,
           switched: true,
           switchedParams: params,
-        })
+        });
       }
     }
-  })
+  });
 
-  return renderTarget
-}
+  return renderTarget;
+};

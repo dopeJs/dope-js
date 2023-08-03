@@ -1,10 +1,10 @@
-import { babel } from '@rollup/plugin-babel'
-import { resolve } from 'path'
-import postcss from 'rollup-plugin-postcss'
-import { IDopeRc } from '../../@types'
+import { babel } from '@rollup/plugin-babel';
+import { resolve } from 'path';
+import postcss from 'rollup-plugin-postcss';
+import { IDopeRc } from '../../@types';
 
-const root = resolve(__dirname)
-const globals = { react: 'React' }
+const root = resolve(__dirname);
+const globals = { react: 'React' };
 
 const config: IDopeRc = {
   typing: true,
@@ -53,16 +53,13 @@ const config: IDopeRc = {
       ],
       plugins: [
         '@babel/plugin-transform-runtime',
-        [
-          'babel-plugin-styled-components',
-          { namespace: `dope-design`, preprocess: false, fileName: false, displayName: false },
-        ],
+        ['babel-plugin-styled-components', { namespace: `dope-design`, preprocess: false, fileName: false, displayName: false }],
       ],
     }),
     postcss({
       modules: true,
     }),
   ],
-}
+};
 
-export default config
+export default config;

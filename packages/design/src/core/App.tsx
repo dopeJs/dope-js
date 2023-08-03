@@ -1,70 +1,70 @@
-import { getCommonTheme, darkColors, lightColors } from '@/styles'
-import { AppProps, IThemeContext } from '@/types'
-import { createContext, FC, useCallback, useEffect, useMemo, useState } from 'react'
-import { ColorFn, ColorType, DefaultTheme, ThemeProvider } from 'styled-components'
-import { ErrorBoundary } from './ErrorBoundary'
-import { GlobalStyle } from './GlobalStyle'
+import { getCommonTheme, darkColors, lightColors } from '@/styles';
+import { AppProps, IThemeContext } from '@/types';
+import { createContext, FC, useCallback, useEffect, useMemo, useState } from 'react';
+import { ColorFn, ColorType, DefaultTheme, ThemeProvider } from 'styled-components';
+import { ErrorBoundary } from './ErrorBoundary';
+import { GlobalStyle } from './GlobalStyle';
 
-export const ThemeContext = createContext<IThemeContext | null>(null)
+export const ThemeContext = createContext<IThemeContext | null>(null);
 
 export const App: FC<AppProps> = ({ children, rootId, options, fallback, onError }) => {
-  const [dark, setDark] = useState(false)
+  const [dark, setDark] = useState(false);
 
-  const [primaryColor, setPrimary] = useState<ColorType>(options?.colors?.primary || 'blue')
-  const [dangerColor, setDanger] = useState<ColorType>(options?.colors?.danger || 'red')
-  const [warnColor, setWarn] = useState<ColorType>(options?.colors?.warn || 'yellow')
-  const [successColor, setSuccess] = useState<ColorType>(options?.colors?.success || 'green')
+  const [primaryColor, setPrimary] = useState<ColorType>(options?.colors?.primary || 'blue');
+  const [dangerColor, setDanger] = useState<ColorType>(options?.colors?.danger || 'red');
+  const [warnColor, setWarn] = useState<ColorType>(options?.colors?.warn || 'yellow');
+  const [successColor, setSuccess] = useState<ColorType>(options?.colors?.success || 'green');
 
   const color = useCallback(
     (stage: number, type: ColorType, alpha = 1) => {
-      if (alpha < 0) alpha = 0
-      if (alpha > 1) alpha = 1
+      if (alpha < 0) alpha = 0;
+      if (alpha > 1) alpha = 1;
 
-      const colorMap = dark ? darkColors : lightColors
-      const colors = colorMap[type]
-      const color = colors[stage] || colors[0]
+      const colorMap = dark ? darkColors : lightColors;
+      const colors = colorMap[type];
+      const color = colors[stage] || colors[0];
 
-      if (alpha === 1) return color
+      if (alpha === 1) return color;
       const alphaStr = Math.floor(alpha * 255)
         .toString(16)
-        .padStart(2, '0')
-      return `${color}${alphaStr}`
+        .padStart(2, '0');
+      return `${color}${alphaStr}`;
     },
     [dark]
-  )
+  );
 
   useEffect(() => {
-    const media = window.matchMedia('(prefers-color-scheme:dark)')
-    if (media.matches) setDark(true)
-    else setDark(false)
-  }, [])
+    const media = window.matchMedia('(prefers-color-scheme:dark)');
+    if (media.matches) setDark(true);
+    else setDark(false);
+  }, []);
 
-  const primaryFn = useCallback((stage: number, alpha = 1) => color(stage, primaryColor, alpha), [primaryColor, color])
+  const primaryFn = useCallback((stage: number, alpha = 1) => color(stage, primaryColor, alpha), [primaryColor, color]);
 
-  const successFn = useCallback((stage: number, alpha = 1) => color(stage, successColor, alpha), [successColor, color])
+  const successFn = useCallback((stage: number, alpha = 1) => color(stage, successColor, alpha), [successColor, color]);
 
-  const dangerFn = useCallback((stage: number, alpha = 1) => color(stage, dangerColor, alpha), [dangerColor, color])
+  const dangerFn = useCallback((stage: number, alpha = 1) => color(stage, dangerColor, alpha), [dangerColor, color]);
 
-  const warnFn = useCallback((stage: number, alpha = 1) => color(stage, warnColor, alpha), [warnColor, color])
+  const warnFn = useCallback((stage: number, alpha = 1) => color(stage, warnColor, alpha), [warnColor, color]);
 
   const colorFns: Record<ColorType, ColorFn> = useMemo(() => {
-    const colorMap = dark ? darkColors : lightColors
-    const types = Object.keys(colorMap) as Array<ColorType>
+    const colorMap = dark ? darkColors : lightColors;
+    const types = Object.keys(colorMap) as Array<ColorType>;
 
     return types.reduce((acc, curr) => {
-      acc[curr] = (stage, alpha = 1) => color(stage, curr, alpha)
-      return acc
-    }, {} as Record<ColorType, ColorFn>)
-  }, [color, dark])
+      acc[curr] = (stage, alpha = 1) => color(stage, curr, alpha);
+      return acc;
+    }, {} as Record<ColorType, ColorFn>);
+  }, [color, dark]);
 
   const theme: DefaultTheme = useMemo(() => {
-    const commonTheme = getCommonTheme(options)
+    const commonTheme = getCommonTheme(options);
 
     return {
       ...commonTheme,
       colors: { primary: primaryFn, success: successFn, danger: dangerFn, warn: warnFn, ...colorFns },
-    }
-  }, [dark, options])
+    };
+  }, [dark, options]);
 
   return (
     <ErrorBoundary fallback={fallback} onError={onError}>
@@ -85,5 +85,5 @@ export const App: FC<AppProps> = ({ children, rootId, options, fallback, onError
         </ThemeProvider>
       </ThemeContext.Provider>
     </ErrorBoundary>
-  )
-}
+  );
+};

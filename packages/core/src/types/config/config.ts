@@ -1,15 +1,15 @@
-import { InputConfig, NormalizedInputConfig } from './input'
-import { NormalizedOutputConfig, OutputConfig } from './output'
-import { CommonServerConfig, DevServerConfig, NormalizeCommonServerConfig, NormalizeDevServerConfig } from './server'
+import { InputConfig, NormalizedInputConfig } from './input';
+import { NormalizedOutputConfig, OutputConfig } from './output';
+import { CommonServerConfig, DevServerConfig, NormalizeCommonServerConfig, NormalizeDevServerConfig } from './server';
 
 export interface DopeConfig extends InputConfig {
-  outputs?: OutputConfig | Array<OutputConfig>
-  devServer?: DevServerConfig
-  preview: CommonServerConfig
+  outputs?: OutputConfig | Array<OutputConfig>;
+  devServer?: DevServerConfig;
+  preview: CommonServerConfig;
 }
 
 export interface NormalizeDopeConfig extends NormalizedInputConfig {
-  outputs: Array<NormalizedOutputConfig>
-  devServer: NormalizeDevServerConfig
-  preview: NormalizeCommonServerConfig
+  outputs: Array<NormalizedOutputConfig>;
+  devServer: NormalizeDevServerConfig;
+  preview: NormalizeCommonServerConfig;
 }

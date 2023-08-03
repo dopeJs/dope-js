@@ -63,6 +63,6 @@ const recommended: { [key: string]: unknown } = {
     'react/prop-types': 'off',
     '@typescript-eslint/ban-types': 'off',
   },
-}
+};
 
-export const configs = { recommended }
+export const configs = { recommended };

@@ -1,2 +1,2 @@
-export * from './mdxPlugin'
-export * from './normalizeConfig'
+export * from './mdxPlugin';
+export * from './normalizeConfig';

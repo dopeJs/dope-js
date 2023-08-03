@@ -1,10 +1,10 @@
-import commonjs from '@rollup/plugin-commonjs'
-import json from '@rollup/plugin-json'
-import nodeResolve from '@rollup/plugin-node-resolve'
-import typescript from '@rollup/plugin-typescript'
-import * as path from 'path'
-import { defineConfig } from 'rollup'
-import pkg from './package.json'
+import commonjs from '@rollup/plugin-commonjs';
+import json from '@rollup/plugin-json';
+import nodeResolve from '@rollup/plugin-node-resolve';
+import typescript from '@rollup/plugin-typescript';
+import * as path from 'path';
+import { defineConfig } from 'rollup';
+import pkg from './package.json';
 
 function createPlugins(isProduction) {
   return [
@@ -20,7 +20,7 @@ function createPlugins(isProduction) {
       ignoreDynamicRequires: true,
     }),
     json(),
-  ]
+  ];
 }
 
 function createConfig(isProduction) {
@@ -43,23 +43,23 @@ function createConfig(isProduction) {
     onwarn(warning, warn) {
       // node-resolve complains a lot about this but seems to still work?
       if (warning.message.includes('Package subpath')) {
-        return
+        return;
       }
       // we use the eval('require') trick to deal with optional deps
       if (warning.message.includes('Use of eval')) {
-        return
+        return;
       }
       if (warning.message.includes('Circular dependency')) {
-        return
+        return;
       }
-      warn(warning)
+      warn(warning);
     },
     external: ['fsevents', ...(isProduction ? [] : Object.keys(pkg.devDependencies))],
     plugins: createPlugins(isProduction),
-  })
+  });
 }
 
 export default (commandLineArgs) => {
-  const isProduction = !commandLineArgs.watch
-  return defineConfig(createConfig(isProduction))
-}
+  const isProduction = !commandLineArgs.watch;
+  return defineConfig(createConfig(isProduction));
+};

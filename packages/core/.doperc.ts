@@ -1,7 +1,7 @@
-import { resolve } from 'path'
-import { IDopeRc } from '../../@types'
+import { resolve } from 'path';
+import { IDopeRc } from '../../@types';
 
-const root = resolve(__dirname)
+const root = resolve(__dirname);
 
 const config: IDopeRc = {
   typing: true,
@@ -16,6 +16,6 @@ const config: IDopeRc = {
     format: 'cjs',
     sourcemap: true,
   },
-}
+};
 
-export default config
+export default config;

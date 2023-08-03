@@ -13,5 +13,5 @@
     "allowSyntheticDefaultImports": true,
     "downlevelIteration": true
   },
-  "include": ["rollup.config.ts", "scripts/**/*.ts"]
+  "include": ["rollup1.config.ts", "scripts/**/*.ts"]
 }

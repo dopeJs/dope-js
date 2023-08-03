@@ -1,9 +1,9 @@
-import { FC } from 'react'
-import { Aside } from './Aside'
-import { Header } from './Header'
+import { FC } from 'react';
+import { Aside } from './Aside';
+import { Header } from './Header';
 
 const _Layout: FC = () => {
-  return <></>
-}
+  return <></>;
+};
 
-export const Layout = Object.assign(_Layout, { Header, Aside })
+export const Layout = Object.assign(_Layout, { Header, Aside });

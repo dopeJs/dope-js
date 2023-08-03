@@ -1,9 +1,9 @@
-import { RouterCache } from '@/cache'
-import type { IRouterContext } from '@/types'
-import { createBrowserHistory } from 'history'
-import { createContext } from 'react'
+import { RouterCache } from '@/cache';
+import type { IRouterContext } from '@/types';
+import { createBrowserHistory } from 'history';
+import { createContext } from 'react';
 
-export const browserHistory = createBrowserHistory()
+export const browserHistory = createBrowserHistory();
 
 /**
  * context instance for router
@@ -18,6 +18,6 @@ const initValue: IRouterContext = {
   redirect: null,
   cache: new RouterCache(),
   redirectRef: null,
-}
+};
 
-export const RouterContext = createContext<IRouterContext>(initValue)
+export const RouterContext = createContext<IRouterContext>(initValue);

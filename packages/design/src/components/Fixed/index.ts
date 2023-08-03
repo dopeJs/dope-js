@@ -1,1 +1,1 @@
-export * from './Fixed'
+export * from './Fixed';

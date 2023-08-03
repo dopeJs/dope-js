@@ -1,9 +1,9 @@
-import { FC, ReactNode } from 'react'
-import styled, { css } from 'styled-components'
+import { FC, ReactNode } from 'react';
+import styled, { css } from 'styled-components';
 
 export interface ButtonProps {
-  onClick: () => void
-  children: ReactNode
+  onClick: () => void;
+  children: ReactNode;
 }
 
 const _Button = styled.div(
@@ -27,8 +27,8 @@ const _Button = styled.div(
       background-color: ${theme.colors.neutral(200)};
     }
   `
-)
+);
 
 export const Button: FC<ButtonProps> = ({ children, onClick }) => {
-  return <_Button onClick={onClick}>{children}</_Button>
-}
+  return <_Button onClick={onClick}>{children}</_Button>;
+};

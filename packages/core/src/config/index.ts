@@ -14,7 +14,7 @@ export function defineConfig(config?: UserConfig) {
   const defaultConfig: UserConfig = {
     plugins: [
       dopeRouter('', { ...router }) as Plugin,
-      dopeEntry(pageDirs, '') as Plugin,
+      dopeEntry('') as Plugin,
       createHtmlPlugin({
         minify: true,
         template: '/index.html',

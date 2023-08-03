@@ -1,49 +1,49 @@
-import { RouterContext } from './context'
+import { RouterContext } from './context';
 
-export type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>
+export type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>;
 
 export interface PageRouteBase {
-  caseSensitive?: boolean
-  children?: PageRouteBase[]
-  element?: string
-  index?: boolean
-  path?: string
-  rawRoute: string
+  caseSensitive?: boolean;
+  children?: PageRouteBase[];
+  element?: string;
+  index?: boolean;
+  path?: string;
+  rawRoute: string;
 }
 
 export interface PageRoute extends Omit<Optional<PageRouteBase, 'rawRoute' | 'path'>, 'children'> {
-  children?: PageRoute[]
+  children?: PageRoute[];
 }
 
 export interface Options {
-  pagesRoot?: string
-  extensions: string[]
-  exclude: string[]
-  caseSensitive: boolean
+  pagesRoot?: string;
+  extensions: string[];
+  exclude: string[];
+  caseSensitive: boolean;
 }
 
-export type RouterOptions = Partial<Options>
+export type RouterOptions = Partial<Options>;
 
-export type Awaitable<T> = T | PromiseLike<T>
+export type Awaitable<T> = T | PromiseLike<T>;
 
 export interface PageResolver {
-  resolveExtensions: () => string[]
-  resolveRoutes: (ctx: RouterContext) => Awaitable<string>
-  getComputedRoutes: (ctx: RouterContext) => Awaitable<PageRoute[]>
+  resolveExtensions: () => string[];
+  resolveRoutes: (ctx: RouterContext) => Awaitable<string>;
+  getComputedRoutes: (ctx: RouterContext) => Awaitable<PageRoute[]>;
   stringify?: {
-    dynamicImport?: (importPath: string) => string
-    component?: (importName: string) => string
-    final?: (code: string) => string
-  }
+    dynamicImport?: (importPath: string) => string;
+    component?: (importName: string) => string;
+    final?: (code: string) => string;
+  };
   hmr?: {
-    added?: (ctx: RouterContext, path: string) => Awaitable<void>
-    removed?: (ctx: RouterContext, path: string) => Awaitable<void>
-    changed?: (ctx: RouterContext, path: string) => Awaitable<void>
-  }
+    added?: (ctx: RouterContext, path: string) => Awaitable<void>;
+    removed?: (ctx: RouterContext, path: string) => Awaitable<void>;
+    changed?: (ctx: RouterContext, path: string) => Awaitable<void>;
+  };
 }
 
 export interface ResolvedOptions extends Omit<Options, 'pagesDir'> {
-  root: string
-  pagesRoot: string
-  extensionsRE: RegExp
+  root: string;
+  pagesRoot: string;
+  extensionsRE: RegExp;
 }

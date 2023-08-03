@@ -23,7 +23,7 @@
     "preinstall": "npx only-allow pnpm",
     "watch": "pnpm clear-build && pnpm rollup -w",
     "build": "pnpm clear-build && pnpm rollup",
-    "rollup": "rollup -c rollup.config.ts --configPlugin typescript",
+    "rollup": "rollup -c rollup1.config.ts --configPlugin typescript",
     "clear-build": "tsx ./scripts/clear-build.ts",
     "publish": "lerna run --scope @dope-js/* --ignore dopejs --no-private --stream publish",
     "start:home": "cd homepage && pnpm start",

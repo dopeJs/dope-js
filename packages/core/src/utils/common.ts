@@ -1,6 +1,12 @@
 import { platform } from 'os'
 import { posix } from 'path'
 
+export const countSlashRE = /\//g
+
+export function countSlash(value: string) {
+  return (value.match(countSlashRE) || []).length
+}
+
 export function slash(p: string): string {
   return p.replace(/\\/g, '/')
 }

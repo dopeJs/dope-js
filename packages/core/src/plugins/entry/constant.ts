@@ -1,7 +1,9 @@
 import { Options } from 'prettier'
 
-export const moduleId = 'dope-js/runtime/index.tsx'
-export const displayId = '@dope-js/runtime'
+export const moduleId = '__dope_index.tsx'
+export const displayId = 'index.tsx'
+export const htmlModuleId = 'index.html'
+export const htmlDisplayId = 'index.html'
 
 export const prettierCfg: Options = {
   parser: 'typescript',

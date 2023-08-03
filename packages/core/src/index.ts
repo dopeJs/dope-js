@@ -1,10 +1,10 @@
-import { FC, ReactNode } from 'react'
+import { FC, ReactNode } from 'react';
 
-export * from './config'
-export * from './types/page'
+export * from './config';
+export * from './types/page';
 
 export interface DopeAppProps {
-  page: ReactNode
+  page: ReactNode;
 }
 
-export type DopeApp = FC<DopeAppProps>
+export type DopeApp = FC<DopeAppProps>;

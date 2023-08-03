@@ -1,13 +1,13 @@
-import { ResolvedOptions, RouterOptions } from './types'
+import { ResolvedOptions, RouterOptions } from './types';
 
 export function resolveOptions(options: RouterOptions, root: string): ResolvedOptions {
-  const extensions = options.extensions || ['.tsx', '.mdx', '.md']
-  const exclude = options.exclude || []
-  const caseSensitive = !!options.caseSensitive
+  const extensions = options.extensions || ['.tsx', '.mdx', '.md'];
+  const exclude = options.exclude || [];
+  const caseSensitive = !!options.caseSensitive;
 
-  const pagesRoot = options.pagesRoot || 'src/pages'
+  const pagesRoot = options.pagesRoot || 'src/pages';
 
-  const extensionsRE = new RegExp(`\\.(${extensions.join('|')})$`)
+  const extensionsRE = new RegExp(`\\.(${extensions.join('|')})$`);
 
   return {
     root,
@@ -16,5 +16,5 @@ export function resolveOptions(options: RouterOptions, root: string): ResolvedOp
     pagesRoot,
     caseSensitive,
     extensionsRE,
-  }
+  };
 }

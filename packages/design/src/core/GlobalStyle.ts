@@ -1,18 +1,18 @@
-import { createGlobalStyle, css, FlattenSimpleInterpolation } from 'styled-components'
+import { createGlobalStyle, css, FlattenSimpleInterpolation } from 'styled-components';
 
 export interface IGlobalStyleProps {
   /**
    * Customize the global css style.
    */
-  css?: FlattenSimpleInterpolation
+  css?: FlattenSimpleInterpolation;
   /**
    * Use the initial global style.
    */
-  reset?: boolean
+  reset?: boolean;
   /**
    * Customize the root id of the project. (When use `next`, keep it `__next`)
    */
-  rootId?: string
+  rootId?: string;
 }
 
 export const GlobalStyle = createGlobalStyle<IGlobalStyleProps>(
@@ -38,4 +38,4 @@ export const GlobalStyle = createGlobalStyle<IGlobalStyleProps>(
 
     ${_css && _css}
   `
-)
+);

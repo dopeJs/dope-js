@@ -1,3 +1,3 @@
-export * from './App'
-export * from './ErrorBoundary'
-export * from './GlobalStyle'
+export * from './App';
+export * from './ErrorBoundary';
+export * from './GlobalStyle';

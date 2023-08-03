@@ -1,4 +1,4 @@
-import { ColorMap } from '@/types'
+import { ColorMap } from '@/types';
 
 export const lightColors: ColorMap = {
   blue: {
@@ -161,4 +161,4 @@ export const lightColors: ColorMap = {
     [950]: '#0f1114',
     [1000]: '#000000',
   },
-}
+};

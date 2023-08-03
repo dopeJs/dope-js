@@ -1,25 +1,25 @@
-import { IRouterCache } from '@/cache'
-import { RedirectFunc, RedirectResult } from '@/types'
-import { History, Location, Path, To } from 'history'
-import { MutableRefObject, useLayoutEffect } from 'react'
-import { appendPrefix, removePrefix } from './metainfo'
-import { parsePathname } from './parse'
-import { isPromise, pickBy } from './utils'
+import { IRouterCache } from '@/cache';
+import { RedirectFunc, RedirectResult } from '@/types';
+import { History, Location, Path, To } from 'history';
+import { MutableRefObject, useLayoutEffect } from 'react';
+import { appendPrefix, removePrefix } from './metainfo';
+import { parsePathname } from './parse';
+import { isPromise, pickBy } from './utils';
 
 const appendPreserveParams = (search: string, cache: IRouterCache) => {
-  const preserveParams = cache.getPreserveParams()
+  const preserveParams = cache.getPreserveParams();
 
-  const searchParams = new URLSearchParams(search)
+  const searchParams = new URLSearchParams(search);
 
   for (const key in preserveParams) {
-    if (searchParams.has(key)) continue
-    searchParams.append(key, preserveParams[key])
+    if (searchParams.has(key)) continue;
+    searchParams.append(key, preserveParams[key]);
   }
 
-  const searchParamsStr = searchParams.toString()
+  const searchParamsStr = searchParams.toString();
 
-  return searchParamsStr ? '?' + searchParamsStr : searchParamsStr
-}
+  return searchParamsStr ? '?' + searchParamsStr : searchParamsStr;
+};
 
 export const handleRoute = async (
   handler: History['push'] | History['replace'],
@@ -30,11 +30,11 @@ export const handleRoute = async (
   cache: IRouterCache,
   state?: unknown
 ): Promise<void> => {
-  let partialPath: Path
+  let partialPath: Path;
 
   if (typeof to === 'string') {
-    if (!to) to = '/'
-    partialPath = parsePathname(to)
+    if (!to) to = '/';
+    partialPath = parsePathname(to);
   } else {
     if (typeof to.pathname !== 'string') {
       /**
@@ -42,43 +42,43 @@ export const handleRoute = async (
        * if no pathname is passed to object params
        * we should keep pathname still instead of changing to '/'
        */
-      to.pathname = pathname
+      to.pathname = pathname;
     } else if (to.pathname === '') {
-      to.pathname = '/'
+      to.pathname = '/';
     }
 
     partialPath = {
       pathname: to.pathname,
       search: to.search || '',
       hash: to.hash || '',
-    }
+    };
   }
 
-  const prevLoc = genExposeLoc(location)
+  const prevLoc = genExposeLoc(location);
 
   if (typeof redirect === 'function') {
-    let redirectedResult: RedirectResult
-    const returnValue = redirect(partialPath, prevLoc)
+    let redirectedResult: RedirectResult;
+    const returnValue = redirect(partialPath, prevLoc);
     if (isPromise(returnValue)) {
-      const result = await returnValue
+      const result = await returnValue;
       if (!result) {
-        redirectedResult = Object.assign({}, partialPath)
+        redirectedResult = Object.assign({}, partialPath);
       } else if (typeof result === 'string') {
-        redirectedResult = parsePathname(result)
+        redirectedResult = parsePathname(result);
       } else if (typeof result === 'object') {
-        redirectedResult = Object.assign({}, partialPath, result)
+        redirectedResult = Object.assign({}, partialPath, result);
       } else {
-        redirectedResult = Object.assign({}, partialPath)
+        redirectedResult = Object.assign({}, partialPath);
       }
     } else {
       if (!returnValue) {
-        redirectedResult = Object.assign({}, partialPath)
+        redirectedResult = Object.assign({}, partialPath);
       } else if (typeof returnValue === 'string') {
-        redirectedResult = parsePathname(returnValue)
+        redirectedResult = parsePathname(returnValue);
       } else if (typeof returnValue === 'object') {
-        redirectedResult = Object.assign({}, partialPath, returnValue)
+        redirectedResult = Object.assign({}, partialPath, returnValue);
       } else {
-        redirectedResult = Object.assign({}, partialPath)
+        redirectedResult = Object.assign({}, partialPath);
       }
     }
 
@@ -89,7 +89,7 @@ export const handleRoute = async (
         search: appendPreserveParams(redirectedResult.search || '', cache),
       },
       state
-    )
+    );
   } else {
     handler(
       {
@@ -98,12 +98,11 @@ export const handleRoute = async (
         search: appendPreserveParams(partialPath.search || '', cache),
       },
       state
-    )
+    );
   }
-}
+};
 
-export const genExposeLoc = (location: Location) =>
-  pickBy(location, (key) => ['pathname', 'hash', 'search'].includes(key))
+export const genExposeLoc = (location: Location) => pickBy(location, (key) => ['pathname', 'hash', 'search'].includes(key));
 
 export const useInitialRedirect = (
   location: Location,
@@ -113,37 +112,37 @@ export const useInitialRedirect = (
   ref: MutableRefObject<boolean | string>
 ) => {
   useLayoutEffect(() => {
-    ;(async () => {
-      if (typeof redirect !== 'function') return
+    (async () => {
+      if (typeof redirect !== 'function') return;
 
-      const pathObj = genExposeLoc(location)
+      const pathObj = genExposeLoc(location);
 
-      pathObj.pathname = removePrefix(pathObj.pathname)
+      pathObj.pathname = removePrefix(pathObj.pathname);
 
-      let redirectedResult: RedirectResult
+      let redirectedResult: RedirectResult;
 
-      let finalLoc: Path
+      let finalLoc: Path;
 
-      const returnValue = redirect(pathObj, pathObj)
+      const returnValue = redirect(pathObj, pathObj);
 
       if (isPromise(returnValue)) {
-        redirectedResult = await returnValue
+        redirectedResult = await returnValue;
       } else {
-        redirectedResult = returnValue
+        redirectedResult = returnValue;
       }
 
-      if (!redirectedResult) return
+      if (!redirectedResult) return;
 
       if (typeof redirectedResult === 'string') {
-        finalLoc = parsePathname(redirectedResult)
+        finalLoc = parsePathname(redirectedResult);
       } else if (typeof redirectedResult === 'object') {
-        finalLoc = Object.assign({}, pathObj, redirectedResult)
+        finalLoc = Object.assign({}, pathObj, redirectedResult);
       } else {
-        return
+        return;
       }
 
       // mark a initial redirect is triggered
-      ref.current = finalLoc.pathname
+      ref.current = finalLoc.pathname;
 
       handler(
         {
@@ -152,7 +151,7 @@ export const useInitialRedirect = (
           search: appendPreserveParams(finalLoc.search, cache),
         },
         location.state
-      )
-    })()
-  }, [])
-}
+      );
+    })();
+  }, []);
+};

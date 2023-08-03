@@ -1,1 +1,1 @@
-export { browserHistory, RouterContext } from './RouterContext'
+export { browserHistory, RouterContext } from './RouterContext';

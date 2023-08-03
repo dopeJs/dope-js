@@ -76,6 +76,7 @@ function createBundleConfig(info: IPkgInfo, isProduction: boolean) {
 
 export default async (args: { watch: boolean }) => {
   const isProduction = !args.watch;
+
   const pkgs = await getPkgs(process.cwd());
   return pkgs.map((info) => createBundleConfig(info, isProduction));
 };

@@ -1,3 +1,3 @@
-export * from './useAnimation'
-export * from './useDark'
-export * from './useTheme'
+export * from './useAnimation';
+export * from './useDark';
+export * from './useTheme';
