@@ -1,9 +1,9 @@
-import { Options } from 'prettier'
+import { Options } from 'prettier';
 
-export const moduleId = '__dope_index.tsx'
-export const displayId = 'index.tsx'
-export const htmlModuleId = 'index.html'
-export const htmlDisplayId = 'index.html'
+export const moduleId = '__dope_index.tsx';
+export const displayId = 'index.tsx';
+export const htmlModuleId = 'index.html';
+export const htmlDisplayId = 'index.html';
 
 export const prettierCfg: Options = {
   parser: 'typescript',
@@ -15,4 +15,4 @@ export const prettierCfg: Options = {
   trailingComma: 'es5',
   bracketSpacing: true,
   jsxBracketSameLine: false,
-}
+};

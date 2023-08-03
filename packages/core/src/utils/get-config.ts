@@ -1,52 +1,52 @@
-import { IServerOption } from '@/types'
-import commonjs from '@rollup/plugin-commonjs'
-import react from '@vitejs/plugin-react'
-import findUp from 'find-up'
-import { join } from 'path'
-import { Plugin, PluginOption, UserConfig } from 'vite'
-import eslint from 'vite-plugin-eslint'
+import { IServerOption } from '@/types';
+import commonjs from '@rollup/plugin-commonjs';
+import react from '@vitejs/plugin-react';
+import findUp from 'find-up';
+import { join } from 'path';
+import { Plugin, PluginOption, UserConfig } from 'vite';
+import eslint from 'vite-plugin-eslint';
 
-const findFileCache: Record<string, string> = {}
+const findFileCache: Record<string, string> = {};
 const getFindFileCacheKey = (cwd: string, files: string | string[]) => {
-  const afterKey = Array.isArray(files) ? files.join('&') : typeof files === 'string' ? files : ''
-  return `${cwd}?${afterKey}`
-}
+  const afterKey = Array.isArray(files) ? files.join('&') : typeof files === 'string' ? files : '';
+  return `${cwd}?${afterKey}`;
+};
 
 /**
  * 从用户目录访问公共目录会增加一个 privite 前缀
  */
 export function handlePrivate(path: string) {
   if (path.startsWith('/private')) {
-    return path.replace(/^\/private/, '')
+    return path.replace(/^\/private/, '');
   }
-  return path
+  return path;
 }
 
 export async function findConfigFile(cwd: string) {
-  const files = ['dope.config.ts', 'dope.config.js']
+  const files = ['dope.config.ts', 'dope.config.js'];
 
-  const cacheKey = getFindFileCacheKey(cwd, files)
+  const cacheKey = getFindFileCacheKey(cwd, files);
   if (Reflect.has(findFileCache, cacheKey)) {
-    return findFileCache[cacheKey]
+    return findFileCache[cacheKey];
   }
 
-  let result: string | undefined
+  let result: string | undefined;
 
   if (typeof files === 'string') {
-    result = await findUp(files, { cwd })
+    result = await findUp(files, { cwd });
   } else {
     for (const fileName of files) {
-      result = await findUp(fileName, { cwd })
-      if (result) break
+      result = await findUp(fileName, { cwd });
+      if (result) break;
     }
   }
 
-  result = result ? handlePrivate(result) : result
+  result = result ? handlePrivate(result) : result;
 
   if (result) {
-    findFileCache[cacheKey] = result
+    findFileCache[cacheKey] = result;
   }
-  return result || ''
+  return result || '';
 }
 
 export async function getDefaultConfig(cwd: string, isProduction: boolean, server?: IServerOption) {
@@ -68,7 +68,7 @@ export async function getDefaultConfig(cwd: string, isProduction: boolean, serve
       extensions: ['.js'],
     }) as Plugin,
     eslint({ ignore: !isProduction, exclude: ['/dope-js/runtime/*', '**/*.js', '**/*.cjs'] }),
-  ]
+  ];
 
   const config: UserConfig = {
     root: cwd,
@@ -82,7 +82,7 @@ export async function getDefaultConfig(cwd: string, isProduction: boolean, serve
     build: {
       sourcemap: !isProduction,
     },
-  }
+  };
 
   if (server) {
     if (!isProduction) {
@@ -90,14 +90,14 @@ export async function getDefaultConfig(cwd: string, isProduction: boolean, serve
         host: server?.host || 'localhost',
         port: server?.port || 4000,
         open: '/',
-      }
+      };
     } else {
       config.preview = {
         host: server?.host || 'localhost',
         port: server?.port || 8080,
-      }
+      };
     }
   }
 
-  return config
+  return config;
 }

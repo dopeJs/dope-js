@@ -1,16 +1,16 @@
-import chalk from 'chalk'
-import { addColors, createLogger, format, transports } from 'winston'
+import chalk from 'chalk';
+import { addColors, createLogger, format, transports } from 'winston';
 
 class Logger {
-  private _logger
-  private static instance: Logger
+  private _logger;
+  private static instance: Logger;
 
   public static getInstance() {
     if (!Logger.instance) {
-      Logger.instance = new Logger()
+      Logger.instance = new Logger();
     }
 
-    return Logger.instance
+    return Logger.instance;
   }
 
   private constructor() {
@@ -20,7 +20,7 @@ class Logger {
       warn: 'yellow',
       error: 'red',
       debug: 'black',
-    })
+    });
 
     this._logger = createLogger({
       defaultMeta: { service: 'user-service' },
@@ -39,35 +39,33 @@ class Logger {
             format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss.SSS' }),
             format.splat(),
             format.colorize(),
-            format.printf(({ level, message, timestamp }) =>
-              [chalk.whiteBright(timestamp), `[${level}]`, message].join(' ')
-            )
+            format.printf(({ level, message, timestamp }) => [chalk.whiteBright(timestamp), `[${level}]`, message].join(' '))
             // format.
           ),
         }),
       ],
-    })
+    });
   }
 
   info(...str: Array<string>) {
-    this._logger.log('info', str.join(' '))
+    this._logger.log('info', str.join(' '));
   }
 
   success(...str: Array<string>) {
-    this._logger.log('succ', str.join(' '))
+    this._logger.log('succ', str.join(' '));
   }
 
   warn(...str: Array<string>) {
-    this._logger.log('warn', str.join(' '))
+    this._logger.log('warn', str.join(' '));
   }
 
   error(...str: Array<string>) {
-    this._logger.log('error', str.join(' '))
+    this._logger.log('error', str.join(' '));
   }
 
   debug(...str: Array<string>) {
-    this._logger.log('debug', str.join(' '))
+    this._logger.log('debug', str.join(' '));
   }
 }
 
-export const logger = Logger.getInstance()
+export const logger = Logger.getInstance();

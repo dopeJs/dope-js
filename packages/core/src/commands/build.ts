@@ -1,4 +1,4 @@
-import { dopeEntry, dopeEntry1, dopeRouter } from '@/plugins';
+import { dopeEntry, dopeRouter } from '@/plugins';
 import { IBuildOptions } from '@/types';
 import { logger, prepareDir } from '@/utils';
 import { babel } from '@rollup/plugin-babel';
@@ -8,7 +8,6 @@ import { nodeResolve } from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
 import chalk from 'chalk';
 import { Command } from 'commander';
-import { build } from 'esbuild';
 import * as path from 'path/posix';
 import { cwd as getCwd } from 'process';
 import { rollup } from 'rollup';

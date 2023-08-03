@@ -51,10 +51,13 @@ export const App: FC<AppProps> = ({ children, rootId, options, fallback, onError
     const colorMap = dark ? darkColors : lightColors;
     const types = Object.keys(colorMap) as Array<ColorType>;
 
-    return types.reduce((acc, curr) => {
-      acc[curr] = (stage, alpha = 1) => color(stage, curr, alpha);
-      return acc;
-    }, {} as Record<ColorType, ColorFn>);
+    return types.reduce(
+      (acc, curr) => {
+        acc[curr] = (stage, alpha = 1) => color(stage, curr, alpha);
+        return acc;
+      },
+      {} as Record<ColorType, ColorFn>
+    );
   }, [color, dark]);
 
   const theme: DefaultTheme = useMemo(() => {

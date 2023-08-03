@@ -26,15 +26,14 @@
     "@dope-js/router": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "styled-components": "^5.3.5"
+    "styled-components": "^6.0.6"
   },
   "devDependencies": {
     "@dope-js/core": "workspace:*",
     "@dope-js/eslint-plugin": "workspace:*",
-    "@types/prettier": "^2.7.0",
-    "@types/react": "^18.0.20",
-    "@types/react-dom": "^18.0.6",
+    "@types/react": "^18.2.18",
+    "@types/react-dom": "^18.2.7",
     "@types/styled-components": "^5.1.26",
-    "eslint": "^8.23.1"
+    "eslint": "^8.46.0"
   }
 }

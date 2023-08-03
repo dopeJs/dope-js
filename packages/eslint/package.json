@@ -45,7 +45,6 @@
     "eslint-plugin-react": "^7.31.8"
   },
   "devDependencies": {
-    "clean-publish": "^4.0.1",
     "eslint": "^8.23.1"
   }
 }
